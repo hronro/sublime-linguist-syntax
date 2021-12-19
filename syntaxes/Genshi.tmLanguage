@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Genshi Template (XML)</string>
+	<key>scopeName</key>
+	<string>text.xml.genshi</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>comment.block.xml.genshi</string>
+			<key>begin</key>
+			<string>&lt;!--\s*!</string>
+			<key>end</key>
+			<string>--&gt;</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>source.python.embedded.genshi.expression.full</string>
+			<key>begin</key>
+			<string>(?&lt;!\$)\$\{</string>
+			<key>end</key>
+			<string>\}</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.python</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>source.python.embedded.genshi.expression.short</string>
+			<key>match</key>
+			<string>(?&lt;!\$)\$([a-zA-Z][a-zA-Z0-9_\.]*)</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>text.xml</string>
+		</dict>
+	</array>
+	<key>fileTypes</key>
+	<array>
+		<string>kid</string>
+	</array>
+</dict>
+</plist>

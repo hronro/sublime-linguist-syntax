@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>FIGlet Font</string>
+	<key>scopeName</key>
+	<string>source.figfont</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>include</key>
+			<string>#main</string>
+		</dict>
+	</array>
+	<key>repository</key>
+	<dict>
+		<key>codeTag</key>
+		<dict>
+			<key>name</key>
+			<string>meta.code-tag.figfont</string>
+			<key>match</key>
+			<string>(?x) ^(?!.+[@#]$)
+( (-(?:0[Xx])?0*1)(?=\s|$)        # Invalid -1
+| (\+?(?:[1-9][0-9]*|0(?=\s|$))) # Decimal
+| (\+?0[0-7]+)                    # Octal
+| (\+?0[Xx][0-9A-Fa-f]+)          # Hex
+)
+(?:\s+(\S.*))?
+(?=\s*$)</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>meta.codepoint.figfont</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.reserved-codepoint.figfont</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.decimal.integer.int.figfont</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.octal.integer.int.figfont</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.hexadecimal.hex.integer.int.figfont</string>
+				</dict>
+				<key>6</key>
+				<dict>
+					<key>name</key>
+					<string>string.unquoted.description.figfont</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>codeTagTable</key>
+		<dict>
+			<key>name</key>
+			<string>meta.translation-table.figfont</string>
+			<key>contentName</key>
+			<string>string.interpolated.code-tag.figfont</string>
+			<key>begin</key>
+			<string>(?x) ^(?!.+[@#]$)
+( (-(?:[1-9][0-9]*|0(?=\s|$))) # Decimal
+| (-0[0-7]+)                    # Octal
+| (-0[Xx][0-9A-Fa-f]+)          # Hex
+)
+(?:\s+(\S.*))?
+\s*$\n?</string>
+			<key>end</key>
+			<string>(?&lt;=@@|##)[ \t]*$</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#endmarks</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>meta.code-tag.figfont</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>meta.negative.codepoint.figfont</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.decimal.integer.int.figfont</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.octal.integer.int.figfont</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.hexadecimal.hex.integer.int.figfont</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>string.unquoted.description.figfont</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>endmarks</key>
+		<dict>
+			<key>name</key>
+			<string>keyword.operator.endmark.character.figfont</string>
+			<key>match</key>
+			<string>(?:@+|#+)[ \t]*$</string>
+		</dict>
+		<key>fontData</key>
+		<dict>
+			<key>name</key>
+			<string>constant.character.sub-character.figfont</string>
+			<key>match</key>
+			<string>[^#@\s]+|#+(?!#*[ \t]*$)|@+(?!@*[ \t]*$)</string>
+		</dict>
+		<key>integer</key>
+		<dict>
+			<key>name</key>
+			<string>constant.numeric.decimal.integer.int.figfont</string>
+			<key>match</key>
+			<string>[-+]?[0-9]+</string>
+		</dict>
+		<key>main</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#prologue</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#codeTag</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#codeTagTable</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#fontData</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#endmarks</string>
+				</dict>
+			</array>
+		</dict>
+		<key>prologue</key>
+		<dict>
+			<key>name</key>
+			<string>meta.prologue.figfont</string>
+			<key>contentName</key>
+			<string>comment.block.freeform.figfont</string>
+			<key>begin</key>
+			<string>^([ft]lf2a)(\S|\x7F)(\s+.+)?\s*$</string>
+			<key>end</key>
+			<string>^\s*(?=\2(?!.*(?i:hard\W?blank))|.{0,6}[#@]\s*$)</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>meta.header-line.figfont</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.file.signature.figfont</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.hardblank.figfont</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#integer</string>
+						</dict>
+					</array>
+				</dict>
+			</dict>
+		</dict>
+	</dict>
+	<key>fileTypes</key>
+	<array>
+		<string>flf</string>
+	</array>
+</dict>
+</plist>

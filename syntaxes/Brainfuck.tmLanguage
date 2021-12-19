@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Brainfuck</string>
+	<key>scopeName</key>
+	<string>source.bf</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>constant.character.modify-value.bf</string>
+			<key>match</key>
+			<string>[+-]</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>keyword.operator.modify-pointer.bf</string>
+			<key>match</key>
+			<string>[&lt;&gt;]</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>entity.name.function.io.bf</string>
+			<key>match</key>
+			<string>[.,]</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>punctuation.definition.tag.begin.bf</string>
+			<key>match</key>
+			<string>\[</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>punctuation.definition.tag.end.bf</string>
+			<key>match</key>
+			<string>\]</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>comment.block.bf</string>
+			<key>match</key>
+			<string>[^-.,+&lt;&gt;\[\]]</string>
+		</dict>
+	</array>
+	<key>fileTypes</key>
+	<array>
+		<string>b</string>
+		<string>bf</string>
+	</array>
+</dict>
+</plist>

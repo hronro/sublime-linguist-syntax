@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>TOC (WoW)</string>
+	<key>scopeName</key>
+	<string>source.toc</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>keyword.tag.toc</string>
+			<key>begin</key>
+			<string>^## </string>
+			<key>end</key>
+			<string>(:|\Z)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.custom.toc</string>
+					<key>match</key>
+					<string>([Xx]-[^:]+)</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.localized.toc</string>
+					<key>match</key>
+					<string>(Title-|Notes-|Description-)(enUS|enGB|frFR|deDE|esES|esMX|itIT|ptBR|ruRU|koKR|zhTW|zhCN)</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.toc</string>
+					<key>match</key>
+					<string>(Interface|Title|Notes|Description|RequiredDeps|Dependencies|\bDep[^:]+|OptionalDeps|LoadOnDemand|LoadWith|LoadManagers|SavedVariablesPerCharacter|SavedVariables|DefaultState|Secure|Author|Version)</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>invalid.tag.toc</string>
+					<key>match</key>
+					<string>\S[^:]+</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(\|c)([a-fA-F0-9]{8})</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.toc</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>string.escape.coloring.toc</string>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>constant.character.escape.toc</string>
+			<key>match</key>
+			<string>(\|r)</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>comment.toc</string>
+			<key>match</key>
+			<string>(?&lt;!^## )#.*$</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>meta.require.xml.toc</string>
+			<key>match</key>
+			<string>^(?!#)[^ ].+\.xml</string>
+		</dict>
+	</array>
+	<key>fileTypes</key>
+	<array>
+		<string>toc</string>
+	</array>
+</dict>
+</plist>

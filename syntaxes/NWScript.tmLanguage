@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>NWScript</string>
+	<key>scopeName</key>
+	<string>source.c.nwscript</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>include</key>
+			<string>source.c</string>
+		</dict>
+	</array>
+	<key>injections</key>
+	<dict>
+		<key>R:source.c.nwscript - (string | comment)</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>support.type.nwscript.c</string>
+					<key>match</key>
+					<string>\b(?:effect|itemproperty|location|object|string|talent|vector)\b</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>support.constant.nwscript.c</string>
+					<key>match</key>
+					<string>\b[A-Z_][A-Z0-9_]*\b</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+	<key>fileTypes</key>
+	<array>
+		<string>nss</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>scopeName</key>
+	<string>text.conllu</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>comment.line.number-sign.conllu</string>
+			<key>match</key>
+			<string>^# .+$</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>entity.name.section.token.conllu</string>
+			<key>match</key>
+			<string>^([^	]+)	([^	]+)	([^	]+)	([^	]+)	([^	]+)	([^	]+)	([^	]+)	([^	]+)	([^	]+)	([^	]+)$</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.id.conllu</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.form.conllu</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.section.lemma.conllu</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>constant.language.upostag.conllu</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.section.xpostag.conllu</string>
+				</dict>
+				<key>6</key>
+				<dict>
+					<key>name</key>
+					<string>markup.list.unnumbered.feats.conllu</string>
+				</dict>
+				<key>7</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.head.conllu</string>
+				</dict>
+				<key>8</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.deprel.conllu</string>
+				</dict>
+				<key>9</key>
+				<dict>
+					<key>name</key>
+					<string>markup.list.numbered.deps.conllu</string>
+				</dict>
+				<key>10</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.section.misc.conllu</string>
+				</dict>
+			</dict>
+		</dict>
+	</array>
+	<key>fileTypes</key>
+	<array>
+		<string>conllu</string>
+		<string>conll</string>
+	</array>
+</dict>
+</plist>

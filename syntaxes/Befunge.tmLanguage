@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Befunge-93</string>
+	<key>scopeName</key>
+	<string>source.befunge</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>constant.numberic.bf</string>
+			<key>match</key>
+			<string>[0-9]</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>storage.type.bf</string>
+			<key>match</key>
+			<string>[+\-*/%!`]</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>storage.type.bf</string>
+			<key>match</key>
+			<string>[#&lt;&gt;^v?|_@]</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>stack.bf</string>
+			<key>match</key>
+			<string>[:$&quot;]</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>function.io.bf</string>
+			<key>match</key>
+			<string>[.,&amp;~]</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>storage.type.bf</string>
+			<key>match</key>
+			<string>[pg]</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>comment.block.bf</string>
+			<key>match</key>
+			<string>&quot;(.*?)&quot;</string>
+		</dict>
+	</array>
+	<key>fileTypes</key>
+	<array>
+		<string>befunge</string>
+	</array>
+</dict>
+</plist>

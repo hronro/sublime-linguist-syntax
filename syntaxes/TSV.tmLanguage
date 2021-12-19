@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Generic Database</string>
+	<key>scopeName</key>
+	<string>source.generic-db</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>include</key>
+			<string>#main</string>
+		</dict>
+	</array>
+	<key>repository</key>
+	<dict>
+		<key>field</key>
+		<dict>
+			<key>name</key>
+			<string>constant.other.field.generic-db</string>
+			<key>match</key>
+			<string>(?:[^#:\s]|(?&lt;=\t|:)#)[^:\t]*</string>
+		</dict>
+		<key>main</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>etc#comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#record</string>
+				</dict>
+			</array>
+		</dict>
+		<key>record</key>
+		<dict>
+			<key>name</key>
+			<string>meta.record.generic-db</string>
+			<key>begin</key>
+			<string>^(?=\s*[^#:\s])</string>
+			<key>end</key>
+			<string>$</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>etc#colon</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>etc#tab</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#field</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+	<key>fileTypes</key>
+	<array>
+		<string>tsv</string>
+	</array>
+</dict>
+</plist>

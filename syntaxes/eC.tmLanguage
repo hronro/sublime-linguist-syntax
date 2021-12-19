@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>eC</string>
+	<key>scopeName</key>
+	<string>source.c.ec</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>include</key>
+			<string>source.c</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>keyword.other.ec</string>
+			<key>match</key>
+			<string>\b(property|import|delete|new|new0|renew|renew0|define|get|set|remote|dllexport|dllimport|stdcall|subclass|__on_register_module|namespace|using|typed_object|any_object|incref|register|watch|stopwatching|firewatchers|watchable|class_designer|class_fixed|class_no_expansion|isset|class_default_property|property_category|class_data|class_property|virtual|thisclass|dbtable|dbindex|database_open|dbfield|this|value)\b</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>constant.language.boolean.ec</string>
+			<key>match</key>
+			<string>\b(true|false)\b</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>constant.language.null.ec</string>
+			<key>match</key>
+			<string>\bnull\b</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>storage.type.class.ec</string>
+			<key>match</key>
+			<string>\bclass\b</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>storage.modifier.ec</string>
+			<key>match</key>
+			<string>\b(private|public)\b</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>storage.type.ec</string>
+			<key>match</key>
+			<string>\b(unichar|uint|uint32|uint16|uint64|bool|byte|int64|uintptr|intptr|intsize|uintsize)\b</string>
+		</dict>
+	</array>
+	<key>fileTypes</key>
+	<array>
+		<string>ec</string>
+		<string>eh</string>
+	</array>
+</dict>
+</plist>

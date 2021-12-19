@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>WebAssembly</string>
+	<key>scopeName</key>
+	<string>source.webassembly</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>comment.line.hashbang.webassembly</string>
+			<key>begin</key>
+			<string>\A(#!)</string>
+			<key>end</key>
+			<string>$</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.hashbang.webassembly</string>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#main</string>
+		</dict>
+	</array>
+	<key>repository</key>
+	<dict>
+		<key>comment-block</key>
+		<dict>
+			<key>name</key>
+			<string>comment.block.semicolon.webassembly</string>
+			<key>begin</key>
+			<string>\(;</string>
+			<key>end</key>
+			<string>;\)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comment-block</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.comment.begin.webassembly</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.comment.end.webassembly</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>comment-line</key>
+		<dict>
+			<key>name</key>
+			<string>comment.line.semicolon.webassembly</string>
+			<key>begin</key>
+			<string>;;</string>
+			<key>end</key>
+			<string>$</string>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.webassembly</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>expression</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>meta.expression.$2.webassembly</string>
+					<key>begin</key>
+					<string>(\()(\w+)(?=[\s()]|$|;;)</string>
+					<key>end</key>
+					<string>\)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#main</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.expression.begin.webassembly</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#main</string>
+								</dict>
+							</array>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.expression.end.webassembly</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.expression.webassembly</string>
+					<key>begin</key>
+					<string>\(</string>
+					<key>end</key>
+					<string>\)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#main</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.expression.begin.webassembly</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.expression.end.webassembly</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>instructions</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.instruction.$1.webassembly</string>
+					<key>match</key>
+					<string>(?x) \b
+( block
+| br(?:_if|_table|_on_(?:cast|data|func|i31|null))?
+| call(?:_indirect|_ref)?
+| catch_all
+| catch
+| delegate
+| else
+| end
+| if
+| loop
+| nop
+| rethrow
+| return(?:_call(?:_indirect|_ref)?)?
+| then
+| throw
+| try
+| unreachable
+| unwind
+) (?=[\s()]|$|;;)</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.instruction.$1.webassembly</string>
+					<key>match</key>
+					<string>(?x) \b
+(
+	(f32|f64) \.
+	( (?&lt;=f32.) (demote_f64|reinterpret_i32)
+	| (?&lt;=f64.) (promote_f32|reinterpret_i64)
+	| abs
+	| add
+	| atomic (?:\.\w+)++
+	| ceil
+	| const
+	| convert_i(32|64)_[su]
+	| copysign
+	| div
+	| eq
+	| floor
+	| [gl][et]
+	| load
+	| max
+	| min
+	| mul
+	| nearest
+	| neg?
+	| ne
+	| sqrt
+	| store
+	| sub
+	| trunc
+	)
+	|
+	
+	(i32|i64) \.
+	( (?&lt;=i32.) (reinterpret_f32|wrap_i64)
+	| (?&lt;=i64.) (extend_i32_[su]|extend32_s|load32_[su]|reinterpret_f64|store32)
+	| add
+	| and
+	| atomic (?:\.\w+)++
+	| clz
+	| const
+	| ctz
+	| div_[su]
+	| eqz?
+	| eq
+	| extend(8|16)_s
+	| [gl][et]_[su]
+	| load(8|16)_[su]
+	| load
+	| mul
+	| ne
+	| x?or
+	| popcnt
+	| rem_[su]
+	| rot[lr]
+	| shl
+	| shr_[su]
+	| store(8|16)?
+	| sub
+	| trunc_(sat_)?f(32|64)_[su]
+	)
+	|
+	
+	v128 \.
+	( andnot
+	| and
+	| any_true
+	| atomic (?:\.\w+)++
+	| bitselect
+	| const
+	| load((8|16)_lane|(32|64)_(lane|zero)|(8|16|32|64)_splat|(8x8|16x4|32x2)_[su])?
+	| not
+	| x?or
+	| store((8|16|32|64)_lane)?
+	)
+	|
+
+	(f32x4|f64x2) \.
+	( (?&lt;=f32x4.) (convert_i32x4_[su]|demote_f64x2_zero)
+	| (?&lt;=f64x2.) (convert_low_i32x4_[su]|promote_low_f32x4)
+	| abs
+	| add
+	| ceil
+	| div
+	| eq
+	| (extract|replace)_lane
+	| floor
+	| [gl][et]
+	| p?max
+	| p?min
+	| mul
+	| nearest
+	| neg?
+	| splat
+	| sqrt
+	| sub
+	| trunc
+	)
+	|
+	
+	i8x16 \.
+	( abs
+	| (?:add|sub)_sat_[su]
+	| add
+	| all_true
+	| avgr_u
+	| bitmask
+	| eq
+	| extract_lane_[su]
+	| [gl][et]_[su]
+	| load_splat
+	| max_[su]
+	| min_[su]
+	| narrow_i16x8_[su]
+	| neg?
+	| ne
+	| popcnt
+	| replace_lane
+	| shl
+	| shr_[su]
+	| shuffle
+	| splat
+	| sub
+	| swizzle
+	)
+	|
+	
+	i16x8 \.
+	( abs
+	| (?:add|sub)_sat_[su]
+	| add
+	| all_true
+	| avgr_u
+	| bitmask
+	| eq
+	| ext(add_pairwise|(end|mul)_(high|low))_i8x16_[su]
+	| extract_lane_[su]
+	| [gl][et]_[su]
+	| load8x8_[su]
+	| load_splat
+	| max_[su]
+	| min_[su]
+	| mul
+	| narrow_i32x4_[su]
+	| neg?
+	| ne
+	| q15mulr_sat_s
+	| replace_lane
+	| shl
+	| shr_[su]
+	| splat
+	| sub
+	)
+	|
+
+	i32x4 \.
+	( abs
+	| add
+	| all_true
+	| bitmask
+	| dot_i16x8_s
+	| eq
+	| ext(add_pairwise|(end|mul)_(high|low))_i16x8_[su]
+	| extract_lane
+	| [gl][et]_[su]
+	| load16x4_[su]
+	| load_splat
+	| max_[su]
+	| min_[su]
+	| mul
+	| neg?
+	| ne
+	| replace_lane
+	| shl
+	| shr_[su]
+	| splat
+	| sub
+	| trunc_sat_f32x4_[su]
+	| trunc_sat_f64x2_[su]_zero
+	)
+	|
+
+	i64x2 \.
+	( abs
+	| add
+	| all_true
+	| bitmask
+	| eq
+	| ext(end|mul)_(high|low)_i32x4_[su]
+	| extract_lane
+	| [gl][et]_s
+	| load32x2_[su]
+	| load_splat
+	| mul
+	| neg?
+	| ne
+	| replace_lane
+	| shl
+	| shr_[su]
+	| splat
+	| sub
+	)
+) (?=[\s()]|$|;;)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>name</key>
+									<string>punctuation.separator.method.period.webassembly</string>
+									<key>match</key>
+									<string>\.</string>
+								</dict>
+							</array>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b([if](?:32|64)(\.)\w+)(/)([if](?:32|64))</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.instruction.$1.webassembly</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.method.period.webassembly</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.method.slash.webassembly</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#type</string>
+								</dict>
+							</array>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.instruction.$1.webassembly</string>
+					<key>match</key>
+					<string>(?x) \b
+( (array|struct) (\. (len|new(_default)?_with_rtt|get_[su]|[gs]et))?
+| (current|grow)_memory
+| data\.drop
+| drop
+| elem\.drop
+| field
+| i31 \. (new|get_[su])
+| ([gs]et|tee)_(local|global)
+| global\.[gs]et
+| local\.([gs]et|tee)
+| memory\.(atomic\.(notify|wait32|wait64)|copy|fill|grow|init|size)
+| ref(\.([ai]s_(data|func|i31|non_null)|cast|eq|func|is_null|null|test))?
+| rtt(\.(canon|sub))?
+| select
+| table\.(copy|fill|get|grow|init|set|size)
+) (?=[\s()]|$|;;)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>name</key>
+									<string>punctuation.separator.method.period.webassembly</string>
+									<key>match</key>
+									<string>\.</string>
+								</dict>
+							</array>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>storage.type.$1.webassembly</string>
+					<key>match</key>
+					<string>(?x) \b
+( anyfunc
+| data
+| declare
+| element
+| elem
+| export
+| extern
+| func
+| global
+| import
+| item
+| local
+| memory
+| module
+| mut
+| offset
+| param
+| result
+| start
+| table
+| type
+) (?=[\s()]|$|;;)</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>support.function.scripting.webassembly</string>
+					<key>match</key>
+					<string>(?x) \b
+( assert_exhaustion
+| assert_invalid
+| assert_malformed
+| assert_return (?:_(?:arithmetic|canonical)_nan)?
+| assert_trap
+| assert_unlinkable
+| binary
+| input
+| invoke
+| get
+| output
+| quote
+| ref\.extern
+| ref\.host
+| register
+| script
+) (?=[\s()]|$|;;)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>name</key>
+									<string>punctuation.separator.method.period.webassembly</string>
+									<key>match</key>
+									<string>\.</string>
+								</dict>
+							</array>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>main</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comment-line</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment-block</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#expression</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#instructions</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#type</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#number</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#name</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#optional-immediate</string>
+				</dict>
+			</array>
+		</dict>
+		<key>name</key>
+		<dict>
+			<key>name</key>
+			<string>variable.other.name.webassembly</string>
+			<key>match</key>
+			<string>(\$)[-A-Za-z0-9_.+*/\\^~=&lt;&gt;!?@#$%&amp;|:&apos;`]+</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.variable.webassembly</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>number</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>constant.language.nan.with-payload.webassembly</string>
+					<key>match</key>
+					<string>(?&lt;!\w)[-+]?nan(:)(0x(?!_)(?:_?[A-Fa-f0-9])+)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.payload.colon.webassembly</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>constant.numeric.int.hex.payload.webassembly</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.language.$1.$2.webassembly</string>
+					<key>match</key>
+					<string>(?&lt;!\w)[-+]?(inf|nan)(?:(?&lt;=nan):(arithmetic|canonical))?(?!\w)</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.float.hex.webassembly</string>
+					<key>match</key>
+					<string>(?x) (?&lt;!\w)
+[-+]? 0x      (?!_)(?:_? [A-Fa-f0-9])++
+(?: \.       (?!_)(?:_? [A-Fa-f0-9])*+ )?
+(?: [pP][-+]? (?!_)(?:_? [0-9])++ )?</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.float.decimal.webassembly</string>
+					<key>match</key>
+					<string>(?x) (?&lt;!\w)
+[-+]?         (?!_)(?:_? \d)++
+(?: \.       (?!_)(?:_? \d)*+ )?
+(?: [eE][-+]? (?!_)(?:_? \d)++ )?</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.int.hex.webassembly</string>
+					<key>match</key>
+					<string>(?&lt;!\w)[-+]?0x(?!_)(?:_?[A-Fa-f0-9])++</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.int.decimal.webassembly</string>
+					<key>match</key>
+					<string>(?&lt;!\w)[-+]?(?!_)(?:_?\d)++</string>
+				</dict>
+			</array>
+		</dict>
+		<key>optional-immediate</key>
+		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)(align|offset)(=)(?=[-+]?(?:\d|0x[\dA-Fa-f]))</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.$1.webassembly</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.webassembly</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>string</key>
+		<dict>
+			<key>name</key>
+			<string>string.quoted.double.webassembly</string>
+			<key>begin</key>
+			<string>&quot;</string>
+			<key>end</key>
+			<string>&quot;</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.newline.webassembly</string>
+					<key>match</key>
+					<string>\\n</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.tab.webassembly</string>
+					<key>match</key>
+					<string>\\t</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.backslash.webassembly</string>
+					<key>match</key>
+					<string>\\{2}</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.quote.single.webassembly</string>
+					<key>match</key>
+					<string>\\&apos;</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.quote.double.webassembly</string>
+					<key>match</key>
+					<string>\\&quot;</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.hex.unicode.webassembly</string>
+					<key>match</key>
+					<string>\\[0-9A-Fa-f]{2}|\\u({)[A-Fa-f0-9]+(})</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.unicode-escape.begin.bracket.curly.webassembly</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.unicode-escape.end.bracket.curly.webassembly</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.begin.webassembly</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.webassembly</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>type</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>storage.type.number.$1.webassembly</string>
+					<key>match</key>
+					<string>\b([if](?:32|64)|v128|i8|i16)(?=[\s()]|$|;;)</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>storage.type.simd.$1.webassembly</string>
+					<key>match</key>
+					<string>\b(f32x4|f64x2|i8x16|i16x8|i32x4|i64x2)(?=[\s()]|$|;;)</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>storage.type.reference.$1.webassembly</string>
+					<key>match</key>
+					<string>\b((?:any|data|eq|extern|func|i31)ref)(?=[\s()]|$|;;)</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
+	<key>fileTypes</key>
+	<array>
+		<string>wast</string>
+		<string>wat</string>
+	</array>
+</dict>
+</plist>

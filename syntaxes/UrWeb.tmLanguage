@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>UrWeb</string>
+	<key>scopeName</key>
+	<string>source.ur</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>keyword.source.ur</string>
+			<key>match</key>
+			<string>\b(EQUAL|GREATER|LESS|NONE|SOME|abstraction|abstype|and|andalso|array|as|before|bool|case|char|datatype|do|else|end|eqtype|exception|exn|false|fn|fun|functor|handle|if|in|include|infix|infixr|int|let|list|local|nil|nonfix|not|o|of|op|open|option|orelse|overload|print|raise|real|rec|ref|sharing|sig|signature|string|struct|structure|substring|then|true|type|unit|val|vector|where|while|with|withtype|word)\b</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>constant.numeric.ur</string>
+			<key>match</key>
+			<string>\b[0-9]+\b</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>support.type.ur</string>
+			<key>match</key>
+			<string>\b[A-Z]([A-z0-9]*)\b</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>string.ur</string>
+			<key>match</key>
+			<string>&quot;(\\&quot;|[^&quot;])*&quot;</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>comment.ur</string>
+			<key>begin</key>
+			<string>\(\*</string>
+			<key>end</key>
+			<string>\*\)</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>constant.character.ur</string>
+			<key>match</key>
+			<string>(\(\)|=&gt;|::|\[\]|-&gt;|:&gt;)</string>
+		</dict>
+	</array>
+	<key>fileTypes</key>
+	<array>
+		<string>ur</string>
+		<string>urs</string>
+	</array>
+</dict>
+</plist>

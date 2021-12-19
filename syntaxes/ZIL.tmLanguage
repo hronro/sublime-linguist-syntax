@@ -1,0 +1,1317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>ZIL</string>
+	<key>scopeName</key>
+	<string>source.zil</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>include</key>
+			<string>#expressions</string>
+		</dict>
+	</array>
+	<key>repository</key>
+	<dict>
+		<key>argspec</key>
+		<dict>
+			<key>name</key>
+			<string>meta.parameters.zil</string>
+			<key>begin</key>
+			<string>\(</string>
+			<key>end</key>
+			<string>\)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.local.symbol.atom.zil</string>
+					<key>match</key>
+					<string>(?x)
+# optional quote
+(?:&apos;\s*)?
+# atom
+(?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+(?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.binding.zil</string>
+					<key>begin</key>
+					<string>(?x)
+(\()
+\s*
+# optional quote
+(?:&apos;\s*)?
+# atom
+((?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+ (?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+)</string>
+					<key>end</key>
+					<string>\)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#expressions</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.list.parameter.begin.zil</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.local.symbol.atom.zil</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.list.parameter.end.zil</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.arguments.aux.zil keyword.separator.arguments.aux.zil</string>
+					<key>match</key>
+					<string>&quot;(?:AUX|EXTRA)&quot;</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.arguments.opt.zil keyword.separator.arguments.opt.zil</string>
+					<key>match</key>
+					<string>&quot;(?:OPT|OPTIONAL)&quot;</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.arguments.varargs.zil keyword.separator.arguments.varargs.zil</string>
+					<key>match</key>
+					<string>&quot;(?:ARGS|TUPLE)&quot;</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.arguments.misc.zil keyword.separator.arguments.misc.zil</string>
+					<key>match</key>
+					<string>&quot;(?:NAME|BIND)&quot;</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#expressions</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.list.parameters.begin.zil</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.list.parameters.end.zil</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>atom</key>
+		<dict>
+			<key>name</key>
+			<string>meta.symbol.atom.zil</string>
+			<key>match</key>
+			<string>(?x)
+# atom can start with anything escaped, or any non-delimiter
+(?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+# and continue with any of the above as well as &apos;!&apos; and &apos;.&apos;
+(?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+</string>
+		</dict>
+		<key>binary_num</key>
+		<dict>
+			<key>name</key>
+			<string>constant.numeric.binary.zil</string>
+			<key>match</key>
+			<string>(#)\s*0*2\s+[01]+(?![^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.constant.numeric.binary.zil</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>char</key>
+		<dict>
+			<key>name</key>
+			<string>constant.character.zil</string>
+			<key>match</key>
+			<string>!\\.</string>
+		</dict>
+		<key>comment</key>
+		<dict>
+			<key>name</key>
+			<string>comment.block.zil</string>
+			<key>begin</key>
+			<string>;</string>
+			<key>end</key>
+			<string>(?&lt;!\G)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.comment.prefix.zil</string>
+				</dict>
+			</dict>
+			<key>applyEndPatternLast</key>
+			<true />
+		</dict>
+		<key>constants</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#decimal_num</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#octal_num</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#binary_num</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#char</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#else</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#false</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#true</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#atom</string>
+				</dict>
+			</array>
+		</dict>
+		<key>decimal_num</key>
+		<dict>
+			<key>name</key>
+			<string>constant.numeric.decimal.zil</string>
+			<key>match</key>
+			<string>-?([0-9]+)(?![^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+		</dict>
+		<key>else</key>
+		<dict>
+			<key>name</key>
+			<string>keyword.control.else.zil</string>
+			<key>match</key>
+			<string>(?&lt;=\()(?:ELSE|T)\b</string>
+		</dict>
+		<key>expressions</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#constants</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#structures</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#prefixes</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#invalid</string>
+				</dict>
+			</array>
+		</dict>
+		<key>false</key>
+		<dict>
+			<key>name</key>
+			<string>constant.language.boolean.false.zil</string>
+			<key>match</key>
+			<string>&lt;\s*&gt;</string>
+		</dict>
+		<key>form</key>
+		<dict>
+			<key>name</key>
+			<string>meta.structure.form.zil</string>
+			<key>begin</key>
+			<string>&lt;</string>
+			<key>end</key>
+			<string>!?&gt;</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#special_form_body</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#expressions</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.form.begin.zil</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.form.end.zil</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>gval</key>
+		<dict>
+			<key>name</key>
+			<string>variable.other.global.zil</string>
+			<key>begin</key>
+			<string>(,)\s*</string>
+			<key>end</key>
+			<string>(?&lt;!\G)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.variable.global.prefix.zil</string>
+				</dict>
+			</dict>
+			<key>applyEndPatternLast</key>
+			<true />
+		</dict>
+		<key>invalid</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.zil</string>
+					<key>match</key>
+					<string>!.</string>
+				</dict>
+			</array>
+		</dict>
+		<key>list</key>
+		<dict>
+			<key>name</key>
+			<string>meta.structure.list.zil</string>
+			<key>begin</key>
+			<string>!?\(</string>
+			<key>end</key>
+			<string>!?\)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#expressions</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.list.begin.zil</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.list.end.zil</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>lval</key>
+		<dict>
+			<key>name</key>
+			<string>variable.other.local.zil</string>
+			<key>begin</key>
+			<string>(\.)\s*</string>
+			<key>end</key>
+			<string>(?&lt;!\G)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.variable.local.prefix.zil</string>
+				</dict>
+			</dict>
+			<key>applyEndPatternLast</key>
+			<true />
+		</dict>
+		<key>macro</key>
+		<dict>
+			<key>name</key>
+			<string>meta.macro.zil</string>
+			<key>begin</key>
+			<string>(%)|(%%)</string>
+			<key>end</key>
+			<string>(?&lt;!\G)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.macro.single.prefix.zil</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.macro.double.prefix.zil</string>
+				</dict>
+			</dict>
+			<key>applyEndPatternLast</key>
+			<true />
+		</dict>
+		<key>octal_num</key>
+		<dict>
+			<key>name</key>
+			<string>constant.numeric.octal.zil</string>
+			<key>match</key>
+			<string>(\*)([0-7]+)(\*)(?![^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.constant.numeric.octal.zil</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.constant.numeric.octal.zil</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>prefixes</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#macro</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#lval</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#gval</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#quote</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#segment</string>
+				</dict>
+			</array>
+		</dict>
+		<key>property</key>
+		<dict>
+			<key>name</key>
+			<string>meta.property.zil</string>
+			<key>begin</key>
+			<string>(?xi)
+\( \s*
+(?: (IN|LOC|DESC|SYNONYM|ADJECTIVE|FLAGS|
+     GLOBAL|GENERIC|ACTION|DESCFCN|CONTFCN|LDESC|FDESC|
+     NORTH|SOUTH|EAST|WEST|OUT|UP|DOWN|NW|SW|NE|SE)
+|   ((?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+     (?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+)
+)
+\b</string>
+			<key>end</key>
+			<string>\)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>$self</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.property.${1:/downcase}.zil</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>meta.object-literal.key.zil</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>quote</key>
+		<dict>
+			<key>name</key>
+			<string>meta.quoted-expression.zil</string>
+			<key>begin</key>
+			<string>&apos;</string>
+			<key>end</key>
+			<string>(?&lt;!\G)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.quote.prefix.zil</string>
+				</dict>
+			</dict>
+			<key>applyEndPatternLast</key>
+			<true />
+		</dict>
+		<key>segment</key>
+		<dict>
+			<key>name</key>
+			<string>meta.structure.segment.zil</string>
+			<key>begin</key>
+			<string>!(?=[.,&lt;])</string>
+			<key>end</key>
+			<string>(?&lt;!\G)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.segment.prefix.zil</string>
+				</dict>
+			</dict>
+			<key>applyEndPatternLast</key>
+			<true />
+		</dict>
+		<key>skip_ws</key>
+		<dict>
+			<key>match</key>
+			<string>\s+</string>
+		</dict>
+		<key>special_form_body</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.arithmetic.${1:/downcase}.zil</string>
+					<key>match</key>
+					<string>(?xi)
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+(\+|-|\*|/|MOD|MIN|MAX|OR\?|AND\?)
+(?!\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.bitwise.${1:/downcase}.zil</string>
+					<key>match</key>
+					<string>(?xi)
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+(BAND|BOR|ANDB|ORB|LSH|XORB|EQVB)
+(?!\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.comparison.${1:/downcase}.zil</string>
+					<key>match</key>
+					<string>(?xi)
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+(==?|N==?|L=?|G=?|[01TF])\?
+(?!\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.${1:/downcase}.zil</string>
+					<key>match</key>
+					<string>(?xi) \s*
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+(COND|BIND|PROG|REPEAT|DO|MAP[FR]|MAP-(?:CONTENTS|DIRECTIONS)|
+ AGAIN|RETURN|RTRUE|RFALSE|CATCH|THROW|EVAL|AND|OR|NOT)
+(?!\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.output.${1:/downcase}.zil</string>
+					<key>match</key>
+					<string>(?xi) \s*
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+(TELL(?:-TOKENS)?|ADD-TELL-TOKENS|CRLF|PRINT[INR]?|PRIN[C1])
+(?!\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.zmodel.${1:/downcase}.zil</string>
+					<key>match</key>
+					<string>(?xi) \s*
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+(FSET\??|FCLEAR|MOVE|REMOVE|IN\?|FIRST\?|NEXT\?|
+ PUTP|GETP|PROPDEF|GETPT|PTSIZE|INTBL\?|
+ P?L?TABLE|ITABLE|GETB?|GET/B|PUTB?|PUT/B|ZGET|ZPUT|
+ VOC|SYNONYM|(?:VERB|PREP|ADJ|DIR|BIT)-SYNONYM|DIRECTIONS|BUZZ)
+(?!\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.meta.${1:/downcase}.zil</string>
+					<key>match</key>
+					<string>(?xi) \s*
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+(INSERT-FILE|PACKAGE|ENDPACKAGE|USE|ENTRY|RENTRY|VERSION|
+ COMPILATION-FLAG(?:-DEFAULT)?|REPLACE-DEFINITION|DELAY-DEFINITION|DEFAULT-DEFINITION|
+ IF-(?:[A-Z0-9][-A-Z0-9]+))
+(?!\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function.zil</string>
+					<key>begin</key>
+					<string>(?xi)
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+# function type (1)
+(DEFINE|DEFINE20|DEFMAC|ROUTINE)
+\s+
+# function name atom (2)
+((?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+ (?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+)
+\s*
+# optional activation atom (3)
+(?:
+    (?&lt;=\s)
+    ((?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+     (?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+)
+     \s*
+)?
+# followed by paren starting arg spec
+(?=\()</string>
+					<key>end</key>
+					<string>(?&lt;=\))|(?=\&gt;)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#argspec</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.definition.function.${1:/downcase}.zil</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.zil</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.variable.local.activation-atom.zil</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.object.zil</string>
+					<key>begin</key>
+					<string>(?xi)
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+# object type (1)
+(OBJECT|ROOM)
+\s+
+# object name (2)
+((?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+ (?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+)
+\s*</string>
+					<key>end</key>
+					<string>(?=\&gt;)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#property</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.definition.object.${1:/downcase}.zil</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.object.zil</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(?xi)
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+# global type (1)
+(SETG|CONSTANT|GLOBAL|GASSIGNED\?|GUNASSIGN)
+\s+
+# global name atom (2)
+((?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+ (?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+)?</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.definition.global.${1:/downcase}.zil</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.variable.global.zil variable.global.zil</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(?xi)
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+# local type?
+(SET|ASSIGNED\?|UNASSIGN)
+\s+
+# local name atom (2)
+((?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+ (?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+)?</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.definition.local.${1:/downcase}.zil</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.variable.local.zil variable.local.zil</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(?xi)
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+(CHTYPE|TYPE\??|PRIMTYPE)
+(?!\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.type.${1:/downcase}.zil</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(?xi)
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+# keyword (1)
+(NEWTYPE|DEFSTRUCT|APPLYTYPE|EVALTYPE|PRINTTYPE|TYPEPRIM)
+\s+
+# type name atom (2)
+((?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+ (?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+)?
+(?!\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.definition.type.${1:/downcase}.zil</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.type.zil</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(?xi)
+(?&lt;=&lt;) \s* (?:FORM\s+)?
+(SYNTAX)
+\s+
+# verb word
+((?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+ (?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+)
+# first object
+(?:
+    (?!\s*=\b)
+    # prep 1
+    (?:\s+ (?!OBJECT\b)(\S+))?
+    # obj 1
+    \s+ (OBJECT)
+    # flags/search options 1
+    (\s* \( [^)]* \) )*
+)?+
+# second object
+(?:
+    (?!\s*=\b)
+    # prep 2
+    (?:\s+ (?!OBJECT\b)(\S+))?
+    # obj 2
+    \s+ (OBJECT)
+    # flags/search options 2
+    (\s* \( [^)]* \) )*
+)?+
+# handlers
+(?:
+    \s+ =
+    # action
+    \s+
+    ((?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+     (?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+)
+    # preaction
+    (?:
+        \s+
+        ((?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+         (?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+)
+    )?+
+    # name
+    (?:
+        \s+
+        ((?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+         (?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+)
+    )?+
+)?+</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.definition.vocab.syntax.zil</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.verb.zil</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.preposition.zil</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.definition.vocab.object.zil</string>
+						</dict>
+						<key>6</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.preposition.zil</string>
+						</dict>
+						<key>7</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.definition.vocab.object.zil</string>
+						</dict>
+						<key>9</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.action.zil</string>
+						</dict>
+						<key>10</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.preaction.zil</string>
+						</dict>
+						<key>11</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.verb.zil</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>string</key>
+		<dict>
+			<key>name</key>
+			<string>string.quoted.double.zil</string>
+			<key>begin</key>
+			<string>&quot;</string>
+			<key>end</key>
+			<string>&quot;</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.zil</string>
+					<key>match</key>
+					<string>\\.</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.begin.zil</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.end.zil</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>structures</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#list</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#form</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#vector</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#uvector</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#segment</string>
+				</dict>
+			</array>
+		</dict>
+		<key>true</key>
+		<dict>
+			<key>name</key>
+			<string>constant.language.boolean.true.zil</string>
+			<key>match</key>
+			<string>\bT\b</string>
+		</dict>
+		<key>unstyled_atom</key>
+		<dict>
+			<key>match</key>
+			<string>(?x)
+# atom can start with anything escaped, or any non-delimiter
+(?:\\.|[^!. \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])
+# and continue with any of the above as well as &apos;!&apos; and &apos;.&apos;
+(?:\\.|[^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])*+</string>
+		</dict>
+		<key>unstyled_char</key>
+		<dict>
+			<key>match</key>
+			<string>!\\.</string>
+		</dict>
+		<key>unstyled_constants</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_numeric</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_string</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_char</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_atom</string>
+				</dict>
+			</array>
+		</dict>
+		<key>unstyled_expressions</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_constants</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_structures</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_prefixes</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#invalid</string>
+				</dict>
+			</array>
+		</dict>
+		<key>unstyled_form</key>
+		<dict>
+			<key>begin</key>
+			<string>&lt;</string>
+			<key>end</key>
+			<string>!?&gt;</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+		</dict>
+		<key>unstyled_gval</key>
+		<dict>
+			<key>begin</key>
+			<string>(,)\s*</string>
+			<key>end</key>
+			<string>(?&lt;!\G)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+			<key>applyEndPatternLast</key>
+			<true />
+		</dict>
+		<key>unstyled_list</key>
+		<dict>
+			<key>begin</key>
+			<string>!?\(</string>
+			<key>end</key>
+			<string>!?\)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+		</dict>
+		<key>unstyled_lval</key>
+		<dict>
+			<key>begin</key>
+			<string>\.</string>
+			<key>end</key>
+			<string>(?&lt;!\G)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+			<key>applyEndPatternLast</key>
+			<true />
+		</dict>
+		<key>unstyled_numeric</key>
+		<dict>
+			<key>match</key>
+			<string>(?:\b-?[0-9]+\b|\*[0-7]+\*|#\s*0*2\s+[01]+)(?![^ \t-\r,#&apos;:;%()\[\]&lt;&gt;\{\}&quot;])</string>
+		</dict>
+		<key>unstyled_prefixes</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#macro</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_lval</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_gval</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_quote</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_segment</string>
+				</dict>
+			</array>
+		</dict>
+		<key>unstyled_quote</key>
+		<dict>
+			<key>begin</key>
+			<string>&apos;</string>
+			<key>end</key>
+			<string>(?&lt;!\G)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+			<key>applyEndPatternLast</key>
+			<true />
+		</dict>
+		<key>unstyled_segment</key>
+		<dict>
+			<key>begin</key>
+			<string>!(?=[.,&lt;])</string>
+			<key>end</key>
+			<string>(?&lt;!\G)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+			<key>applyEndPatternLast</key>
+			<true />
+		</dict>
+		<key>unstyled_string</key>
+		<dict>
+			<key>begin</key>
+			<string>&quot;</string>
+			<key>end</key>
+			<string>&quot;</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\\.</string>
+				</dict>
+			</array>
+		</dict>
+		<key>unstyled_structures</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_list</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_form</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_vector</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_uvector</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_segment</string>
+				</dict>
+			</array>
+		</dict>
+		<key>unstyled_uvector</key>
+		<dict>
+			<key>begin</key>
+			<string>!\[</string>
+			<key>end</key>
+			<string>!?\]</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+		</dict>
+		<key>unstyled_vector</key>
+		<dict>
+			<key>begin</key>
+			<string>\[</string>
+			<key>end</key>
+			<string>!?\]</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#unstyled_expressions</string>
+				</dict>
+			</array>
+		</dict>
+		<key>uvector</key>
+		<dict>
+			<key>name</key>
+			<string>meta.structure.array.uvector.zil</string>
+			<key>begin</key>
+			<string>!\[</string>
+			<key>end</key>
+			<string>!?\]</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#expressions</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.array.uvector.begin.zil</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.array.uvector.end.zil</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>vector</key>
+		<dict>
+			<key>name</key>
+			<string>meta.structure.array.vector.zil</string>
+			<key>begin</key>
+			<string>\[</string>
+			<key>end</key>
+			<string>!?\]</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#expressions</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.array.vector.begin.zil</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.array.vector.end.zil</string>
+				</dict>
+			</dict>
+		</dict>
+	</dict>
+	<key>fileTypes</key>
+	<array>
+		<string>zil</string>
+		<string>mud</string>
+	</array>
+</dict>
+</plist>

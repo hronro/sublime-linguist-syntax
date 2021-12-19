@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>JavaScript Template</string>
+	<key>scopeName</key>
+	<string>text.html.js</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>source.js.embedded.html</string>
+			<key>begin</key>
+			<string>&lt;%=?</string>
+			<key>end</key>
+			<string>%&gt;</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.js</string>
+				</dict>
+			</array>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.embedded.js</string>
+				</dict>
+			</dict>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>text.html.basic</string>
+		</dict>
+	</array>
+	<key>fileTypes</key>
+	<array>
+		<string>ejs</string>
+		<string>ect</string>
+		<string>ejs.t</string>
+		<string>jst</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Extended Backus-Naur Form</string>
+	<key>scopeName</key>
+	<string>source.ebnf</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>include</key>
+			<string>#main</string>
+		</dict>
+	</array>
+	<key>repository</key>
+	<dict>
+		<key>brackets</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.square.bracket.begin.ebnf</string>
+					<key>match</key>
+					<string>\[</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.square.bracket.end.ebnf</string>
+					<key>match</key>
+					<string>\]</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.curly.bracket.begin.ebnf</string>
+					<key>match</key>
+					<string>{</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.curly.bracket.end.ebnf</string>
+					<key>match</key>
+					<string>}</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.round.bracket.begin.ebnf</string>
+					<key>match</key>
+					<string>\(</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.round.bracket.end.ebnf</string>
+					<key>match</key>
+					<string>\)</string>
+				</dict>
+			</array>
+		</dict>
+		<key>comment</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>comment.block.iso14977.ebnf</string>
+					<key>begin</key>
+					<string>\(\*</string>
+					<key>end</key>
+					<string>\*\)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.begin.ebnf</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.end.ebnf</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>comment.block.w3c.ebnf</string>
+					<key>begin</key>
+					<string>^[ \t]*((/\*))</string>
+					<key>end</key>
+					<string>\*/</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>comment.block.w3c.ebnf</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.begin.ebnf</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.comment.end.ebnf</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>lhs</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>meta.lhs.ebnf</string>
+					<key>match</key>
+					<string>(?x)
+(?:    \s++
+|      ^|\G
+| (?=  ^|\G    )
+| (?&lt;= ;|\*\) )
+)
+
+# Exclude leading whitespace
+\s*
+
+([A-Za-z][A-Za-z0-9_-]*+)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.rule.identifier.ebnf</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.lhs.non-standard.ebnf</string>
+					<key>contentName</key>
+					<string>entity.name.rule.identifier.non-standard.ebnf</string>
+					<key>begin</key>
+					<string>(?x)
+(?:    \s++
+|      ^|\G
+| (?=  ^|\G  )
+| (?&lt;= \*\) )
+)
+
+# Exclude leading whitespace
+\s*
+
+# Check for at least one “invalid” character
+(?=
+	# Starts with a digit
+	[0-9]
+	|
+	
+	# Contains at least one non-“word” character
+	[A-Za-z0-9_-]*  # Skip any legal characters
+	(?: [^:;=()]    # Don&apos;t swallow symbols for comments, terminators, or assignments
+	|   \((?!\*)  # Permit open brackets if they don&apos;t introduce a comment
+	)
+)</string>
+					<key>end</key>
+					<string>(?x)
+# Exclude trailing whitespace
+\s*
+
+# Stop before an...
+(?= :*=      # Assignment operator separating `#lhs` from `#rhs`
+|   ;        # Unexpected terminator
+|   \(\*   # Embedded comment
+)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#comment</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment</string>
+				</dict>
+			</array>
+		</dict>
+		<key>main</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#semicolon</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#lhs</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#rhs</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#special</string>
+				</dict>
+			</array>
+		</dict>
+		<key>rhs</key>
+		<dict>
+			<key>name</key>
+			<string>meta.rhs.ebnf</string>
+			<key>begin</key>
+			<string>(::=)|(:=)|(=)</string>
+			<key>end</key>
+			<string>(?=;|^\s*(?:&lt;?[A-Za-z][A-Za-z0-9_-]*&gt;?\s*)?:*=)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#rhs-innards</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.non-standard.double-colon.ebnf</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.non-standard.single-colon.ebnf</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.ebnf</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>rhs-innards</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>punctuation.delimiter.comma.ebnf</string>
+					<key>match</key>
+					<string>,</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.logical.or.alternation.pipe.ebnf</string>
+					<key>match</key>
+					<string>\|</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.logical.minus.hyphen.exception.ebnf</string>
+					<key>match</key>
+					<string>-</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.logical.repetition.asterisk.star.ebnf</string>
+					<key>match</key>
+					<string>\*</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#special</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.double.ebnf</string>
+					<key>begin</key>
+					<string>&quot;</string>
+					<key>end</key>
+					<string>&quot;(?!&quot;)|(?=^\s*+\S+?\s+::{0,2}=\s|\s+\|)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.ebnf</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.ebnf</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.single.ebnf</string>
+					<key>begin</key>
+					<string>&apos;</string>
+					<key>end</key>
+					<string>&apos;(?!&apos;)|(?=^\s*+\S+?\s+::{0,2}=\s|\s+\|)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.ebnf</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.ebnf</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#brackets</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>variable.parameter.argument.identifier.reference.ebnf</string>
+					<key>match</key>
+					<string>\b(?&lt;!-)[A-Za-z][A-Za-z0-9_-]*</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.logical.not.negation.non-standard.ebnf</string>
+					<key>match</key>
+					<string>!</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>source.lex.regexp#quantifier</string>
+				</dict>
+			</array>
+		</dict>
+		<key>semicolon</key>
+		<dict>
+			<key>name</key>
+			<string>punctuation.terminator.statement.ebnf</string>
+			<key>match</key>
+			<string>;</string>
+		</dict>
+		<key>special</key>
+		<dict>
+			<key>name</key>
+			<string>meta.pragma.directive.special.iso14977.ebnf</string>
+			<key>match</key>
+			<string>(?&lt;=\s|^)(\?)(.+?)(?&lt;=\s)(\?)(?=[,;]?(?:$|\s))</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.pragma.begin.ebnf</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>support.constant.language.pragma.ebnf</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.pragma.end.ebnf</string>
+				</dict>
+			</dict>
+		</dict>
+	</dict>
+	<key>fileTypes</key>
+	<array>
+		<string>ebnf</string>
+	</array>
+</dict>
+</plist>
