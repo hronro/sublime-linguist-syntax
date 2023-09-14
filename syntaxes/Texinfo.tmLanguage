@@ -1916,6 +1916,40 @@
 				</dict>
 			</array>
 		</dict>
+		<key>manualName</key>
+		<dict>
+			<key>name</key>
+			<string>meta.manual-name.texinfo</string>
+			<key>contentName</key>
+			<string>constant.other.reference.link.texinfo</string>
+			<key>begin</key>
+			<string>(?:^|\G)\s*\(</string>
+			<key>end</key>
+			<string>\)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#main</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.reference.manual.begin.texinfo</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.reference.manual.end.texinfo</string>
+				</dict>
+			</dict>
+		</dict>
 		<key>menu</key>
 		<dict>
 			<key>name</key>
@@ -1939,7 +1973,7 @@
 							<key>contentName</key>
 							<string>entity.name.tag.entry-name.texinfo</string>
 							<key>begin</key>
-							<string>\G</string>
+							<string>\G(\s*\(.*?\))?</string>
 							<key>end</key>
 							<string>::?|(?=\s*$)</string>
 							<key>patterns</key>
@@ -1949,6 +1983,19 @@
 									<string>#main</string>
 								</dict>
 							</array>
+							<key>beginCaptures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#manualName</string>
+										</dict>
+									</array>
+								</dict>
+							</dict>
 							<key>endCaptures</key>
 							<dict>
 								<key>0</key>
@@ -1962,7 +2009,7 @@
 							<key>contentName</key>
 							<string>entity.name.node-name.texinfo</string>
 							<key>begin</key>
-							<string>(?&lt;=[^:]:)\s*</string>
+							<string>(?&lt;=[^:]:)\s*(\(.*?\))?</string>
 							<key>end</key>
 							<string>(\.)|(?=\s*$)</string>
 							<key>patterns</key>
@@ -1972,6 +2019,19 @@
 									<string>#main</string>
 								</dict>
 							</array>
+							<key>beginCaptures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#manualName</string>
+										</dict>
+									</array>
+								</dict>
+							</dict>
 							<key>endCaptures</key>
 							<dict>
 								<key>1</key>

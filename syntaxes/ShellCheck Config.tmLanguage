@@ -97,6 +97,12 @@
 					<key>patterns</key>
 					<array>
 						<dict>
+							<key>name</key>
+							<string>keyword.operator.all-warnings.shellcheckrc</string>
+							<key>match</key>
+							<string>\Gall(?=$|\s)</string>
+						</dict>
+						<dict>
 							<key>include</key>
 							<string>#errorCodeRange</string>
 						</dict>
@@ -140,6 +146,25 @@
 					<string>(?=$|\s)</string>
 					<key>patterns</key>
 					<array>
+						<dict>
+							<key>include</key>
+							<string>#escape</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(?x)(?&lt;= \s external-sources= | ^   external-sources= )\G</string>
+					<key>end</key>
+					<string>(?=$|\s)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>constant.language.boolean.$1.shellcheckrc</string>
+							<key>match</key>
+							<string>\G(true|false)(?=$|\s)</string>
+						</dict>
 						<dict>
 							<key>include</key>
 							<string>#escape</string>

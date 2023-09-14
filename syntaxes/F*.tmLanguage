@@ -653,6 +653,7 @@
 	<key>fileTypes</key>
 	<array>
 		<string>fst</string>
+		<string>fsti</string>
 	</array>
 </dict>
 </plist>

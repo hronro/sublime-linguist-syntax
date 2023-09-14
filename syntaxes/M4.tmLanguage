@@ -1566,6 +1566,7 @@
 	<key>fileTypes</key>
 	<array>
 		<string>m4</string>
+		<string>mc</string>
 	</array>
 </dict>
 </plist>

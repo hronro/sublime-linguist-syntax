@@ -15,12 +15,57 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>array</key>
+		<dict>
+			<key>begin</key>
+			<string>(?:\G|^)(?=\s*[^#\s,]+\s*(?:,\s*[^#\s,]+)++\s*$)</string>
+			<key>end</key>
+			<string>(?=\s*(?:$|#))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>string.unquoted.bareword.editorconfig</string>
+					<key>match</key>
+					<string>[^#\s,]+</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comma</string>
+				</dict>
+			</array>
+		</dict>
 		<key>bareword</key>
 		<dict>
 			<key>name</key>
 			<string>string.unquoted.bareword.editorconfig</string>
 			<key>match</key>
 			<string>[^=#;\s]+</string>
+		</dict>
+		<key>bestGuess</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#value</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#bareword</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment</string>
+				</dict>
+			</array>
+		</dict>
+		<key>comma</key>
+		<dict>
+			<key>name</key>
+			<string>punctuation.separator.delimiter.comma.editorconfig</string>
+			<key>match</key>
+			<string>,</string>
 		</dict>
 		<key>comment</key>
 		<dict>
@@ -30,7 +75,7 @@
 					<key>name</key>
 					<string>comment.line.number-sign.editorconfig</string>
 					<key>begin</key>
-					<string>(\s*)(#)</string>
+					<string>^(\s*)(#)</string>
 					<key>end</key>
 					<string>$</string>
 					<key>beginCaptures</key>
@@ -51,7 +96,7 @@
 					<key>name</key>
 					<string>comment.line.semicolon.editorconfig</string>
 					<key>begin</key>
-					<string>(\s*)(;)</string>
+					<string>^(\s*)(;)</string>
 					<key>end</key>
 					<string>$</string>
 					<key>beginCaptures</key>
@@ -85,13 +130,13 @@
 					<key>name</key>
 					<string>constant.language.boolean.${1:/downcase}.editorconfig</string>
 					<key>match</key>
-					<string>(?i)(?&lt;=\s|=)(true|false|on|off|yes|no)(?=$|\s)</string>
+					<string>(?i)(?:\G|^|(?&lt;=\s|=))(true|false|on|off|yes|no)(?=$|\s)</string>
 				</dict>
 				<dict>
 					<key>name</key>
 					<string>constant.language.${1:/downcase}.editorconfig</string>
 					<key>match</key>
-					<string>(?i)(?&lt;=\s|=)(CRLF|CR|LF|tab|space|unset)(?=$|\s)</string>
+					<string>(?i)(?:\G|^|(?&lt;=\s|=))(CRLF|CR|LF|tab|space|unset)(?=$|\s)</string>
 				</dict>
 			</array>
 		</dict>
@@ -133,10 +178,8 @@
 					<string>#escape</string>
 				</dict>
 				<dict>
-					<key>name</key>
-					<string>punctuation.separator.delimiter.comma.editorconfig</string>
-					<key>match</key>
-					<string>,</string>
+					<key>include</key>
+					<string>#comma</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -377,6 +420,118 @@
 				</dict>
 				<dict>
 					<key>name</key>
+					<string>meta.rule.vendor-specific.intellij.editorconfig</string>
+					<key>begin</key>
+					<string>(?i)^\s*(ij_[^#\s=]+)\s*(=)</string>
+					<key>end</key>
+					<string>(?=\s*(?:$|#))</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#array</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#value</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#bareword</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.definition.vendor-specific.editorconfig</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.key-value.editorconfig</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.rule.vendor-specific.microsoft.${2:/downcase}.editorconfig</string>
+					<key>begin</key>
+					<string>(?i)^\s*((csharp|dotnet|java|vs|vscode|visual_studio)_[^\s=]+)\s*(=)</string>
+					<key>end</key>
+					<string>$</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>string.unquoted.pathname.windows.editorconfig</string>
+							<key>begin</key>
+							<string>[A-Z]:\\(?=[^\s:])</string>
+							<key>end</key>
+							<string>(?=\s*(?:$|:|#|;))</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>match</key>
+									<string>\\</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#pathSpec</string>
+								</dict>
+							</array>
+						</dict>
+						<dict>
+							<key>name</key>
+							<string>meta.severity-level.editorconfig</string>
+							<key>match</key>
+							<string>\G\s*(?:(true|false)(:))?(error|warning|suggestion|silent|none|default)(?=$|[\s;#])</string>
+							<key>captures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#keywords</string>
+										</dict>
+									</array>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.separator.warning.editorconfig</string>
+								</dict>
+								<key>3</key>
+								<dict>
+									<key>name</key>
+									<string>constant.language.severity-level.editorconfig</string>
+								</dict>
+							</dict>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#bestGuess</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.definition.custom.editorconfig</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.key-value.editorconfig</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
 					<string>meta.rule.custom.editorconfig</string>
 					<key>begin</key>
 					<string>^\s*(?![\[#;])([^\s=]+)\s*(=)</string>
@@ -386,11 +541,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#value</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#bareword</string>
+							<string>#bestGuess</string>
 						</dict>
 					</array>
 					<key>beginCaptures</key>
@@ -570,7 +721,7 @@
 	</dict>
 	<key>fileTypes</key>
 	<array>
-		<string>.editorconfig</string>
+		<string>editorconfig</string>
 	</array>
 </dict>
 </plist>

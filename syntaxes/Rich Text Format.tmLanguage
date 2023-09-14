@@ -134,7 +134,7 @@
 			<key>begin</key>
 			<string>\\b\b</string>
 			<key>end</key>
-			<string>(?=\\(?:b0|plain)\b|})</string>
+			<string>(?=\\(?:b0(?:\b|[^\d])|plain\b)|})</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -157,7 +157,7 @@
 			<key>begin</key>
 			<string>\\i\b</string>
 			<key>end</key>
-			<string>(?=\\(?:i0|plain)\b|})</string>
+			<string>(?=\\(?:i0(?:\b|[^\d])|plain\b)|})</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -180,7 +180,7 @@
 			<key>begin</key>
 			<string>\\strike\b</string>
 			<key>end</key>
-			<string>(?=\\(?:strike0|plain)\b|})</string>
+			<string>(?=\\(?:strike0(?:\b|[^\d])|plain\b)|})</string>
 			<key>patterns</key>
 			<array>
 				<dict>

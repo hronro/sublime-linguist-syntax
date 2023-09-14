@@ -22,6 +22,13 @@
 			<key>match</key>
 			<string>(?x)\b(?:abstract)(?:(?!(?:[0-9A-Za-z_])))</string>
 		</dict>
+		<key>additional</key>
+		<dict>
+			<key>name</key>
+			<string>storage.modifier.additional.ql</string>
+			<key>match</key>
+			<string>(?x)\b(?:additional)(?:(?!(?:[0-9A-Za-z_])))</string>
+		</dict>
 		<key>and</key>
 		<dict>
 			<key>name</key>
@@ -61,11 +68,19 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#additional</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#bindingset</string>
 				</dict>
 				<dict>
 					<key>include</key>
 					<string>#cached</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#default</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -102,6 +117,10 @@
 				<dict>
 					<key>include</key>
 					<string>#query</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#signature</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -163,7 +182,7 @@
 			<key>begin</key>
 			<string>(?x)((?:\b(?:bindingset)(?:(?!(?:[0-9A-Za-z_])))))</string>
 			<key>end</key>
-			<string>(?x)(?! \s | (?:// | /\*) | \[ ) | (?&lt;=\])</string>
+			<string>(?x)(?! (?:\s | $ | (?:// | /\*)) | \[ ) | (?&lt;=\])</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -452,7 +471,7 @@
 			<key>name</key>
 			<string>keyword.operator.comparison.ql</string>
 			<key>match</key>
-			<string>(?x)=|\!-</string>
+			<string>(?x)=|\!\=</string>
 		</dict>
 		<key>concat</key>
 		<dict>
@@ -474,6 +493,13 @@
 			<string>keyword.type.date.ql</string>
 			<key>match</key>
 			<string>(?x)\b(?:date)(?:(?!(?:[0-9A-Za-z_])))</string>
+		</dict>
+		<key>default</key>
+		<dict>
+			<key>name</key>
+			<string>storage.modifier.default.ql</string>
+			<key>match</key>
+			<string>(?x)\b(?:default)(?:(?!(?:[0-9A-Za-z_])))</string>
 		</dict>
 		<key>deprecated</key>
 		<dict>
@@ -520,7 +546,7 @@
 		<key>end-of-as-clause</key>
 		<dict>
 			<key>match</key>
-			<string>(?x)(?: (?&lt;=(?:[0-9A-Za-z_])) (?!(?:[0-9A-Za-z_])) (?&lt;!(?&lt;!(?:[0-9A-Za-z_]))as)) | (?=\s* (?!(?:// | /\*) | (?:\b [A-Za-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))) \S) | (?=\s* (?:(?:(?:\b(?:_)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:and)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:any)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:as)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:asc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:avg)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:boolean)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:by)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:class)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:concat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:count)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:date)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:desc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:else)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:exists)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:extends)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:false)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:float)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forall)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forex)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:from)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:if)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:implies)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:import)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:in)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:instanceof)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:int)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:max)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:min)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:module)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:newtype)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:none)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:not)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:or)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:order)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:predicate)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:rank)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:result)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:select)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictconcat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictcount)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictsum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:string)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:sum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:super)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:then)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:this)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:true)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:where)(?:(?!(?:[0-9A-Za-z_])))))))</string>
+			<string>(?x)(?: (?&lt;=(?:[0-9A-Za-z_])) (?!(?:[0-9A-Za-z_])) (?&lt;!(?&lt;!(?:[0-9A-Za-z_]))as)) | (?=\s* (?!(?:// | /\*) | (?:\b [A-Za-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))) \S) | (?=\s* (?:(?:(?:\b(?:_)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:and)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:any)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:as)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:asc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:avg)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:boolean)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:by)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:class)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:concat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:count)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:date)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:desc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:else)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:exists)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:extends)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:false)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:float)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forall)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forex)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:from)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:if)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:implies)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:import)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:in)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:instanceof)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:int)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:max)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:min)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:module)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:newtype)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:none)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:not)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:or)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:order)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:predicate)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:rank)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:result)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:select)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictconcat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictcount)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictsum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:string)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:sum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:super)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:then)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:this)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:true)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:unique)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:where)(?:(?!(?:[0-9A-Za-z_])))))))</string>
 		</dict>
 		<key>end-of-id</key>
 		<dict>
@@ -541,7 +567,7 @@
 			<key>begin</key>
 			<string>(?x)((?:\b(?:as)(?:(?!(?:[0-9A-Za-z_])))))</string>
 			<key>end</key>
-			<string>(?x)(?:(?: (?&lt;=(?:[0-9A-Za-z_])) (?!(?:[0-9A-Za-z_])) (?&lt;!(?&lt;!(?:[0-9A-Za-z_]))as)) | (?=\s* (?!(?:// | /\*) | (?:\b [A-Za-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))) \S) | (?=\s* (?:(?:(?:\b(?:_)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:and)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:any)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:as)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:asc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:avg)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:boolean)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:by)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:class)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:concat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:count)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:date)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:desc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:else)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:exists)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:extends)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:false)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:float)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forall)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forex)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:from)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:if)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:implies)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:import)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:in)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:instanceof)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:int)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:max)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:min)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:module)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:newtype)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:none)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:not)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:or)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:order)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:predicate)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:rank)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:result)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:select)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictconcat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictcount)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictsum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:string)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:sum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:super)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:then)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:this)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:true)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:where)(?:(?!(?:[0-9A-Za-z_]))))))))</string>
+			<string>(?x)(?:(?: (?&lt;=(?:[0-9A-Za-z_])) (?!(?:[0-9A-Za-z_])) (?&lt;!(?&lt;!(?:[0-9A-Za-z_]))as)) | (?=\s* (?!(?:// | /\*) | (?:\b [A-Za-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))) \S) | (?=\s* (?:(?:(?:\b(?:_)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:and)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:any)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:as)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:asc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:avg)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:boolean)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:by)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:class)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:concat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:count)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:date)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:desc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:else)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:exists)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:extends)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:false)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:float)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forall)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forex)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:from)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:if)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:implies)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:import)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:in)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:instanceof)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:int)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:max)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:min)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:module)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:newtype)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:none)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:not)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:or)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:order)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:predicate)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:rank)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:result)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:select)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictconcat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictcount)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictsum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:string)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:sum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:super)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:then)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:this)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:true)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:unique)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:where)(?:(?!(?:[0-9A-Za-z_]))))))))</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -730,6 +756,48 @@
 			<key>match</key>
 			<string>(?x)\b(?:if)(?:(?!(?:[0-9A-Za-z_])))</string>
 		</dict>
+		<key>implements</key>
+		<dict>
+			<key>name</key>
+			<string>keyword.other.implements.ql</string>
+			<key>match</key>
+			<string>(?x)\b(?:implements)(?:(?!(?:[0-9A-Za-z_])))</string>
+		</dict>
+		<key>implements-clause</key>
+		<dict>
+			<key>name</key>
+			<string>meta.block.implements-clause.ql</string>
+			<key>begin</key>
+			<string>(?x)((?:\b(?:implements)(?:(?!(?:[0-9A-Za-z_])))))</string>
+			<key>end</key>
+			<string>(?x)(?= \{ )</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#non-context-sensitive</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>entity.name.type.ql</string>
+					<key>match</key>
+					<string>(?x)(?:\b [A-Za-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))|(?:@[a-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#implements</string>
+						</dict>
+					</array>
+				</dict>
+			</dict>
+		</dict>
 		<key>implies</key>
 		<dict>
 			<key>name</key>
@@ -751,7 +819,7 @@
 			<key>begin</key>
 			<string>(?x)((?:\b(?:as)(?:(?!(?:[0-9A-Za-z_])))))</string>
 			<key>end</key>
-			<string>(?x)(?:(?: (?&lt;=(?:[0-9A-Za-z_])) (?!(?:[0-9A-Za-z_])) (?&lt;!(?&lt;!(?:[0-9A-Za-z_]))as)) | (?=\s* (?!(?:// | /\*) | (?:\b [A-Za-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))) \S) | (?=\s* (?:(?:(?:\b(?:_)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:and)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:any)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:as)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:asc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:avg)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:boolean)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:by)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:class)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:concat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:count)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:date)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:desc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:else)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:exists)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:extends)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:false)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:float)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forall)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forex)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:from)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:if)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:implies)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:import)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:in)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:instanceof)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:int)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:max)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:min)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:module)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:newtype)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:none)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:not)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:or)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:order)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:predicate)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:rank)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:result)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:select)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictconcat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictcount)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictsum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:string)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:sum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:super)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:then)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:this)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:true)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:where)(?:(?!(?:[0-9A-Za-z_]))))))))</string>
+			<string>(?x)(?:(?: (?&lt;=(?:[0-9A-Za-z_])) (?!(?:[0-9A-Za-z_])) (?&lt;!(?&lt;!(?:[0-9A-Za-z_]))as)) | (?=\s* (?!(?:// | /\*) | (?:\b [A-Za-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))) \S) | (?=\s* (?:(?:(?:\b(?:_)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:and)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:any)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:as)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:asc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:avg)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:boolean)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:by)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:class)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:concat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:count)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:date)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:desc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:else)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:exists)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:extends)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:false)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:float)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forall)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forex)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:from)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:if)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:implies)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:import)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:in)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:instanceof)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:int)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:max)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:min)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:module)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:newtype)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:none)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:not)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:or)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:order)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:predicate)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:rank)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:result)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:select)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictconcat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictcount)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictsum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:string)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:sum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:super)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:then)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:this)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:true)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:unique)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:where)(?:(?!(?:[0-9A-Za-z_]))))))))</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1048,6 +1116,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#unique</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#where</string>
 				</dict>
 			</array>
@@ -1066,7 +1138,7 @@
 			<key>begin</key>
 			<string>(?x)((?:\b(?:language)(?:(?!(?:[0-9A-Za-z_])))))</string>
 			<key>end</key>
-			<string>(?x)(?! \s | (?:// | /\*) | \[ ) | (?&lt;=\])</string>
+			<string>(?x)(?! (?:\s | $ | (?:// | /\*)) | \[ ) | (?&lt;=\])</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1249,6 +1321,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#implements-clause</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#non-context-sensitive</string>
 				</dict>
 				<dict>
@@ -1290,6 +1366,22 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#newtype-declaration</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#newtype-branch-name-with-prefix</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#predicate-parameter-list</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#predicate-body</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#class-declaration</string>
 				</dict>
 				<dict>
@@ -1324,32 +1416,39 @@
 			<key>match</key>
 			<string>(?x)\b(?:newtype)(?:(?!(?:[0-9A-Za-z_])))</string>
 		</dict>
-		<key>newtype-branch</key>
+		<key>newtype-branch-name-with-prefix</key>
 		<dict>
 			<key>name</key>
-			<string>meta.block.newtype-branch.ql</string>
+			<string>meta.block.newtype-branch-name-with-prefix.ql</string>
 			<key>begin</key>
-			<string>(?x)(?:\b [A-Z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))</string>
+			<string>(?x)\= | (?:\b(?:or)(?:(?!(?:[0-9A-Za-z_]))))</string>
 			<key>end</key>
-			<string>(?x)(?&lt;=\}) | (?! \s | (?:// | /\*) | \{ )</string>
+			<string>(?x)(?:\b [A-Z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#predicate-body</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>#non-context-sensitive</string>
-				</dict>
-				<dict>
-					<key>name</key>
-					<string>entity.name.type.ql</string>
-					<key>match</key>
-					<string>(?x)(?:\b [A-Z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#or</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#comparison-operator</string>
+						</dict>
+					</array>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
 			<dict>
 				<key>0</key>
 				<dict>
@@ -1361,20 +1460,16 @@
 		<key>newtype-declaration</key>
 		<dict>
 			<key>name</key>
-			<string>meta.block.newtype.ql</string>
+			<string>meta.block.newtype-declaration.ql</string>
 			<key>begin</key>
 			<string>(?x)((?:\b(?:newtype)(?:(?!(?:[0-9A-Za-z_])))))</string>
 			<key>end</key>
-			<string>(?x)(?! \s | (?:\b [A-Z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_])))) | (?:// | /\*) | \= | \( )</string>
+			<string>(?x)(?:\b [A-Z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_]))))</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
 					<string>#non-context-sensitive</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#newtype-branch</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -1388,6 +1483,14 @@
 							<string>#newtype</string>
 						</dict>
 					</array>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.type.ql</string>
 				</dict>
 			</dict>
 		</dict>
@@ -1552,7 +1655,7 @@
 			<key>begin</key>
 			<string>(?x)((?:\b(?:pragma)(?:(?!(?:[0-9A-Za-z_])))))</string>
 			<key>end</key>
-			<string>(?x)(?! \s | (?:// | /\*) | \[ ) | (?&lt;=\])</string>
+			<string>(?x)(?! (?:\s | $ | (?:// | /\*)) | \[ ) | (?&lt;=\])</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1712,7 +1815,7 @@
 			<key>name</key>
 			<string>meta.block.predicate-or-field-declaration.ql</string>
 			<key>begin</key>
-			<string>(?x)(?:(?=(?:\b [A-Za-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_])))))(?!(?:(?:(?:\b(?:_)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:and)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:any)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:as)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:asc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:avg)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:boolean)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:by)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:class)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:concat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:count)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:date)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:desc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:else)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:exists)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:extends)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:false)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:float)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forall)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forex)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:from)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:if)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:implies)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:import)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:in)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:instanceof)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:int)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:max)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:min)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:module)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:newtype)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:none)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:not)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:or)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:order)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:predicate)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:rank)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:result)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:select)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictconcat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictcount)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictsum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:string)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:sum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:super)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:then)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:this)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:true)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:where)(?:(?!(?:[0-9A-Za-z_]))))))|(?:(?:(?:\b(?:abstract)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:bindingset)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:cached)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:deprecated)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:external)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:final)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:language)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:library)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:override)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:pragma)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:private)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:query)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:transient)(?:(?!(?:[0-9A-Za-z_])))))))) | (?=(?:(?:(?:\b(?:boolean)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:date)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:float)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:int)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:predicate)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:string)(?:(?!(?:[0-9A-Za-z_]))))))) | (?=(?:@[a-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_])))))</string>
+			<string>(?x)(?:(?=(?:\b [A-Za-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_])))))(?!(?:(?:(?:\b(?:_)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:and)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:any)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:as)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:asc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:avg)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:boolean)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:by)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:class)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:concat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:count)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:date)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:desc)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:else)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:exists)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:extends)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:false)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:float)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forall)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:forex)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:from)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:if)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:implies)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:import)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:in)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:instanceof)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:int)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:max)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:min)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:module)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:newtype)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:none)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:not)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:or)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:order)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:predicate)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:rank)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:result)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:select)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictconcat)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictcount)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:strictsum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:string)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:sum)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:super)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:then)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:this)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:true)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:unique)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:where)(?:(?!(?:[0-9A-Za-z_]))))))|(?:(?:(?:\b(?:abstract)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:additional)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:bindingset)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:cached)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:default)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:deprecated)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:external)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:final)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:language)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:library)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:override)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:pragma)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:private)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:query)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:signature)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:transient)(?:(?!(?:[0-9A-Za-z_])))))))) | (?=(?:(?:(?:\b(?:boolean)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:date)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:float)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:int)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:predicate)(?:(?!(?:[0-9A-Za-z_]))))|(?:\b(?:string)(?:(?!(?:[0-9A-Za-z_]))))))) | (?=(?:@[a-z][0-9A-Za-z_]* (?:(?!(?:[0-9A-Za-z_])))))</string>
 			<key>end</key>
 			<string>(?x)(?&lt;=\}|;)</string>
 			<key>patterns</key>
@@ -1988,6 +2091,13 @@
 			<key>match</key>
 			<string>(?x);</string>
 		</dict>
+		<key>signature</key>
+		<dict>
+			<key>name</key>
+			<string>storage.modifier.signature.ql</string>
+			<key>match</key>
+			<string>(?x)\b(?:signature)(?:(?!(?:[0-9A-Za-z_])))</string>
+		</dict>
 		<key>simple-id</key>
 		<dict>
 			<key>match</key>
@@ -2107,6 +2217,13 @@
 			<key>match</key>
 			<string>(?x)\b(?:true)(?:(?!(?:[0-9A-Za-z_])))</string>
 		</dict>
+		<key>unique</key>
+		<dict>
+			<key>name</key>
+			<string>keyword.aggregate.unique.ql</string>
+			<key>match</key>
+			<string>(?x)\b(?:unique)(?:(?!(?:[0-9A-Za-z_])))</string>
+		</dict>
 		<key>upper-id</key>
 		<dict>
 			<key>match</key>
@@ -2147,6 +2264,11 @@
 					</array>
 				</dict>
 			</dict>
+		</dict>
+		<key>whitespace-or-comment-start</key>
+		<dict>
+			<key>match</key>
+			<string>(?x)\s | $ | (?:// | /\*)</string>
 		</dict>
 	</dict>
 	<key>fileTypes</key>

@@ -94,9 +94,9 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>([A-Za-z][A-Za-z0-9_]*)\s*=\s*(0[xX][0-9a-fA-F]+|[0-9]+)</string>
+					<string>([A-Za-z][A-Za-z0-9_]*)\s*(=)\s*(0[xX][0-9a-fA-F]+|[0-9]+)</string>
 					<key>end</key>
-					<string>;</string>
+					<string>(;)</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -114,7 +114,20 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
+							<string>keyword.operator.assignment.proto</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
 							<string>constant.numeric.proto</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.terminator.proto</string>
 						</dict>
 					</dict>
 				</dict>
@@ -136,9 +149,9 @@
 		<key>field</key>
 		<dict>
 			<key>begin</key>
-			<string>\s*(optional|repeated|required)?\s*\b([\w.]+)\s+(\w+)\s*=\s*(0[xX][0-9a-fA-F]+|[0-9]+)</string>
+			<string>\s*(optional|repeated|required)?\s*\b([\w.]+)\s+(\w+)\s*(=)\s*(0[xX][0-9a-fA-F]+|[0-9]+)</string>
 			<key>end</key>
-			<string>;</string>
+			<string>(;)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -166,7 +179,20 @@
 				<key>4</key>
 				<dict>
 					<key>name</key>
+					<string>keyword.operator.assignment.proto</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
 					<string>constant.numeric.proto</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.terminator.proto</string>
 				</dict>
 			</dict>
 		</dict>
@@ -210,7 +236,7 @@
 		<key>import</key>
 		<dict>
 			<key>match</key>
-			<string>\s*(import)\s+(weak|public)?\s*(&quot;[^&quot;]+&quot;)\s*;</string>
+			<string>\s*(import)\s+(weak|public)?\s*(&quot;[^&quot;]+&quot;)\s*(;)</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -228,14 +254,19 @@
 					<key>name</key>
 					<string>string.quoted.double.proto.import</string>
 				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.terminator.proto</string>
+				</dict>
 			</dict>
 		</dict>
 		<key>kv</key>
 		<dict>
 			<key>begin</key>
-			<string>(\w+)\s*:</string>
+			<string>(\w+)\s*(:)</string>
 			<key>end</key>
-			<string>;|,|(?=[}/_a-zA-Z])</string>
+			<string>(;)|,|(?=[}/_a-zA-Z])</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -262,14 +293,27 @@
 					<key>name</key>
 					<string>keyword.other.proto</string>
 				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.key-value.proto</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.terminator.proto</string>
+				</dict>
 			</dict>
 		</dict>
 		<key>mapfield</key>
 		<dict>
 			<key>begin</key>
-			<string>\s*(map)\s*&lt;\s*([\w.]+)\s*,\s*([\w.]+)\s*&gt;\s+(\w+)\s*=\s*(\d+)</string>
+			<string>\s*(map)\s*(&lt;)\s*([\w.]+)\s*,\s*([\w.]+)\s*(&gt;)\s+(\w+)\s*(=)\s*(\d+)</string>
 			<key>end</key>
-			<string>;</string>
+			<string>(;)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -287,7 +331,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>storage.type.proto</string>
+					<string>punctuation.definition.typeparameters.begin.proto</string>
 				</dict>
 				<key>3</key>
 				<dict>
@@ -297,12 +341,35 @@
 				<key>4</key>
 				<dict>
 					<key>name</key>
-					<string>variable.other.proto</string>
+					<string>storage.type.proto</string>
 				</dict>
 				<key>5</key>
 				<dict>
 					<key>name</key>
+					<string>punctuation.definition.typeparameters.end.proto</string>
+				</dict>
+				<key>6</key>
+				<dict>
+					<key>name</key>
+					<string>variable.other.proto</string>
+				</dict>
+				<key>7</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.proto</string>
+				</dict>
+				<key>8</key>
+				<dict>
+					<key>name</key>
 					<string>constant.numeric.proto</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.terminator.proto</string>
 				</dict>
 			</dict>
 		</dict>
@@ -366,7 +433,7 @@
 			<key>begin</key>
 			<string>(rpc)\s+([A-Za-z][A-Za-z0-9_]*)</string>
 			<key>end</key>
-			<string>\}|;</string>
+			<string>\}|(;)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -397,6 +464,14 @@
 				<dict>
 					<key>name</key>
 					<string>entity.name.function</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.terminator.proto</string>
 				</dict>
 			</dict>
 		</dict>
@@ -468,9 +543,9 @@
 		<key>optionStmt</key>
 		<dict>
 			<key>begin</key>
-			<string>(option)\s+(\w+|\(\w+(\.\w+)*\))(\.\w+)*\s*=</string>
+			<string>(option)\s+(\w+|\(\w+(\.\w+)*\))(\.\w+)*\s*(=)</string>
 			<key>end</key>
-			<string>;</string>
+			<string>(;)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -512,12 +587,25 @@
 					<key>name</key>
 					<string>support.other.proto</string>
 				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.proto</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.terminator.proto</string>
+				</dict>
 			</dict>
 		</dict>
 		<key>package</key>
 		<dict>
 			<key>match</key>
-			<string>\s*(package)\s+([\w.]+)\s*;</string>
+			<string>\s*(package)\s+([\w.]+)\s*(;)</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -530,6 +618,11 @@
 					<key>name</key>
 					<string>string.unquoted.proto.package</string>
 				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.terminator.proto</string>
+				</dict>
 			</dict>
 		</dict>
 		<key>reserved</key>
@@ -537,7 +630,7 @@
 			<key>begin</key>
 			<string>(reserved)\s+</string>
 			<key>end</key>
-			<string>;</string>
+			<string>(;)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -573,6 +666,14 @@
 				<dict>
 					<key>name</key>
 					<string>keyword.other.proto</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.terminator.proto</string>
 				</dict>
 			</dict>
 		</dict>
@@ -653,7 +754,7 @@
 		<key>syntax</key>
 		<dict>
 			<key>match</key>
-			<string>\s*(syntax)\s*=\s*(&quot;proto[23]&quot;)\s*;</string>
+			<string>\s*(syntax)\s*(=)\s*(&quot;proto[23]&quot;)\s*(;)</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -664,7 +765,17 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
+					<string>keyword.operator.assignment.proto</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
 					<string>string.quoted.double.proto.syntax</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.terminator.proto</string>
 				</dict>
 			</dict>
 		</dict>

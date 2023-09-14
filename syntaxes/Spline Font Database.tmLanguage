@@ -59,7 +59,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable.other.property.sfd</string>
+					<string>variable.assignment.property.sfd</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -97,7 +97,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable.other.property.sfd</string>
+					<string>variable.assignment.property.sfd</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -133,7 +133,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable.other.property.sfd</string>
+					<string>variable.assignment.property.sfd</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -284,7 +284,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable.other.property.sfd</string>
+					<string>variable.assignment.property.sfd</string>
 				</dict>
 				<key>3</key>
 				<dict>
@@ -320,7 +320,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable.other.property.sfd</string>
+					<string>variable.assignment.property.sfd</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -391,7 +391,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable.other.property.sfd</string>
+					<string>variable.assignment.property.sfd</string>
 				</dict>
 				<key>2</key>
 				<dict>

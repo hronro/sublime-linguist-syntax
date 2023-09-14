@@ -97,7 +97,7 @@
 			<key>name</key>
 			<string>keyword.other.rego</string>
 			<key>match</key>
-			<string>(^|\s+)(?:(default|not|package|import|as|with|else|some|in))\s+</string>
+			<string>(^|\s+)(?:(default|not|package|import|as|with|else|some|in|every|if|contains))\s+</string>
 		</dict>
 		<key>number</key>
 		<dict>

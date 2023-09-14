@@ -54,6 +54,7 @@
 	<key>fileTypes</key>
 	<array>
 		<string>befunge</string>
+		<string>bf</string>
 	</array>
 </dict>
 </plist>

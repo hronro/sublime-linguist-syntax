@@ -155,7 +155,7 @@
 					<key>name</key>
 					<string>keyword.other.declaration.pony</string>
 					<key>match</key>
-					<string>\b(var|let|embed|delegate)\b</string>
+					<string>\b(var|let|embed)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -219,7 +219,7 @@
 		<key>methoddeclarations</key>
 		<dict>
 			<key>match</key>
-			<string>\b(new|be|fun)\s+(iso|trn|ref|val|box|tag)?\b\s*([_a-z][_a-zA-Z0-9]*)</string>
+			<string>\b(new|be|fun)\s+(\\[_a-z][_a-zA-Z0-9]*\\)?\s*(iso|trn|ref|val|box|tag)?\b\s*([_a-z][_a-zA-Z0-9]*)</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -230,9 +230,14 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.capability.pony</string>
+					<string>support.other.annotation.pony</string>
 				</dict>
 				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.capability.pony</string>
+				</dict>
+				<key>4</key>
 				<dict>
 					<key>name</key>
 					<string>entity.name.function.pony</string>
@@ -350,7 +355,7 @@
 		<key>typedeclarations</key>
 		<dict>
 			<key>match</key>
-			<string>\b(type|interface|trait|primitive|struct|class|actor)\s+(iso|trn|ref|val|box|tag)?@?\s*([_A-Z][_a-zA-Z0-9]*)</string>
+			<string>\b(type|interface|trait|primitive|struct|class|actor)\s+(\\[_a-z][_a-zA-Z0-9]*\\)?\s*(iso|trn|ref|val|box|tag)?@?\s*([_A-Z][_a-zA-Z0-9]*)</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -361,9 +366,14 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.other.capability.pony</string>
+					<string>support.other.annotation.pony</string>
 				</dict>
 				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.capability.pony</string>
+				</dict>
+				<key>4</key>
 				<dict>
 					<key>name</key>
 					<string>entity.name.type.pony</string>

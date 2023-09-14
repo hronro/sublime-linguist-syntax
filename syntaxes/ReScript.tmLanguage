@@ -14,6 +14,14 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#ffi-single</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#ffi</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#constant</string>
 		</dict>
 		<dict>
@@ -88,39 +96,73 @@
 			<key>include</key>
 			<string>#punctuations</string>
 		</dict>
+		<dict>
+			<key>include</key>
+			<string>#defaultIdIsVariable</string>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
-		<key>RE_ATTRIBUTE</key>
+		<key>RE_CONSTANTS_BOOL</key>
 		<dict>
+			<key>name</key>
+			<string>constant.language.boolean</string>
 			<key>match</key>
-			<string>[A-Za-z_][A-Za-z0-9_\.]*</string>
+			<string>\b(false|true)\b</string>
 		</dict>
-		<key>RE_IDENT</key>
+		<key>RE_KEYWORD</key>
 		<dict>
+			<key>name</key>
+			<string>storage.type</string>
 			<key>match</key>
-			<string>[a-z_][0-9a-zA-Z_]*</string>
+			<string>\b(include|let|module|of|open|type)\b</string>
 		</dict>
-		<key>RE_KEYWORDS</key>
+		<key>RE_KEYWORD_CONTROL</key>
 		<dict>
 			<key>name</key>
 			<string>keyword.control</string>
 			<key>match</key>
-			<string>\b(and|as|assert|constraint|downto|else|exception|external|false|for|if|in|include|lazy|let|module|mutable|of|open|rec|switch|to|true|try|type|when|while|with)\b</string>
+			<string>\b(and|as|assert|async|await|catch|constraint|downto|else|exception|external|for|if|in|lazy|mutable|rec|switch|to|try|when|while|with)\b</string>
 		</dict>
-		<key>RE_LITERAL</key>
+		<key>RE_TO_DOWNTO_AS_LABELS</key>
 		<dict>
-			<key>name</key>
-			<string>constant.language</string>
-			<key>match</key>
-			<string>\b(true|false)\b</string>
-		</dict>
-		<key>RE_MODULE_IDENT</key>
-		<dict>
-			<key>name</key>
-			<string>entity.name.namespace</string>
-			<key>match</key>
-			<string>[A-Z_][0-9a-zA-Z_]*</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>(to|downto)\s*(=)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator keyword</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(to|downto)\s*(as)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
 		</dict>
 		<key>attribute</key>
 		<dict>
@@ -134,7 +176,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>storage.modifier punctuation.definition.annotation</string>
+							<string>punctuation.decorator</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -165,13 +207,13 @@
 										<key>2</key>
 										<dict>
 											<key>name</key>
-											<string>variable.annotation</string>
+											<string>entity.name.function</string>
 										</dict>
 									</dict>
 								</dict>
 								<dict>
 									<key>name</key>
-									<string>variable.annotation</string>
+									<string>entity.name.function</string>
 									<key>match</key>
 									<string>[A-Za-z_][A-Za-z0-9_\.]*</string>
 								</dict>
@@ -240,7 +282,7 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#RE_LITERAL</string>
+					<string>#RE_CONSTANTS_BOOL</string>
 				</dict>
 			</array>
 		</dict>
@@ -250,29 +292,41 @@
 			<array>
 				<dict>
 					<key>name</key>
-					<string>variable.function variable.other</string>
+					<string>variable.other.enummember</string>
 					<key>match</key>
 					<string>\b[A-Z][0-9a-zA-Z_]*\b</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(#)(\.\.\.)?([a-zA-Z][0-9a-zA-Z_]*)\b</string>
+					<string>(#)\s*([a-zA-Z][0-9a-zA-Z_]*)\b</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.keyword</string>
+							<string>variable.other.enummember</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.keyword</string>
+							<string>variable.other.enummember</string>
 						</dict>
-						<key>3</key>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>(#)\s*(\.\.\.)\b</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>variable.function variable.other</string>
+							<string>variable.other.enummember</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.enummember</string>
 						</dict>
 					</dict>
 				</dict>
@@ -284,11 +338,107 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.keyword</string>
+							<string>variable.other.enummember</string>
 						</dict>
 					</dict>
 				</dict>
 			</array>
+		</dict>
+		<key>defaultIdIsVariable</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>variable</string>
+					<key>match</key>
+					<string>[A-Za-z_][A-Za-z0-9_]*</string>
+				</dict>
+			</array>
+		</dict>
+		<key>ffi</key>
+		<dict>
+			<key>name</key>
+			<string>source.embedded.javascript</string>
+			<key>contentName</key>
+			<string>meta.embedded.block.javascript</string>
+			<key>begin</key>
+			<string>(%|%%)(raw|ffi)(\()(`)</string>
+			<key>end</key>
+			<string>(`)(\))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.js</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.decorator</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.template.begin.embedded-js</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.template.end.embedded-js</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>ffi-single</key>
+		<dict>
+			<key>name</key>
+			<string>source.embedded.javascript.single</string>
+			<key>match</key>
+			<string>(%|%%)(raw|ffi)(\()(`)(.*?)(`)(\))</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.decorator</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.template.begin.embedded-js</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>source.js</string>
+						</dict>
+					</array>
+				</dict>
+				<key>6</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.string.template.end.embedded-js</string>
+				</dict>
+			</dict>
 		</dict>
 		<key>function</key>
 		<dict>
@@ -307,34 +457,59 @@
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag</string>
 					<key>match</key>
-					<string>&lt;&gt;|&lt;/&gt;|/&gt;</string>
+					<string>&lt;&gt;|&lt;/&gt;|&lt;/|/&gt;</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>&lt;/([A-Z_][0-9a-zA-Z_]*)</string>
 					<key>captures</key>
 					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.tag</string>
+						</dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.namespace</string>
+							<string>entity.name.class</string>
 						</dict>
 					</dict>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>&lt;/([a-z_][0-9a-zA-Z_]*)</string>
+					<key>captures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.tag</string>
+						</dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable</string>
+						</dict>
+					</dict>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>&lt;([A-Z_][0-9a-zA-Z_]*)</string>
 					<key>captures</key>
 					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.tag</string>
+						</dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.namespace</string>
+							<string>entity.name.class</string>
 						</dict>
 					</dict>
 				</dict>
@@ -346,7 +521,15 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#RE_KEYWORDS</string>
+					<string>#RE_TO_DOWNTO_AS_LABELS</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#RE_KEYWORD_CONTROL</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#RE_KEYWORD</string>
 				</dict>
 			</array>
 		</dict>
@@ -391,7 +574,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.namespace</string>
+							<string>entity.name.class</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -408,7 +591,7 @@
 			<array>
 				<dict>
 					<key>name</key>
-					<string>entity.name.namespace</string>
+					<string>entity.name.class</string>
 					<key>match</key>
 					<string>[A-Z_][0-9a-zA-Z_]*</string>
 				</dict>
@@ -425,7 +608,7 @@
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.namespace</string>
+							<string>entity.name.class</string>
 						</dict>
 					</dict>
 				</dict>
@@ -448,7 +631,7 @@
 								<key>1</key>
 								<dict>
 									<key>name</key>
-									<string>entity.name.namespace</string>
+									<string>entity.name.class</string>
 								</dict>
 							</dict>
 						</dict>
@@ -473,7 +656,7 @@
 						<key>4</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.namespace</string>
+							<string>entity.name.class</string>
 						</dict>
 					</dict>
 				</dict>
@@ -531,7 +714,7 @@
 			<array>
 				<dict>
 					<key>name</key>
-					<string>keyword.operator keyword</string>
+					<string>keyword.operator</string>
 					<key>match</key>
 					<string>-&gt;|\|\||&amp;&amp;|\+\+|\*\*|\+\.|\+|-\.|-|\*\.|\*|/\.|/|\.\.\.|\.\.|===|==|\^|:=|!|&gt;=(?! *\?)|&lt;=|=</string>
 				</dict>
@@ -609,18 +792,6 @@
 				</dict>
 			</array>
 		</dict>
-		<key>storage</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>name</key>
-					<string>storage.type</string>
-					<key>match</key>
-					<string>\btype\b</string>
-				</dict>
-			</array>
-		</dict>
 		<key>string</key>
 		<dict>
 			<key>patterns</key>
@@ -664,7 +835,7 @@
 					<key>begin</key>
 					<string>([a-z_][0-9a-zA-Z_]*)?(`)</string>
 					<key>end</key>
-					<string>`</string>
+					<string>(?&lt;!\\)`</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -698,7 +869,7 @@
 								<key>0</key>
 								<dict>
 									<key>name</key>
-									<string>punctuation.section.interpolation.begin</string>
+									<string>punctuation.definition.template-expression.begin</string>
 								</dict>
 							</dict>
 							<key>endCaptures</key>
@@ -706,7 +877,7 @@
 								<key>0</key>
 								<dict>
 									<key>name</key>
-									<string>punctuation.section.interpolation.end</string>
+									<string>punctuation.definition.template-expression.end</string>
 								</dict>
 							</dict>
 						</dict>

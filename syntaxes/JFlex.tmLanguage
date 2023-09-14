@@ -204,7 +204,7 @@
 					<key>name</key>
 					<string>meta.somearg.jflex</string>
 					<key>match</key>
-					<string>^(%(?:class|extends|type|ctorarg|implements|include|initthrow|eofthrow|yylexthrow|throws|scanerror))\s+(.+)</string>
+					<string>^(%(?:class|extends|type|ctorarg|implements|include|initthrow|eofthrow|yylexthrow|throws|scanerror|warn|no-warn|suppress|token_size_limit))\s+(.+)</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -308,7 +308,7 @@
 					<key>name</key>
 					<string>keyword.other.jflex</string>
 					<key>match</key>
-					<string>^%(char|line|column|byaccj|cup2|cup(debug)?|integer|int(wrap)?|yyeof|notunix|7bit|full|8bit|16bit|caseless|ignorecase|public|apiprivate|final|abstract|debug|standalone|pack)</string>
+					<string>^%(char|line|column|byaccj|cup2|cup(debug)?|integer|int(wrap)?|yyeof|notunix|7bit|full|8bit|16bit|caseless|ignorecase|public|apiprivate|final|abstract|debug|standalone|pack|no_suppress_warnings)</string>
 				</dict>
 				<dict>
 					<key>name</key>

@@ -124,7 +124,7 @@
 						</dict>
 						<dict>
 							<key>match</key>
-							<string>(?:(\*)|\b(deprecated|unavailable)\b)\s*(.*?)(?=[,)])</string>
+							<string>(?:(\*)|\b(deprecated|unavailable|noasync)\b)\s*(.*?)(?=[,)])</string>
 							<key>captures</key>
 							<dict>
 								<key>1</key>
@@ -1240,10 +1240,32 @@
 					</dict>
 				</dict>
 				<dict>
+					<key>match</key>
+					<string>(?&lt;!\.)\b(?:(?:(async)|(nonisolated))\s+)?(let|var)\b</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.async.swift</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>storage.modifier.swift</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.declaration-specifier.swift</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
 					<key>name</key>
 					<string>keyword.other.declaration-specifier.swift</string>
 					<key>match</key>
-					<string>(?&lt;!\.)\b(?:associatedtype|let|operator|typealias|var)\b</string>
+					<string>(?&lt;!\.)\b(?:associatedtype|operator|typealias)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -2025,9 +2047,15 @@
 				</dict>
 				<dict>
 					<key>name</key>
+					<string>keyword.operator.type.existential.swift</string>
+					<key>match</key>
+					<string>\bany\b</string>
+				</dict>
+				<dict>
+					<key>name</key>
 					<string>storage.modifier.swift</string>
 					<key>match</key>
-					<string>\binout\b</string>
+					<string>\b(?:inout|isolated)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -2276,6 +2304,7 @@
 			<key>begin</key>
 			<string>(?x)
 						\b
+						(?:(nonisolated)\s+)?
 						(func)
 						\s+
 						(
@@ -2382,19 +2411,24 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>storage.type.function.swift</string>
+					<string>storage.modifier.swift</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.function.swift</string>
+					<string>storage.type.function.swift</string>
 				</dict>
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.identifier.swift</string>
+					<string>entity.name.function.swift</string>
 				</dict>
 				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.identifier.swift</string>
+				</dict>
+				<key>5</key>
 				<dict>
 					<key>name</key>
 					<string>punctuation.definition.identifier.swift</string>
@@ -4364,7 +4398,7 @@
 		<dict>
 			<key>begin</key>
 			<string>(?x)
-						\b(let|var)\b\s+
+						\b(?:(async)\s+)?(let|var)\b\s+
 						(?&lt;q&gt;`?)[\p{L}_][\p{L}_\p{N}\p{M}]*(\k&lt;q&gt;)\s*
 						:
 					</string>
@@ -4380,6 +4414,11 @@
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.async.swift</string>
+				</dict>
+				<key>2</key>
 				<dict>
 					<key>name</key>
 					<string>keyword.other.declaration-specifier.swift</string>

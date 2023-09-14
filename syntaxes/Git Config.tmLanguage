@@ -229,6 +229,13 @@
 				</dict>
 			</array>
 		</dict>
+		<key>dot</key>
+		<dict>
+			<key>name</key>
+			<string>punctuation.delimiter.separator.meta.dot.period.gitconfig</string>
+			<key>match</key>
+			<string>\.</string>
+		</dict>
 		<key>escapedNewline</key>
 		<dict>
 			<key>name</key>
@@ -597,6 +604,65 @@
 								</dict>
 							</dict>
 						</dict>
+						<dict>
+							<key>name</key>
+							<string>meta.condition.match-config.gitconfig</string>
+							<key>contentName</key>
+							<string>string.unquoted.argument.gitconfig</string>
+							<key>begin</key>
+							<string>(hasconfig)(:)([^&quot;:]+)(:)</string>
+							<key>end</key>
+							<string>(?=\s*(?:$|&quot;))</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>#sectionEscapes</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#includeInnards</string>
+								</dict>
+							</array>
+							<key>beginCaptures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>entity.name.condition-type.gitconfig</string>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.separator.parameter.gitconfig</string>
+								</dict>
+								<key>3</key>
+								<dict>
+									<key>name</key>
+									<string>variable.parameter.comparison.gitconfig</string>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#dot</string>
+										</dict>
+										<dict>
+											<key>include</key>
+											<string>#sectionEscapes</string>
+										</dict>
+										<dict>
+											<key>include</key>
+											<string>#includeInnards</string>
+										</dict>
+									</array>
+								</dict>
+								<key>4</key>
+								<dict>
+									<key>name</key>
+									<string>punctuation.separator.key-value.gitconfig</string>
+								</dict>
+							</dict>
+						</dict>
 					</array>
 				</dict>
 				<key>5</key>
@@ -710,8 +776,13 @@
 				</dict>
 				<key>5</key>
 				<dict>
-					<key>name</key>
-					<string>punctuation.delimiter.separator.meta.dot.period.gitconfig</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#dot</string>
+						</dict>
+					</array>
 				</dict>
 				<key>6</key>
 				<dict>
@@ -1134,7 +1205,7 @@
 					<key>name</key>
 					<string>meta.variable-field.gitconfig</string>
 					<key>begin</key>
-					<string>[A-Za-z][-A-Za-z]*</string>
+					<string>[0-9A-Za-z][-0-9A-Za-z]*</string>
 					<key>end</key>
 					<string>(?=\s*(?:$|#|;))</string>
 					<key>patterns</key>

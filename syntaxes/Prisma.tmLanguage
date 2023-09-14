@@ -354,7 +354,7 @@
 			<array>
 				<dict>
 					<key>match</key>
-					<string>^\s*(\w+)(\s*:)?\s+((?!(?:Int|String|DateTime|Bytes|Decimal|Float|Json|Boolean)\b)\b\w+)?(Int|String|DateTime|Bytes|Decimal|Float|Json|Boolean)?(\[\])?(\?)?(\!)?</string>
+					<string>^\s*(\w+)(\s*:)?\s+((?!(?:Int|BigInt|String|DateTime|Bytes|Decimal|Float|Json|Boolean)\b)\b\w+)?(Int|BigInt|String|DateTime|Bytes|Decimal|Float|Json|Boolean)?(\[\])?(\?)?(\!)?</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -507,7 +507,7 @@
 			<key>name</key>
 			<string>source.prisma.embedded.source</string>
 			<key>begin</key>
-			<string>^\s*(model|type)\s+([A-Za-z][\w]*)\s*({)</string>
+			<string>^\s*(model|type|view)\s+([A-Za-z][\w]*)\s*({)</string>
 			<key>end</key>
 			<string>\s*\}</string>
 			<key>patterns</key>

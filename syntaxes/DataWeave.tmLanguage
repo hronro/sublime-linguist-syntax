@@ -35,6 +35,98 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>annotation-directive</key>
+		<dict>
+			<key>name</key>
+			<string>meta.directive.annot.dw</string>
+			<key>begin</key>
+			<string>(\s*(annotation)\s+([a-zA-Z][a-zA-Z0-9]*))</string>
+			<key>end</key>
+			<string>(?=\n)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\(</string>
+					<key>end</key>
+					<string>\)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#parameters</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.annotation.dw</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.dw</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.dw</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>annotation-usage</key>
+		<dict>
+			<key>name</key>
+			<string>meta.annot.usage.dw</string>
+			<key>begin</key>
+			<string>(\s*(\@)([a-zA-Z][a-zA-Z0-9]*))</string>
+			<key>end</key>
+			<string>(?=\n)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\(</string>
+					<key>end</key>
+					<string>\)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#parameters</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.annotation.dw</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.dw</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.dw</string>
+				</dict>
+			</dict>
+		</dict>
 		<key>array-literal</key>
 		<dict>
 			<key>name</key>
@@ -382,6 +474,14 @@
 					<key>include</key>
 					<string>#output-directive</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#annotation-usage</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#annotation-directive</string>
+				</dict>
 			</array>
 		</dict>
 		<key>do-statement</key>
@@ -477,6 +577,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#undefined-fun-character</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#paren-expression</string>
 				</dict>
 				<dict>
@@ -510,6 +614,10 @@
 				<dict>
 					<key>include</key>
 					<string>#regex</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#type_parameters</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -554,7 +662,7 @@
 			<key>name</key>
 			<string>meta.directive.fun.dw</string>
 			<key>begin</key>
-			<string>(\s*(fun)\s+([a-zA-Z][a-zA-Z0-9]*))</string>
+			<string>(\s*(fun)\s+([a-zA-Z][a-zA-Z0-9_]*|--|\+\+))</string>
 			<key>end</key>
 			<string>(=)</string>
 			<key>patterns</key>
@@ -628,26 +736,6 @@
 					<string>keyword.operator.assignment.dw</string>
 				</dict>
 			</dict>
-		</dict>
-		<key>function_call</key>
-		<dict>
-			<key>name</key>
-			<string>function_call</string>
-			<key>begin</key>
-			<string>\s*\(</string>
-			<key>end</key>
-			<string>\s*\)</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#punctuation-comma</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#expressions</string>
-				</dict>
-			</array>
 		</dict>
 		<key>generics</key>
 		<dict>
@@ -723,7 +811,7 @@
 			<key>begin</key>
 			<string>(\s*(import)\s+)</string>
 			<key>end</key>
-			<string>(?=(fun|input|output|type|var|ns|import|%dw|private|---)\s|$)</string>
+			<string>(?=(fun|input|output|type|var|ns|import|%dw|private|annotation|\@|---)\s|$)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -735,26 +823,35 @@
 					<string>(,)</string>
 				</dict>
 				<dict>
+					<key>name</key>
+					<string>entity.name.type.dw</string>
 					<key>match</key>
 					<string>(\*)</string>
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\b(from)\s+</string>
+					<string>\s+(from)\s+</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>storage.type.dw</string>
+							<string>keyword.control.from</string>
 						</dict>
 					</dict>
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>entity.name.other.dw</string>
+					<string>entity.name.type.dw</string>
 					<key>match</key>
-					<string>(?:[a-zA-Z][a-zA-Z0-9]*(?:::[a-zA-Z][a-zA-Z0-9]*)*)
+					<string>(?:[a-zA-Z][a-zA-Z0-9]*(?:::[a-zA-Z][a-zA-Z0-9]*)+)
+</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.dw</string>
+					<key>match</key>
+					<string>(?:[a-zA-Z][a-zA-Z0-9]*)
 </string>
 				</dict>
 				<dict>
@@ -765,12 +862,12 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.other.dw</string>
+							<string>keyword.control.as</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.other.dw</string>
+							<string>entity.name.function.dw</string>
 						</dict>
 					</dict>
 				</dict>
@@ -780,7 +877,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>storage.type.dw</string>
+					<string>keyword.control.import</string>
 				</dict>
 			</dict>
 		</dict>
@@ -990,7 +1087,7 @@
 			<array>
 				<dict>
 					<key>name</key>
-					<string>meta.object.member.dw meta.object-literal.namespace.dw</string>
+					<string>variable.object.member.dw meta.object-literal.namespace.dw</string>
 					<key>match</key>
 					<string>\b([[:alpha:]][_[:alnum:]]+#)</string>
 					<key>captures</key>
@@ -1004,7 +1101,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>meta.object.member.dw meta.object-literal.key.dw</string>
+					<string>variable.object.member.dw meta.object-literal.key.dw</string>
 					<key>begin</key>
 					<string>(?=[\&apos;\&quot;\`])</string>
 					<key>end</key>
@@ -1019,7 +1116,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>meta.object.member.dw</string>
+					<string>variable.object.member.dw</string>
 					<key>match</key>
 					<string>(?:[_$[:alpha:]][_$[:alnum:]]*)\s*(?=:|@\()</string>
 					<key>end</key>
@@ -1069,6 +1166,8 @@
 		</dict>
 		<key>object-member</key>
 		<dict>
+			<key>name</key>
+			<string>meta.object.member.first.dw</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1078,27 +1177,6 @@
 				<dict>
 					<key>include</key>
 					<string>#paren-expression</string>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>\s+if\b</string>
-					<key>end</key>
-					<string>(?=,|})</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#expressions</string>
-						</dict>
-					</array>
-					<key>beginCaptures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.control.dw</string>
-						</dict>
-					</dict>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -1121,7 +1199,7 @@
 		<key>object-member-body</key>
 		<dict>
 			<key>name</key>
-			<string>meta.object.member.dw</string>
+			<string>variable.object.member.dw</string>
 			<key>begin</key>
 			<string>:</string>
 			<key>end</key>
@@ -1170,7 +1248,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>meta.object.member.dw</string>
+					<string>variable.object.member.dw</string>
 					<key>match</key>
 					<string>([a-zA-Z][a-zA-Z0-9]*)</string>
 				</dict>
@@ -1803,7 +1881,7 @@
 			<array>
 				<dict>
 					<key>name</key>
-					<string>meta.object.member.dw</string>
+					<string>variable.object.member.dw</string>
 					<key>match</key>
 					<string>\b([[:alpha:]][_[:alnum:]]+#)</string>
 					<key>captures</key>
@@ -1817,7 +1895,7 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>meta.object.member.dw</string>
+					<string>variable.object.member.dw</string>
 					<key>match</key>
 					<string>((?:[A-Za-z])([a-zA-Z0-9_]*)[?!]?|(\$)+)</string>
 				</dict>
@@ -2004,7 +2082,7 @@
 			<key>begin</key>
 			<string>(\s*(type)\s+([a-zA-Z][a-zA-Z0-9]*))</string>
 			<key>end</key>
-			<string>(?=(fun|input|output|type|var|ns|import|%dw|private|---)\s)</string>
+			<string>(?=(fun|input|output|type|var|ns|import|%dw|private|---)\s|(\@[a-zA-Z][a-zA-Z0-9]*))</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -2045,6 +2123,28 @@
 				</dict>
 			</dict>
 		</dict>
+		<key>type_parameters</key>
+		<dict>
+			<key>begin</key>
+			<string>&lt;</string>
+			<key>end</key>
+			<string>&gt;</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#types</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#punctuation-comma</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comments</string>
+				</dict>
+			</array>
+		</dict>
 		<key>types</key>
 		<dict>
 			<key>patterns</key>
@@ -2055,54 +2155,19 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>support.class.dw</string>
+					<string>constant.language.dw</string>
 					<key>match</key>
-					<string>\b(String|Boolean|Number|Range|Namespace|Uri|DateTime|LocalDateTime|Date|LocalTime|Time|TimeZone|Period|Binary|Null|Regex|Nothing|Any|Object|Key)\b</string>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>\b(Array|Type)\s*&lt;\b</string>
-					<key>end</key>
-					<string>&gt;</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>name</key>
-							<string>invalid</string>
-							<key>match</key>
-							<string>,</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#types</string>
-						</dict>
-					</array>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>support.type.dw</string>
-						</dict>
-					</dict>
+					<string>\b(true|false|null)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>keyword.operator.declaration.dw</string>
+					<string>constant.numeric.dw</string>
 					<key>match</key>
-					<string>(&amp;|\|)</string>
+					<string>\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)([LlFfUuDd]|UL|ul)?\b</string>
 				</dict>
 				<dict>
-					<key>name</key>
-					<string>keyword.operator.declaration.dw</string>
-					<key>match</key>
-					<string>&lt;:</string>
-				</dict>
-				<dict>
-					<key>name</key>
-					<string>support.class.dw</string>
-					<key>match</key>
-					<string>\b([A-Z][a-zA-Z0-9_]*)</string>
+					<key>include</key>
+					<string>#strings</string>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -2124,31 +2189,6 @@
 							<string>#comments</string>
 						</dict>
 					</array>
-				</dict>
-				<dict>
-					<key>begin</key>
-					<string>\(</string>
-					<key>end</key>
-					<string>(\)\s*\-\&gt;)</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#types</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#parameters</string>
-						</dict>
-					</array>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.operator.tuple.dw</string>
-						</dict>
-					</dict>
 				</dict>
 				<dict>
 					<key>begin</key>
@@ -2220,16 +2260,91 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>\(</string>
+					<string>(\()</string>
 					<key>end</key>
-					<string>\)</string>
+					<string>(\)\s*-&gt;|\))</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
 							<string>#types</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#parameters</string>
+						</dict>
 					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.grouping.dw</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.grouping.dw</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>support.class.dw</string>
+					<key>match</key>
+					<string>(String|Boolean|Number|Range|Namespace|Uri|DateTime|LocalDateTime|Date|LocalTime|TimeZone|Time|Period|Binary|Null|Regex|Nothing|Any|Object|Key)</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>(Array|Type)\s*&lt;</string>
+					<key>end</key>
+					<string>&gt;</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>invalid</string>
+							<key>match</key>
+							<string>,</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#types</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.type.dw</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.declaration.dw</string>
+					<key>match</key>
+					<string>(&amp;|\|)</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.declaration.dw</string>
+					<key>match</key>
+					<string>&lt;:</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>support.class.dw</string>
+					<key>match</key>
+					<string>\b([A-Z][a-zA-Z0-9_]*)</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#undefined-fun-character</string>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -2254,6 +2369,13 @@
 					<string>(~=|==|!=|===|!==|&lt;=|&gt;=|&lt;|&gt;|\$+)</string>
 				</dict>
 			</array>
+		</dict>
+		<key>undefined-fun-character</key>
+		<dict>
+			<key>name</key>
+			<string>constant.language.undefined.dw</string>
+			<key>match</key>
+			<string>\?\?\?</string>
 		</dict>
 		<key>using-statement</key>
 		<dict>

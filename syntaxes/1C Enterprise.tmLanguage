@@ -183,7 +183,7 @@
 			<key>begin</key>
 			<string>(?i:(?&lt;=;|^)\s*([\wа-яё]+))\s*(=)</string>
 			<key>end</key>
-			<string>(?=;)</string>
+			<string>(?i:(?=(;|Иначе|Конец|Els|End)))</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -220,6 +220,12 @@
 			<string>keyword.control.import.bsl</string>
 			<key>match</key>
 			<string>(?i)#(Использовать|Use)(?=[^\wа-яё\.]|$)</string>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>keyword.control.native.bsl</string>
+			<key>match</key>
+			<string>(?i)#native</string>
 		</dict>
 		<dict>
 			<key>name</key>

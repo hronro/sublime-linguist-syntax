@@ -431,6 +431,7 @@
 	<key>fileTypes</key>
 	<array>
 		<string>pl</string>
+		<string>plt</string>
 		<string>pro</string>
 		<string>prolog</string>
 		<string>yap</string>

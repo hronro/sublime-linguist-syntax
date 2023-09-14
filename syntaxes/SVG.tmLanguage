@@ -9,38 +9,8 @@
 	<key>patterns</key>
 	<array>
 		<dict>
-			<key>begin</key>
-			<string>\A(?=[ \t]*$)</string>
-			<key>end</key>
-			<string>(?=\S)</string>
-		</dict>
-		<dict>
-			<key>name</key>
-			<string>meta.drawing-commands.xml.svg</string>
-			<key>begin</key>
-			<string>(?i)(?=[MLHVCSQTAZ][-\d\s.,MLHVCSQTAZ]*(?:$|[&apos;&quot;]))</string>
-			<key>end</key>
-			<string>(?i)(?=[^-\d\s.,MLHVCSQTAZ])</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#commands</string>
-				</dict>
-			</array>
-		</dict>
-		<dict>
-			<key>begin</key>
-			<string>(?=\S)</string>
-			<key>end</key>
-			<string>(?=A)B</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#main</string>
-				</dict>
-			</array>
+			<key>include</key>
+			<string>#main</string>
 		</dict>
 	</array>
 	<key>repository</key>
@@ -531,6 +501,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#unescapedBracket</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#unmatchedTag</string>
 				</dict>
 			</array>
@@ -859,7 +833,7 @@
 			<key>begin</key>
 			<string>(?i)(&lt;)([A-Za-z_:][-\w.:]*)(?=$|\s|/?&gt;)</string>
 			<key>end</key>
-			<string>(?i)(&lt;/)(\2)\s*(&gt;)|(/&gt;)</string>
+			<string>(?i)(&lt;/)(\2)(?:\s*(&gt;)|(?=\s*$))|(/&gt;)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -968,6 +942,13 @@
 					<string>[A-Za-z_:][-\w.:]*</string>
 				</dict>
 			</array>
+		</dict>
+		<key>unescapedBracket</key>
+		<dict>
+			<key>name</key>
+			<string>punctuation.definition.tag.closing.end.xml.svg</string>
+			<key>match</key>
+			<string>^\s*(&gt;)</string>
 		</dict>
 		<key>unmatchedTag</key>
 		<dict>

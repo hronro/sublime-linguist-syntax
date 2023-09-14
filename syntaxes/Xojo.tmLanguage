@@ -3,106 +3,133 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>xojo</string>
+	<string>Xojo</string>
 	<key>scopeName</key>
 	<string>source.xojo</string>
 	<key>patterns</key>
 	<array>
 		<dict>
 			<key>include</key>
-			<string>#comment</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#comment-rem</string>
+			<string>#xml</string>
 		</dict>
 		<dict>
 			<key>include</key>
 			<string>#tags</string>
 		</dict>
-		<dict>
-			<key>include</key>
-			<string>#string-literal</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#keywords</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#directives</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#keywords-numeric</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#keywords-functions</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#numbers</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#numbers-literal</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#numbers-binary</string>
-		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>block</key>
+		<dict>
+			<key>begin</key>
+			<string>^\s*Begin.*$</string>
+			<key>end</key>
+			<string>^\s*End$</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#block</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string-literal</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#keywords-numeric</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numbers</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numbers-literal</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numbers-binary</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.section</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.section</string>
+				</dict>
+			</dict>
+		</dict>
 		<key>comment</key>
 		<dict>
 			<key>name</key>
-			<string>punctuation.definition.comment.xojo</string>
+			<string>comment</string>
 			<key>match</key>
 			<string>(//|&apos;).*$</string>
 		</dict>
 		<key>comment-rem</key>
 		<dict>
 			<key>name</key>
-			<string>punctuation.definition.comment.xojo</string>
+			<string>comment</string>
 			<key>match</key>
 			<string>(?i)(rem .++)$</string>
+		</dict>
+		<key>declare</key>
+		<dict>
+			<key>name</key>
+			<string>keyword</string>
+			<key>match</key>
+			<string>^\s*(?i)((protected|private|public)\s+)*(soft\s+)*(?i)declare\s+(sub|function)\s+\w+</string>
 		</dict>
 		<key>directives</key>
 		<dict>
 			<key>name</key>
-			<string>keyword.xojo</string>
+			<string>keyword</string>
 			<key>match</key>
-			<string>(?i)#(if|else|elseif|endif|pragma)\b</string>
+			<string>(?i)#(if|else|elseif|endif|pragma).*$\b</string>
 		</dict>
 		<key>keywords</key>
 		<dict>
 			<key>name</key>
-			<string>keyword.xojo</string>
+			<string>keyword</string>
 			<key>match</key>
-			<string>\b(?i)(me|self|super|return|dim|var|const|static|as|if|then|else|elseif|for|next|do|loop|until|while|wend|end if|select case|case|end select|private|public|protected|inherits|try|catch|finally|nil|and|or|not|mod|to|downto|new|get|set|end)\b</string>
+			<string>\b(?i)(me|self|super|return|dim|var|const|static|as|if|then|else|elseif|for|next|do|loop|until|while|wend|end if|select case|case|end select|inherits|try|catch|finally|nil|and|or|not|mod|to|downto|new|get|set|end|return|call|invoke)\b</string>
 		</dict>
 		<key>keywords-functions</key>
 		<dict>
 			<key>name</key>
-			<string>keyword.xojo</string>
+			<string>entity.name.function</string>
 			<key>match</key>
-			<string>\b(?i)(sub|function|class|return|begin)\s\w++\b</string>
+			<string>\b(?i)(private|protected|public|shared|end)? ?(sub|function|class)\b(\s\w++\b)?</string>
 		</dict>
 		<key>keywords-numeric</key>
 		<dict>
 			<key>name</key>
-			<string>keyword.xojo</string>
+			<string>keyword</string>
 			<key>match</key>
-			<string>\b(?i)(boolean|integer|double|cgfloat|long|string|color|true|false|(u)*int(8|16|32|64))\b</string>
+			<string>\b(?i)(boolean|integer|double|single|ptr|wstring|cgfloat|long|string|color|true|false|(u)*int(8|16|32|64))\b</string>
 		</dict>
 		<key>numbers</key>
 		<dict>
-			<key>name</key>
-			<string>constant.numeric.xojo</string>
 			<key>match</key>
-			<string>\b(-)?[0-9.]+\b</string>
+			<string>\b((-)?[0-9.]+)\b</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric</string>
+				</dict>
+			</dict>
 		</dict>
 		<key>numbers-binary</key>
 		<dict>
@@ -121,16 +148,195 @@
 		<key>string-literal</key>
 		<dict>
 			<key>name</key>
-			<string>string.quoted.double.xojo</string>
+			<string>string.quoted.double</string>
 			<key>match</key>
 			<string>(\&quot;.*?\&quot;)</string>
 		</dict>
 		<key>tags</key>
 		<dict>
-			<key>name</key>
-			<string>markup.bold.xojo</string>
-			<key>match</key>
-			<string>^\s*#tag.*$</string>
+			<key>begin</key>
+			<string>^\s*(#tag\s\w+)(\s\w+)?(.*)$</string>
+			<key>end</key>
+			<string>^\s*(#tag end.*)$</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#block</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment-rem</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#tags</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string-literal</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#directives</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#keywords-numeric</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#keywords-functions</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#keywords</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#declare</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numbers</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numbers-literal</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numbers-binary</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.type</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#string-literal</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#numbers</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#numbers-literal</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#numbers-binary</string>
+						</dict>
+					</array>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>xml</key>
+		<dict>
+			<key>begin</key>
+			<string>^\s*(&lt;[^/].*?&gt;)</string>
+			<key>end</key>
+			<string>(&lt;/\w*&gt;)$</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#xml</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comment-rem</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#string-literal</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#directives</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#keywords-numeric</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#keywords-functions</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#keywords</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#declare</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numbers</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numbers-literal</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#numbers-binary</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#string-literal</string>
+						</dict>
+					</array>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end</string>
+				</dict>
+			</dict>
 		</dict>
 	</dict>
 	<key>fileTypes</key>

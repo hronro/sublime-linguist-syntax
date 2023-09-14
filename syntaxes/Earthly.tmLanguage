@@ -157,7 +157,7 @@
 					<key>name</key>
 					<string>keyword.operator.flag.earthfile</string>
 					<key>match</key>
-					<string>(\B(-)+[a-zA-Z0-9\-]+)</string>
+					<string>(\B(-)+[a-zA-Z0-9\-_]+)</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -218,7 +218,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?&lt;=(^FROM\s))(\S+)</string>
+					<string>^\s*(FROM)\s*([^\s#]+)</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -230,6 +230,23 @@
 						<dict>
 							<key>name</key>
 							<string>entity.name.type.base-image.earthfile</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>^\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT|SET|LET|ADD|STOP SIGNAL|ONBUILD|SHELL)\s((--\w+(?:-\w+)*\s*)+)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.special-method.earthfile</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.type.tag.earthfile</string>
 						</dict>
 					</dict>
 				</dict>
@@ -249,7 +266,7 @@
 					<key>name</key>
 					<string>keyword.other.special-method.earthfile</string>
 					<key>match</key>
-					<string>^\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION)\s</string>
+					<string>^\s*(FROM|COPY|SAVE ARTIFACT|SAVE IMAGE|RUN|LABEL|EXPOSE|VOLUME|USER|ENV|ARG|BUILD|WORKDIR|ENTRYPOINT|CMD|GIT CLONE|DOCKER LOAD|DOCKER PULL|HEALTHCHECK|WITH DOCKER|END|IF|ELSE|ELSE IF|DO|COMMAND|IMPORT|LOCALLY|FOR|VERSION|WAIT|TRY|FINALLY|CACHE|HOST|PIPELINE|TRIGGER|PROJECT|SET|LET|ADD|STOP SIGNAL|ONBUILD|SHELL)\s</string>
 				</dict>
 			</array>
 		</dict>
@@ -369,7 +386,7 @@
 					<key>name</key>
 					<string>variable.other.earthfile</string>
 					<key>match</key>
-					<string>\$[a-zA-Z0-9_\-]+</string>
+					<string>\$[a-zA-Z0-9_]+</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -378,23 +395,21 @@
 					<string>(?&lt;=\${)([a-zA-Z0-9.\-_]+)(?=})</string>
 				</dict>
 				<dict>
-					<key>name</key>
-					<string>variable.other.earthfile</string>
-					<key>begin</key>
-					<string>\$\{</string>
-					<key>end</key>
-					<string>\}</string>
-					<key>beginCaptures</key>
+					<key>match</key>
+					<string>(\${)([a-zA-Z0-9.\-_#]+)(})</string>
+					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.variable.begin.earthfile</string>
 						</dict>
-					</dict>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.earthfile</string>
+						</dict>
+						<key>3</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.variable.end.earthfile</string>

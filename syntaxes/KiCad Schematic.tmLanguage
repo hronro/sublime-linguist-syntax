@@ -25,6 +25,21 @@
 		</dict>
 		<dict>
 			<key>contentName</key>
+			<string>source.pcb.sexp</string>
+			<key>begin</key>
+			<string>\A\s*(?=\(kicad_sch(?:\s|$|\())</string>
+			<key>end</key>
+			<string>(?=A)B</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.pcb.sexp</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>contentName</key>
 			<string>source.scheme</string>
 			<key>begin</key>
 			<string>\A\s*(?=;|\()</string>
@@ -42,7 +57,7 @@
 			<key>name</key>
 			<string>meta.header.pcb.schematic</string>
 			<key>begin</key>
-			<string>^\s*(EESchema\s+(?:Schematic|-LIBRARY)\s+\S+.*)\s*$</string>
+			<string>^\s*(EESchema(?:\s+Schematic|-(?:DOCLIB|LIBRARY))\s+\S+.*)\s*$</string>
 			<key>end</key>
 			<string>(?&lt;=\$EndDescr)(?=\s|$)</string>
 			<key>patterns</key>
@@ -584,7 +599,7 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#stringInnards</string>
+					<string>source.pcb.sexp#stringInnards</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -611,10 +626,6 @@
 				<dict>
 					<key>include</key>
 					<string>#comments</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#capsConstant</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -655,6 +666,7 @@
 	</dict>
 	<key>fileTypes</key>
 	<array>
+		<string>kicad_sch</string>
 		<string>sch</string>
 	</array>
 </dict>

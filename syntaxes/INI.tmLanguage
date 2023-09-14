@@ -172,11 +172,13 @@
 	<array>
 		<string>ini</string>
 		<string>cfg</string>
+		<string>cnf</string>
 		<string>dof</string>
 		<string>lektorproject</string>
 		<string>prefs</string>
 		<string>pro</string>
 		<string>properties</string>
+		<string>url</string>
 	</array>
 </dict>
 </plist>

@@ -21,7 +21,23 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#graphql-comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#graphql-fragment-definition</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-directive-definition</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -49,21 +65,22 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-comment</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#graphql-directive</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#graphql-blockstring-value</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#graphql-string-value</string>
+					<string>#literal-quasi-embedded</string>
 				</dict>
 			</array>
+		</dict>
+		<key>graphql-ampersand</key>
+		<dict>
+			<key>match</key>
+			<string>\s*(&amp;)</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.logical.graphql</string>
+				</dict>
+			</dict>
 		</dict>
 		<key>graphql-arguments</key>
 		<dict>
@@ -80,19 +97,39 @@
 					<string>#graphql-comment</string>
 				</dict>
 				<dict>
+					<key>include</key>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
 					<key>begin</key>
-					<string>\s*([_A-Za-z][_0-9A-Za-z]*)(?:\s*(:))?</string>
+					<string>\s*([_A-Za-z][_0-9A-Za-z]*)(?:\s*(:))</string>
 					<key>end</key>
 					<string>(?=\s*(?:(?:([_A-Za-z][_0-9A-Za-z]*)\s*(:))|\)))|\s*(,)</string>
 					<key>patterns</key>
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#graphql-value</string>
+							<string>#graphql-comment</string>
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#graphql-comment</string>
+							<string>#graphql-description-docstring</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-description-singleline</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-directive</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-value</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -104,7 +141,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>variable.arguments.graphql</string>
+							<string>variable.parameter.graphql</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -121,37 +158,9 @@
 						</dict>
 					</dict>
 				</dict>
-			</array>
-			<key>beginCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>meta.brace.round.directive.graphql</string>
-				</dict>
-			</dict>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>meta.brace.round.directive.graphql</string>
-				</dict>
-			</dict>
-		</dict>
-		<key>graphql-blockstring-value</key>
-		<dict>
-			<key>contentName</key>
-			<string>string.quoted.block.graphql</string>
-			<key>begin</key>
-			<string>\s*+((&quot;&quot;&quot;))</string>
-			<key>end</key>
-			<string>\s*+(?:((&quot;&quot;&quot;)))</string>
-			<key>patterns</key>
-			<array>
 				<dict>
 					<key>include</key>
-					<string>#graphql-string-content</string>
+					<string>#literal-quasi-embedded</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -159,12 +168,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.quoted.block.graphql</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.begin.graphql</string>
+					<string>meta.brace.round.directive.graphql</string>
 				</dict>
 			</dict>
 			<key>endCaptures</key>
@@ -172,12 +176,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>string.quoted.block.graphql</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.string.end.graphql</string>
+					<string>meta.brace.round.directive.graphql</string>
 				</dict>
 			</dict>
 		</dict>
@@ -190,7 +189,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.boolean.graphql</string>
+					<string>constant.language.boolean.graphql</string>
 				</dict>
 			</dict>
 		</dict>
@@ -222,18 +221,71 @@
 		</dict>
 		<key>graphql-comment</key>
 		<dict>
-			<key>name</key>
-			<string>comment.line.graphql.js</string>
-			<key>match</key>
-			<string>(\s*)(#).*</string>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
+			<key>patterns</key>
+			<array>
 				<dict>
 					<key>name</key>
-					<string>punctuation.whitespace.comment.leading.graphql</string>
+					<string>comment.line.graphql.js</string>
+					<key>match</key>
+					<string>(\s*)(#).*</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.whitespace.comment.leading.graphql</string>
+						</dict>
+					</dict>
 				</dict>
-			</dict>
+				<dict>
+					<key>name</key>
+					<string>comment.line.graphql.js</string>
+					<key>begin</key>
+					<string>(&quot;&quot;&quot;)</string>
+					<key>end</key>
+					<string>(&quot;&quot;&quot;)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.whitespace.comment.leading.graphql</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>comment.line.graphql.js</string>
+					<key>begin</key>
+					<string>(&quot;)</string>
+					<key>end</key>
+					<string>(&quot;)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.whitespace.comment.leading.graphql</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>graphql-description-docstring</key>
+		<dict>
+			<key>name</key>
+			<string>comment.block.graphql</string>
+			<key>begin</key>
+			<string>&quot;&quot;&quot;</string>
+			<key>end</key>
+			<string>&quot;&quot;&quot;</string>
+		</dict>
+		<key>graphql-description-singleline</key>
+		<dict>
+			<key>name</key>
+			<string>comment.line.number-sign.graphql</string>
+			<key>match</key>
+			<string>#(?=([^&quot;]*&quot;[^&quot;]*&quot;)*[^&quot;]*$).*$</string>
 		</dict>
 		<key>graphql-directive</key>
 		<dict>
@@ -245,11 +297,23 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#graphql-comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#graphql-arguments</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-comment</string>
+					<string>#literal-quasi-embedded</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -262,6 +326,105 @@
 				<dict>
 					<key>name</key>
 					<string>entity.name.function.directive.graphql</string>
+				</dict>
+			</dict>
+			<key>applyEndPatternLast</key>
+			<true />
+		</dict>
+		<key>graphql-directive-definition</key>
+		<dict>
+			<key>begin</key>
+			<string>\s*(\bdirective\b)\s*(@[_A-Za-z][_0-9A-Za-z]*)</string>
+			<key>end</key>
+			<string>(?=.)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#graphql-variable-definitions</string>
+				</dict>
+				<dict>
+					<key>begin</key>
+					<string>\s*(\bon\b)\s*([_A-Za-z]*)</string>
+					<key>end</key>
+					<string>(?=.)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#graphql-skip-newlines</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-comment</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#literal-quasi-embedded</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>\s*(\|)\s*([_A-Za-z]*)</string>
+							<key>captures</key>
+							<dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>support.type.location.graphql</string>
+								</dict>
+							</dict>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.on.graphql</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>support.type.location.graphql</string>
+						</dict>
+					</dict>
+					<key>applyEndPatternLast</key>
+					<true />
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-skip-newlines</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literal-quasi-embedded</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.directive.graphql</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.directive.graphql</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.on.graphql</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>support.type.graphql</string>
 				</dict>
 			</dict>
 			<key>applyEndPatternLast</key>
@@ -296,15 +459,23 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#graphql-description-docstring</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-description-singleline</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-directive</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#graphql-enum-value</string>
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#graphql-blockstring-value</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#graphql-string-value</string>
+							<string>#literal-quasi-embedded</string>
 						</dict>
 					</array>
 					<key>beginCaptures</key>
@@ -323,6 +494,22 @@
 							<string>punctuation.operation.graphql</string>
 						</dict>
 					</dict>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-directive</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -393,6 +580,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#literal-quasi-embedded</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#graphql-skip-newlines</string>
 				</dict>
 			</array>
@@ -400,13 +591,13 @@
 		<key>graphql-float-value</key>
 		<dict>
 			<key>match</key>
-			<string>\s*((-)?(0|([1-9]\d*)(\.\d*)?((e|E)(\+|-)?\d*)?))</string>
+			<string>\s*(-?(0|[1-9][0-9]*)(\.[0-9]+)?((e|E)(\+|-)?[0-9]+)?)</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.float.graphql</string>
+					<string>constant.numeric.float.graphql</string>
 				</dict>
 			</dict>
 		</dict>
@@ -415,14 +606,43 @@
 			<key>name</key>
 			<string>meta.fragment.graphql</string>
 			<key>begin</key>
-			<string>\s*(?:(\bfragment\b)\s*(?!\bon\b)([_A-Za-z][_0-9A-Za-z]*)\s*(?:(\bon\b)\s*([_A-Za-z][_0-9A-Za-z]*)))</string>
+			<string>\s*(?:(\bfragment\b)\s*([_A-Za-z][_0-9A-Za-z]*)?)</string>
 			<key>end</key>
 			<string>(?&lt;=})</string>
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>match</key>
+					<string>\s*(?:(\bon\b)\s*([_A-Za-z][_0-9A-Za-z]*))</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.on.graphql</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>support.type.graphql</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-variable-definitions</string>
+				</dict>
+				<dict>
 					<key>include</key>
 					<string>#graphql-comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -435,6 +655,10 @@
 				<dict>
 					<key>include</key>
 					<string>#graphql-skip-newlines</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literal-quasi-embedded</string>
 				</dict>
 			</array>
 			<key>captures</key>
@@ -449,16 +673,6 @@
 					<key>name</key>
 					<string>entity.name.fragment.graphql</string>
 				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.on.graphql</string>
-				</dict>
-				<key>4</key>
-				<dict>
-					<key>name</key>
-					<string>support.type.graphql</string>
-				</dict>
 			</dict>
 		</dict>
 		<key>graphql-fragment-spread</key>
@@ -471,7 +685,19 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#graphql-arguments</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#graphql-comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -480,6 +706,10 @@
 				<dict>
 					<key>include</key>
 					<string>#graphql-directive</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literal-quasi-embedded</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -502,6 +732,11 @@
 			<key>applyEndPatternLast</key>
 			<true />
 		</dict>
+		<key>graphql-ignore-spaces</key>
+		<dict>
+			<key>match</key>
+			<string>\s*</string>
+		</dict>
 		<key>graphql-inline-fragment</key>
 		<dict>
 			<key>begin</key>
@@ -516,6 +751,14 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#graphql-selection-set</string>
 				</dict>
 				<dict>
@@ -525,6 +768,10 @@
 				<dict>
 					<key>include</key>
 					<string>#graphql-skip-newlines</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literal-quasi-embedded</string>
 				</dict>
 			</array>
 			<key>captures</key>
@@ -584,15 +831,27 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#graphql-input-types</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#graphql-comment</string>
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#graphql-description-docstring</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-description-singleline</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-input-types</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#graphql-comma</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#literal-quasi-embedded</string>
 						</dict>
 					</array>
 					<key>captures</key>
@@ -600,7 +859,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>meta.brace.squart.graphql</string>
+							<string>meta.brace.square.graphql</string>
 						</dict>
 						<key>2</key>
 						<dict>
@@ -610,19 +869,6 @@
 					</dict>
 				</dict>
 			</array>
-		</dict>
-		<key>graphql-int-value</key>
-		<dict>
-			<key>match</key>
-			<string>\s*((-)?(0|[1-9][0-9]*))</string>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>constant.int.graphql</string>
-				</dict>
-			</dict>
 		</dict>
 		<key>graphql-list-value</key>
 		<dict>
@@ -671,6 +917,19 @@
 				<dict>
 					<key>name</key>
 					<string>entity.name.function.graphql</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>graphql-null-value</key>
+		<dict>
+			<key>match</key>
+			<string>\s*\b(null)\b</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>constant.language.null.graphql</string>
 				</dict>
 			</dict>
 		</dict>
@@ -849,15 +1108,19 @@
 								</dict>
 								<dict>
 									<key>include</key>
-									<string>#graphql-colon</string>
-								</dict>
-								<dict>
-									<key>include</key>
 									<string>#graphql-comment</string>
 								</dict>
 								<dict>
 									<key>include</key>
-									<string>#graphql-directive</string>
+									<string>#graphql-description-docstring</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#graphql-description-singleline</string>
+								</dict>
+								<dict>
+									<key>include</key>
+									<string>#graphql-colon</string>
 								</dict>
 								<dict>
 									<key>include</key>
@@ -887,6 +1150,14 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#graphql-description-docstring</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-description-singleline</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#graphql-skip-newlines</string>
 						</dict>
 					</array>
@@ -909,11 +1180,19 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-directive</string>
+					<string>#graphql-comment</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-comment</string>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-directive</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -941,6 +1220,18 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#graphql-comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#graphql-field</string>
 				</dict>
 				<dict>
@@ -957,7 +1248,11 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-comment</string>
+					<string>#native-interpolation</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literal-quasi-embedded</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -1016,6 +1311,10 @@
 					<key>include</key>
 					<string>#graphql-string-content</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literal-quasi-embedded</string>
+				</dict>
 			</array>
 			<key>beginCaptures</key>
 			<dict>
@@ -1059,11 +1358,19 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#graphql-directive</string>
+					<string>#graphql-comment</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-comment</string>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-directive</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -1080,6 +1387,10 @@
 				<dict>
 					<key>include</key>
 					<string>#graphql-input-types</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literal-quasi-embedded</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -1104,30 +1415,61 @@
 			<key>name</key>
 			<string>meta.type.interface.graphql</string>
 			<key>begin</key>
-			<string>\s*\b(?:(extends)?\b\s*\b(type)|(interface)|(input))\b\s*([_A-Za-z][_0-9A-Za-z]*)?</string>
+			<string>\s*\b(?:(extends?)?\b\s*\b(type)|(interface)|(input))\b\s*([_A-Za-z][_0-9A-Za-z]*)?</string>
 			<key>end</key>
-			<string>(?&lt;=})</string>
+			<string>(?=.)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>match</key>
-					<string>\s*(?:\b(implements)\b|(&amp;))\s*([_A-Za-z][_0-9A-Za-z]*)</string>
-					<key>captures</key>
+					<key>begin</key>
+					<string>\s*\b(implements)\b\s*</string>
+					<key>end</key>
+					<string>\s*(?={)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>\s*([_A-Za-z][_0-9A-Za-z]*)</string>
+							<key>captures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>support.type.graphql</string>
+								</dict>
+							</dict>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-comment</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-description-docstring</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-description-singleline</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-directive</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-ampersand</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-comma</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>
 							<string>keyword.implements.graphql</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>keyword.implements.graphql</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
-							<string>support.type.graphql</string>
 						</dict>
 					</dict>
 				</dict>
@@ -1137,11 +1479,27 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#graphql-directive</string>
 				</dict>
 				<dict>
 					<key>include</key>
 					<string>#graphql-type-object</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literal-quasi-embedded</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-ignore-spaces</string>
 				</dict>
 			</array>
 			<key>captures</key>
@@ -1172,6 +1530,8 @@
 					<string>support.type.graphql</string>
 				</dict>
 			</dict>
+			<key>applyEndPatternLast</key>
+			<true />
 		</dict>
 		<key>graphql-type-object</key>
 		<dict>
@@ -1185,11 +1545,19 @@
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#graphql-object-type</string>
+					<string>#graphql-comment</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-comment</string>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-object-type</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -1197,11 +1565,7 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-blockstring-value</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#graphql-string-value</string>
+					<string>#literal-quasi-embedded</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -1238,11 +1602,23 @@
 					<array>
 						<dict>
 							<key>include</key>
+							<string>#graphql-comment</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-description-docstring</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#graphql-description-singleline</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#graphql-skip-newlines</string>
 						</dict>
 						<dict>
 							<key>include</key>
-							<string>#graphql-comment</string>
+							<string>#literal-quasi-embedded</string>
 						</dict>
 						<dict>
 							<key>match</key>
@@ -1280,11 +1656,19 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-skip-newlines</string>
+					<string>#graphql-comment</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-comment</string>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-skip-newlines</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -1326,6 +1710,14 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#graphql-comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#graphql-variable-name</string>
 				</dict>
 				<dict>
@@ -1334,19 +1726,15 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-int-value</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#graphql-blockstring-value</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>#graphql-string-value</string>
 				</dict>
 				<dict>
 					<key>include</key>
 					<string>#graphql-boolean-value</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-null-value</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -1362,10 +1750,6 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-comment</string>
-				</dict>
-				<dict>
-					<key>include</key>
 					<string>#literal-quasi-embedded</string>
 				</dict>
 			</array>
@@ -1375,7 +1759,8 @@
 			<key>begin</key>
 			<string>\s(=)</string>
 			<key>end</key>
-			<string>(?=.)</string>
+			<string>(?=[
+,)])</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1410,6 +1795,18 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-directive</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#graphql-colon</string>
 				</dict>
 				<dict>
@@ -1422,6 +1819,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#literal-quasi-embedded</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#graphql-skip-newlines</string>
 				</dict>
 			</array>
@@ -1430,7 +1831,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>variable.graphql</string>
+					<string>variable.parameter.graphql</string>
 				</dict>
 			</dict>
 			<key>endCaptures</key>
@@ -1456,15 +1857,19 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#graphql-description-docstring</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#graphql-description-singleline</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#graphql-variable-definition</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#graphql-blockstring-value</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#graphql-string-value</string>
+					<string>#literal-quasi-embedded</string>
 				</dict>
 			</array>
 			<key>captures</key>
@@ -1486,6 +1891,49 @@
 				<dict>
 					<key>name</key>
 					<string>variable.graphql</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>native-interpolation</key>
+		<dict>
+			<key>name</key>
+			<string>native.interpolation</string>
+			<key>begin</key>
+			<string>\s*(\${)</string>
+			<key>end</key>
+			<string>(})</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.js</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>source.ts</string>
+				</dict>
+				<dict>
+
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>source.tsx</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.substitution.begin</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.substitution.end</string>
 				</dict>
 			</dict>
 		</dict>

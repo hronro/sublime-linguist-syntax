@@ -489,6 +489,10 @@
 					<key>include</key>
 					<string>#paranthesisedBracket</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#regex</string>
+				</dict>
 			</array>
 		</dict>
 		<key>comment</key>
@@ -656,6 +660,10 @@
 				<dict>
 					<key>include</key>
 					<string>#enum-decl</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#source</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -1013,6 +1021,10 @@
 					<key>include</key>
 					<string>#identifiers</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#regex</string>
+				</dict>
 			</array>
 		</dict>
 		<key>expression-operators</key>
@@ -1149,6 +1161,65 @@
 					<key>include</key>
 					<string>#paranthesised</string>
 				</dict>
+				<dict>
+					<key>include</key>
+					<string>#regex</string>
+				</dict>
+			</array>
+		</dict>
+		<key>flags-on-off</key>
+		<dict>
+			<key>name</key>
+			<string>meta.flags.regexp.ballerina</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>constant.other.flag.regexp.ballerina</string>
+					<key>begin</key>
+					<string>(\??)([imsx]*)(-?)([imsx]*)(:)</string>
+					<key>end</key>
+					<string>()</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#regexp</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#template-substitution-element</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.other.non-capturing-group-begin.regexp.ballerina</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.non-capturing-group.flags-on.regexp.ballerina</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.other.non-capturing-group.off.regexp.ballerina</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.non-capturing-group.flags-off.regexp.ballerina</string>
+						</dict>
+						<key>5</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.other.non-capturing-group-end.regexp.ballerina</string>
+						</dict>
+					</dict>
+				</dict>
 			</array>
 		</dict>
 		<key>for-loop</key>
@@ -1280,7 +1351,7 @@
 					<key>begin</key>
 					<string>\=&gt;</string>
 					<key>end</key>
-					<string>(?=\;)|(?=\,)</string>
+					<string>(?=\;)|(?=\,)|(?=)(?=\);)</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -1316,7 +1387,7 @@
 			<key>begin</key>
 			<string>(?:(public|private)\s+)?(function\b)</string>
 			<key>end</key>
-			<string>(?&lt;=\;)|(?&lt;=\})|(?&lt;=\,)</string>
+			<string>(?&lt;=\;)|(?&lt;=\})|(?&lt;=\,)|(?=)(?=\);)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -1352,6 +1423,10 @@
 				<dict>
 					<key>include</key>
 					<string>#function-body</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#regex</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -1413,6 +1488,10 @@
 					<string>#identifiers</string>
 				</dict>
 				<dict>
+					<key>include</key>
+					<string>#regex</string>
+				</dict>
+				<dict>
 					<key>name</key>
 					<string>punctuation.separator.parameter.ballerina</string>
 					<key>match</key>
@@ -1444,7 +1523,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\s+(\b(self)|\b(is|new|isolated|null|function|in)\b|(string|int|boolean|float|byte|decimal|json|xml)\b|\b(readonly|error|map)\b|([_$[:alpha:]][_$[:alnum:]]*))</string>
+					<string>\s+(\b(self)|\b(is|new|isolated|null|function|in)\b|(string|int|boolean|float|byte|decimal|json|xml|anydata)\b|\b(readonly|error|map)\b|([_$[:alpha:]][_$[:alnum:]]*))</string>
 					<key>captures</key>
 					<dict>
 						<key>2</key>
@@ -2048,6 +2127,10 @@
 									<key>include</key>
 									<string>#paranthesised</string>
 								</dict>
+								<dict>
+									<key>include</key>
+									<string>#regex</string>
+								</dict>
 							</array>
 							<key>beginCaptures</key>
 							<dict>
@@ -2073,7 +2156,7 @@
 						</dict>
 						<dict>
 							<key>begin</key>
-							<string>(?&lt;=\))</string>
+							<string>(?&lt;=\))(?=\s|\=)</string>
 							<key>end</key>
 							<string>(?=\{)</string>
 							<key>patterns</key>
@@ -2227,7 +2310,7 @@
 					<key>name</key>
 					<string>keyword.other.ballerina</string>
 					<key>match</key>
-					<string>\b(limit|outer|equals|order|by|ascending|descending|class|configurable|variable|module|service)\b</string>
+					<string>\b(limit|outer|equals|order|by|ascending|descending|class|configurable|variable|module|service|group|collect)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -2484,7 +2567,7 @@
 			<array>
 				<dict>
 					<key>begin</key>
-					<string>(\+\s+)([_$[:alpha:]][_$[:alnum:]]*)(\s*\-\s+)</string>
+					<string>(\+\s+)(\&apos;?[_$[:alpha:]][_$[:alnum:]]*)(\s*\-\s+)</string>
 					<key>end</key>
 					<string>(?=[^#\r\n]|(?:# *?\+))</string>
 					<key>patterns</key>
@@ -2592,7 +2675,7 @@
 					<key>name</key>
 					<string>constant.numeric.decimal.ballerina</string>
 					<key>match</key>
-					<string>\b0[xX][\da-f]+\b|\b\d+(?:\.(?:\d+|$))?</string>
+					<string>\b0[xX][\da-fA-F]+\b|\b\d+(?:\.(?:\d+|$))?</string>
 				</dict>
 			</array>
 		</dict>
@@ -3131,7 +3214,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?x)(?:(?&lt;![_$[:alnum:]])(?:(?&lt;=\.\.\.)|(?&lt;!\.))\s+)?(?:(\.\.\.)\s*)?(?&lt;!=|:)(?&lt;![_$[:alnum:]])(?:(?&lt;=\.\.\.)|(?&lt;!\.))(?:(this)|(string|int|boolean|float|byte|decimal|json|xml)|\b(is|new|isolated|null|function|in)\b|\b(true|false)\b|\b(check|foreach|if|checkpanic)\b|\b(readonly|error|map)\b|([_$[:alpha:]][_$[:alnum:]]*))(?![_$[:alnum:]])(?:(?=\.\.\.)|(?!\.))\s*(\??)</string>
+					<string>(?x)(?:(?&lt;![_$[:alnum:]])(?:(?&lt;=\.\.\.)|(?&lt;!\.))\s+)?(?:(\.\.\.)\s*)?(?&lt;!=|:)(?&lt;![_$[:alnum:]])(?:(?&lt;=\.\.\.)|(?&lt;!\.))(?:(this)|(string|int|boolean|float|byte|decimal|json|xml|anydata)|\b(is|new|isolated|null|function|in)\b|\b(true|false)\b|\b(check|foreach|if|checkpanic)\b|\b(readonly|error|map)\b|([_$[:alpha:]][_$[:alnum:]]*))(?![_$[:alnum:]])(?:(?=\.\.\.)|(?!\.))\s*(\??)</string>
 					<key>captures</key>
 					<dict>
 						<key>2</key>
@@ -3290,6 +3373,30 @@
 				</dict>
 			</array>
 		</dict>
+		<key>parameters</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.flow.ballerina</string>
+					<key>match</key>
+					<string>\s*(return|break|continue|check|checkpanic|panic|trap|from|where)\b</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.ballerina</string>
+					<key>match</key>
+					<string>\s*(let|select)\b</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.parameter.ballerina</string>
+					<key>match</key>
+					<string>\,</string>
+				</dict>
+			</array>
+		</dict>
 		<key>paranthesised</key>
 		<dict>
 			<key>name</key>
@@ -3322,6 +3429,10 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#parameters</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#annotationAttachment</string>
 				</dict>
 				<dict>
@@ -3341,14 +3452,12 @@
 					<string>#variable-initializer</string>
 				</dict>
 				<dict>
-					<key>name</key>
-					<string>punctuation.separator.parameter.ballerina</string>
-					<key>match</key>
-					<string>\,</string>
+					<key>include</key>
+					<string>#expression</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#expression</string>
+					<string>#regex</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -3507,6 +3616,275 @@
 				</dict>
 			</array>
 		</dict>
+		<key>regex</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>regexp.template.ballerina</string>
+					<key>begin</key>
+					<string>(\bre)(\s*)(`)</string>
+					<key>end</key>
+					<string>`</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#template-substitution-element</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#regexp</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>support.type.primitive.ballerina</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.regexp.template.begin.ballerina</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.regexp.template.end.ballerina</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>regex-character-class</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.character-class.regexp.ballerina</string>
+					<key>match</key>
+					<string>\\[wWsSdDtrn]|\.</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape.backslash.regexp</string>
+					<key>match</key>
+					<string>\\[^pPu]</string>
+				</dict>
+			</array>
+		</dict>
+		<key>regex-unicode-properties-general-category</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>constant.other.unicode-property-general-category.regexp.ballerina</string>
+					<key>match</key>
+					<string>(Lu|Ll|Lt|Lm|Lo|L|Mn|Mc|Me|M|Nd|Nl|No|N|Pc|Pd|Ps|Pe|Pi|Pf|Po|P|Sm|Sc|Sk|So|S|Zs|Zl|Zp|Z|Cf|Cc|Cn|Co|C)</string>
+				</dict>
+			</array>
+		</dict>
+		<key>regex-unicode-property-key</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.unicode-property-key.regexp.ballerina</string>
+					<key>begin</key>
+					<string>(sc=|gc=)</string>
+					<key>end</key>
+					<string>()</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#regex-unicode-properties-general-category</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.unicode-property-key.regexp.ballerina</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.other.unicode-property.end.regexp.ballerina</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>regexp</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.assertion.regexp.ballerina</string>
+					<key>match</key>
+					<string>\^|\$</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.quantifier.regexp.ballerina</string>
+					<key>match</key>
+					<string>[?+*]|\{(\d+,\d+|\d+,|,\d+|\d+)\}\??</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.or.regexp.ballerina</string>
+					<key>match</key>
+					<string>\|</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.group.assertion.regexp.ballerina</string>
+					<key>begin</key>
+					<string>(\()</string>
+					<key>end</key>
+					<string>(\))</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#template-substitution-element</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#regexp</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#flags-on-off</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#unicode-property-escape</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.group.regexp.ballerina</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.group.regexp.ballerina</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.other.character-class.set.regexp.ballerina</string>
+					<key>begin</key>
+					<string>(\[)(\^)?</string>
+					<key>end</key>
+					<string>(\])</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>constant.other.character-class.range.regexp.ballerina</string>
+							<key>match</key>
+							<string>(?:.|(\\(?:[0-7]{3}|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}))|(\\[^pPu]))\-(?:[^\]\\]|(\\(?:[0-7]{3}|x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4}))|(\\[^pPu]))</string>
+							<key>captures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>constant.character.numeric.regexp</string>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>constant.character.escape.backslash.regexp</string>
+								</dict>
+								<key>3</key>
+								<dict>
+									<key>name</key>
+									<string>constant.character.numeric.regexp</string>
+								</dict>
+								<key>4</key>
+								<dict>
+									<key>name</key>
+									<string>constant.character.escape.backslash.regexp</string>
+								</dict>
+							</dict>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#regex-character-class</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#unicode-values</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#unicode-property-escape</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.character-class.start.regexp.ballerina</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.negation.regexp.ballerina</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.character-class.end.regexp.ballerina</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#template-substitution-element</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#regex-character-class</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unicode-values</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#unicode-property-escape</string>
+				</dict>
+			</array>
+		</dict>
 		<key>self-literal</key>
 		<dict>
 			<key>patterns</key>
@@ -3548,7 +3926,7 @@
 			<key>begin</key>
 			<string>\bservice\b</string>
 			<key>end</key>
-			<string>(?=;|^\s*$|(?:^\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\b))|(?&lt;=\})</string>
+			<string>(?=;|^\s*$|(?:^\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\b))|(?&lt;=\})|(?&lt;=\,)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -3614,6 +3992,8 @@
 				<dict>
 					<key>name</key>
 					<string>entity.service.path.ballerina</string>
+					<key>match</key>
+					<string>(\/([_$[:alpha:]][_$[:alnum:]]*)|\&quot;[_$[:alpha:]][_$[:alnum:]]*\&quot;)</string>
 				</dict>
 			</array>
 		</dict>
@@ -3639,6 +4019,31 @@
 						<dict>
 							<key>name</key>
 							<string>keyword.other.ballerina</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>source</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>(\bsource\b)\s+([_$[:alpha:]][_$[:alnum:]]*)</string>
+					<key>end</key>
+					<string>(?=\,)|(?=\;)</string>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.ballerina</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>variable.other.readwrite.ballerina</string>
 						</dict>
 					</dict>
 				</dict>
@@ -3691,6 +4096,10 @@
 				<dict>
 					<key>include</key>
 					<string>#annotationAttachment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#regex</string>
 				</dict>
 			</array>
 		</dict>
@@ -4024,7 +4433,19 @@
 						</dict>
 						<dict>
 							<key>include</key>
+							<string>#stringTemplate</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#regex</string>
+						</dict>
+						<dict>
+							<key>include</key>
 							<string>#self-literal</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#xml</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -4125,7 +4546,7 @@
 					<key>name</key>
 					<string>support.type.primitive.ballerina</string>
 					<key>match</key>
-					<string>(?&lt;![_$[:alnum:]])(?:(?&lt;=\.\.\.)|(?&lt;!\.))(string|int|boolean|float|byte|decimal|json|xml)(?![_$[:alnum:]])(?:(?=\.\.\.)|(?!\.))</string>
+					<string>(?&lt;![_$[:alnum:]])(?:(?&lt;=\.\.\.)|(?&lt;!\.))(string|int|boolean|float|byte|decimal|json|xml|anydata)(?![_$[:alnum:]])(?:(?=\.\.\.)|(?!\.))</string>
 				</dict>
 			</array>
 		</dict>
@@ -4332,13 +4753,13 @@
 					<key>name</key>
 					<string>storage.type.ballerina</string>
 					<key>match</key>
-					<string>\b(handle|any|anydata|future|typedesc)\b</string>
+					<string>\b(handle|any|future|typedesc)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
 					<string>support.type.primitive.ballerina</string>
 					<key>match</key>
-					<string>\b(boolean|int|string|float|decimal|byte|json|xml)\b</string>
+					<string>\b(boolean|int|string|float|decimal|byte|json|xml|anydata)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -4354,6 +4775,96 @@
 				</dict>
 			</array>
 		</dict>
+		<key>unicode-property-escape</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.unicode-property.regexp.ballerina</string>
+					<key>begin</key>
+					<string>(\\p|\\P)(\{)</string>
+					<key>end</key>
+					<string>(\})</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#regex-unicode-properties-general-category</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#regex-unicode-property-key</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.unicode-property.regexp.ballerina</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.other.unicode-property.begin.regexp.ballerina</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.other.unicode-property.end.regexp.ballerina</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>unicode-values</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.unicode-value.ballerina</string>
+					<key>begin</key>
+					<string>(\\u)(\{)</string>
+					<key>end</key>
+					<string>(\})</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>constant.other.unicode-value.regexp.ballerina</string>
+							<key>match</key>
+							<string>([0-9A-Fa-f]{1,6})</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.unicode-value.regexp.ballerina</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.other.unicode-value.begin.regexp.ballerina</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.other.unicode-value.end.regexp.ballerina</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
 		<key>var-expr</key>
 		<dict>
 			<key>patterns</key>
@@ -4364,7 +4875,7 @@
 					<key>begin</key>
 					<string>(?=\b(var))</string>
 					<key>end</key>
-					<string>(?!\b(var))((?=;|}|;|^\s*$|(?:^\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\b))|((?&lt;!^string|[^\._$[:alnum:]]string|^int|[^\._$[:alnum:]]int)(?=\s*$)))</string>
+					<string>(?!\b(var))((?=;|}|;|^\s*$|(?:^\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\b))|((?&lt;![_$[:alnum:]])(?:(?&lt;=\.\.\.)|(?&lt;!\.))(?=(if)\s+))|((?&lt;!^string|[^\._$[:alnum:]]string|^int|[^\._$[:alnum:]]int)(?=\s*$)))</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -4392,6 +4903,14 @@
 							<string>keyword.other.ballerina</string>
 							<key>match</key>
 							<string>\bin\b</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#comment</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#string</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -4433,6 +4952,10 @@
 							<key>include</key>
 							<string>#type-tuple</string>
 						</dict>
+						<dict>
+							<key>include</key>
+							<string>#regex</string>
+						</dict>
 					</array>
 					<key>beginCaptures</key>
 					<dict>
@@ -4453,7 +4976,7 @@
 					<key>begin</key>
 					<string>(?=\b(const(?!\s+enum\b)))</string>
 					<key>end</key>
-					<string>(?!\b(const(?!\s+enum\b)))((?=;|}|;|^\s*$|(?:^\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\b))|((?&lt;!^string|[^\._$[:alnum:]]string|^int|[^\._$[:alnum:]]int)(?=\s*$)))</string>
+					<string>(?!\b(const(?!\s+enum\b)))((?=\bannotation\b|;|}|;|^\s*$|(?:^\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\b))|((?&lt;!^string|[^\._$[:alnum:]]string|^int|[^\._$[:alnum:]]int)(?=\s*$)))</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -4469,6 +4992,14 @@
 									<string>keyword.other.ballerina</string>
 								</dict>
 							</dict>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#comment</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#string</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -4500,7 +5031,7 @@
 					<key>name</key>
 					<string>meta.var.expr.ballerina</string>
 					<key>begin</key>
-					<string>(string|int|boolean|float|byte|decimal|json|xml)(?=\s+|\[|\?|\||\:)</string>
+					<string>(string|int|boolean|float|byte|decimal|json|xml|anydata)(?=\s+|\[|\?|\||\:)</string>
 					<key>end</key>
 					<string>(?!\b(var))((?=;|}|;|^\s*$|(?:^\s*(?:abstract|async|class|const|declare|enum|export|function|import|interface|let|module|namespace|return|service|type|var)\b))|((?&lt;!^string|[^\._$[:alnum:]]string|^int|[^\._$[:alnum:]]int)(?=\s*$)))</string>
 					<key>patterns</key>
@@ -4511,7 +5042,7 @@
 						</dict>
 						<dict>
 							<key>begin</key>
-							<string>(string|int|boolean|float|byte|decimal|json|xml)(?=\s+|\[|\?|\||\:)</string>
+							<string>(string|int|boolean|float|byte|decimal|json|xml|anydata)(?=\s+|\[|\?|\||\:)</string>
 							<key>end</key>
 							<string>(?=\S)</string>
 							<key>beginCaptures</key>
@@ -4528,6 +5059,10 @@
 							<string>keyword.operator.type.annotation.ballerina</string>
 							<key>match</key>
 							<string>\|</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#string</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -4564,6 +5099,10 @@
 						<dict>
 							<key>include</key>
 							<string>#type-tuple</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#regex</string>
 						</dict>
 					</array>
 					<key>beginCaptures</key>
@@ -4631,7 +5170,7 @@
 					<key>name</key>
 					<string>meta.var-single-variable.expr.ballerina</string>
 					<key>begin</key>
-					<string>((string|int|boolean|float|byte|decimal|json|xml)|\b(readonly|error|map)\b|([_$[:alpha:]][_$[:alnum:]]*))(?=\s+|\;|\&gt;|\|)</string>
+					<string>((string|int|boolean|float|byte|decimal|json|xml|anydata)|\b(readonly|error|map)\b|([_$[:alpha:]][_$[:alnum:]]*))(?=\s+|\;|\&gt;|\|)</string>
 					<key>end</key>
 					<string>(?=$|^|[;,=}])</string>
 					<key>patterns</key>
@@ -4743,6 +5282,10 @@
 						<dict>
 							<key>include</key>
 							<string>#punctuation-accessor</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#regex</string>
 						</dict>
 					</array>
 					<key>beginCaptures</key>

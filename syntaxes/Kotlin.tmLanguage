@@ -213,7 +213,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#keyword</string>
+							<string>#keywords</string>
 						</dict>
 						<dict>
 							<key>begin</key>
@@ -260,11 +260,11 @@
 							<array>
 								<dict>
 									<key>include</key>
-									<string>#comments</string>
+									<string>#class-literal-class-parameter-list</string>
 								</dict>
 								<dict>
 									<key>include</key>
-									<string>#class-literal-class-parameter-list</string>
+									<string>#comments</string>
 								</dict>
 							</array>
 							<key>beginCaptures</key>
@@ -336,10 +336,6 @@
 				<dict>
 					<key>include</key>
 					<string>#comments</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#comments-inline</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -576,7 +572,7 @@
 					<key>name</key>
 					<string>storage.modifier.kotlin</string>
 					<key>match</key>
-					<string>\b(?&lt;![+-/%*=(,]\s)(inline|external|public|private|protected|internal|abstract|final|sealed|enum|open|annotation|expect|actual|const|lateinit)(?=\s(?!(?:\s*)(?:[+-/%*=:).,]|$)))\b</string>
+					<string>\b(?&lt;![+-/%*=(,]\s)(inline|inner|external|public|private|protected|internal|abstract|final|sealed|enum|open|annotation|expect|actual|const|lateinit)(?=\s(?!(?:\s*)(?:[+-/%*=:).,]|$)))\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -1041,14 +1037,6 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#keyword-punctuation</string>
-						</dict>
-						<dict>
-							<key>include</key>
-							<string>#parameters</string>
-						</dict>
-						<dict>
-							<key>include</key>
 							<string>#code</string>
 						</dict>
 					</array>
@@ -1214,6 +1202,10 @@
 				<dict>
 					<key>include</key>
 					<string>#types</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#literals</string>
 				</dict>
 			</array>
 		</dict>
@@ -1426,7 +1418,7 @@
 					<array>
 						<dict>
 							<key>include</key>
-							<string>#literals-string-string-content</string>
+							<string>#literals-string-raw-string-content</string>
 						</dict>
 					</array>
 					<key>beginCaptures</key>
@@ -1507,6 +1499,49 @@
 							<string>punctuation.definition.string.end.kotlin</string>
 						</dict>
 					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>literals-string-raw-string-content</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>entity.string.template.element.kotlin</string>
+					<key>begin</key>
+					<string>\$(\{)</string>
+					<key>end</key>
+					<string>\}</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#code</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.block.begin.kotlin</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.section.block.end.kotlin</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>entity.string.template.element.kotlin</string>
+					<key>match</key>
+					<string>\$[a-zA-Z_]\w*</string>
 				</dict>
 			</array>
 		</dict>

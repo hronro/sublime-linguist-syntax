@@ -239,39 +239,6 @@
 						</dict>
 					</dict>
 				</dict>
-				<dict>
-					<key>begin</key>
-					<string>(^[ \t]+)?(?=#)</string>
-					<key>end</key>
-					<string>(?!\G)</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>name</key>
-							<string>comment.line.number-sign.php</string>
-							<key>begin</key>
-							<string>#</string>
-							<key>end</key>
-							<string>\n|(?=\?&gt;)</string>
-							<key>beginCaptures</key>
-							<dict>
-								<key>0</key>
-								<dict>
-									<key>name</key>
-									<string>punctuation.definition.comment.php</string>
-								</dict>
-							</dict>
-						</dict>
-					</array>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.whitespace.comment.leading.php</string>
-						</dict>
-					</dict>
-				</dict>
 			</array>
 		</dict>
 		<key>constants</key>
@@ -404,9 +371,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(?xi)
-\s*(&amp;)?      # Reference
-\s*((\$+)[a-z_\x{7f}-\x{ff}][a-z0-9_\x{7f}-\x{ff}]*)  # The variable name</string>
+					<string>(?xi)((\$+)[a-z_\x{7f}-\x{ff}][a-z0-9_\x{7f}-\x{ff}]*)  # The variable name</string>
 					<key>end</key>
 					<string>(?xi)
 \s*(?=,|\)|$) # A closing parentheses (end of argument list) or a comma</string>
@@ -439,14 +404,9 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>storage.modifier.reference.php</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
 							<string>variable.other.php</string>
 						</dict>
-						<key>3</key>
+						<key>2</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.variable.php</string>
@@ -768,7 +728,7 @@
 			<key>name</key>
 			<string>meta.interface.php</string>
 			<key>begin</key>
-			<string>^(?i)\b(interface)\b</string>
+			<string>^(?i)\s*(?:(public|internal)\s+)?(interface)\b</string>
 			<key>end</key>
 			<string>(?=[;{])</string>
 			<key>patterns</key>
@@ -807,6 +767,11 @@
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.modifier.php</string>
+				</dict>
+				<key>2</key>
 				<dict>
 					<key>name</key>
 					<string>storage.type.interface.php</string>
@@ -904,7 +869,7 @@
 					<key>begin</key>
 					<string>(?xi)
 ^\s*
-(type|newtype)
+(?:(module)\s*)?(type|newtype)
 \s+
 ([a-z0-9_]+)</string>
 					<key>end</key>
@@ -935,9 +900,14 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>storage.type.typedecl.php</string>
+							<string>storage.modifier.php</string>
 						</dict>
 						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.typedecl.php</string>
+						</dict>
+						<key>3</key>
 						<dict>
 							<key>name</key>
 							<string>entity.name.type.typedecl.php</string>
@@ -954,9 +924,90 @@
 				</dict>
 				<dict>
 					<key>name</key>
+					<string>meta.class.enum.php</string>
+					<key>begin</key>
+					<string>(?i)^\s*(?:(public|internal)\s+)?(enum)\s+(class)\s+([a-z0-9_]+)\s*:?</string>
+					<key>end</key>
+					<string>(?=[{])</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>storage.modifier.extends.php</string>
+							<key>match</key>
+							<string>\b(extends)\b</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#type-annotation</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.modifier.php</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>storage.modifier.php</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.class.enum.php</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.type.class.enum.php</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.enum.php</string>
+					<key>begin</key>
+					<string>(?i)^\s*(?:(public|internal)\s+)?(enum)\s+([a-z0-9_]+)\s*:?</string>
+					<key>end</key>
+					<string>\{</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#comments</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#type-annotation</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.modifier.php</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.enum.php</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.type.enum.php</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
 					<string>meta.trait.php</string>
 					<key>begin</key>
-					<string>(?i)^\s*(trait)\s+([a-z0-9_]+)\s*</string>
+					<string>(?i)^\s*(?:(public|internal)\s+)?(trait)\s+([a-z0-9_]+)\s*</string>
 					<key>end</key>
 					<string>(?=[{])</string>
 					<key>patterns</key>
@@ -979,12 +1030,78 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>storage.type.trait.php</string>
+							<string>storage.modifier.php</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
+							<string>storage.type.trait.php</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
 							<string>entity.name.type.class.php</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.module.php</string>
+					<key>begin</key>
+					<string>^\s*(new)\s+(module)\s+([A-Za-z0-9_\.]+)\b</string>
+					<key>end</key>
+					<string>(?=[{])</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#comments</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.module.php</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.module.php</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.type.module.php</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.use.module.php</string>
+					<key>begin</key>
+					<string>^\s*(module)\s+([A-Za-z0-9_\.]+)\b</string>
+					<key>end</key>
+					<string>$|(?=[\s;])</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#comments</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.other.module.php</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.type.module.php</string>
 						</dict>
 					</dict>
 				</dict>
@@ -1093,7 +1210,7 @@
 					<key>name</key>
 					<string>meta.class.php</string>
 					<key>begin</key>
-					<string>(?i)^\s*(abstract|final)?\s*(abstract|final)?\s*(class)\s+([a-z0-9_]+)\s*</string>
+					<string>(?i)^\s*((?:(?:final|abstract|public|internal)\s+)*)(class)\s+([a-z0-9_]+)\s*</string>
 					<key>end</key>
 					<string>(?=[;{])</string>
 					<key>patterns</key>
@@ -1169,20 +1286,22 @@
 					<dict>
 						<key>1</key>
 						<dict>
-							<key>name</key>
-							<string>storage.modifier.php</string>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>name</key>
+									<string>storage.modifier.php</string>
+									<key>match</key>
+									<string>final|abstract|public|internal</string>
+								</dict>
+							</array>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>storage.modifier.php</string>
-						</dict>
-						<key>3</key>
-						<dict>
-							<key>name</key>
 							<string>storage.type.class.php</string>
 						</dict>
-						<key>4</key>
+						<key>3</key>
 						<dict>
 							<key>name</key>
 							<string>entity.name.type.class.php</string>
@@ -1191,7 +1310,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>\s*\b((break|c(ase|ontinue)|d(e(clare|fault)|ie|o)|e(lse(if)?|nd(declare|for(each)?|if|switch|while)|xit)|for(each)?|if|return|switch|use|while))\b</string>
+					<string>\s*\b(await|break|c(ase|ontinue)|concurrent|default|do|else|for(each)?|if|return|switch|use|while)\b</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -1314,7 +1433,7 @@
 					<key>name</key>
 					<string>meta.function.closure.php</string>
 					<key>begin</key>
-					<string>(?i)\b(function)\s*(&amp;\s*)?(?=\()</string>
+					<string>(?i)\s*(?:(public|internal)\s+)?(function)\s*(?=\()</string>
 					<key>end</key>
 					<string>\{|\)</string>
 					<key>patterns</key>
@@ -1410,12 +1529,12 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>storage.type.function.php</string>
+							<string>storage.modifier.php</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>storage.modifier.reference.php</string>
+							<string>storage.type.function.php</string>
 						</dict>
 					</dict>
 				</dict>
@@ -1424,9 +1543,9 @@
 					<string>meta.function.php</string>
 					<key>begin</key>
 					<string>(?x)
-\s*((?:(?:final|abstract|public|private|protected|static|async)\s+)*)
+\s*((?:(?:final|abstract|public|private|protected|internal|static|async)\s+)*)
 (function)
-(?:\s+|(\s*&amp;\s*))
+(?:\s+)
 (?:
   (__(?:call|construct|destruct|get|set|isset|unset|tostring|clone|set_state|sleep|wakeup|autoload|invoke|callStatic|dispose|disposeAsync)(?=[^a-zA-Z0-9_\x7f-\xff]))
   |
@@ -1495,7 +1614,7 @@
 									<key>name</key>
 									<string>storage.modifier.php</string>
 									<key>match</key>
-									<string>final|abstract|public|private|protected|static|async</string>
+									<string>final|abstract|public|private|protected|internal|static|async</string>
 								</dict>
 							</array>
 						</dict>
@@ -1507,19 +1626,14 @@
 						<key>3</key>
 						<dict>
 							<key>name</key>
-							<string>storage.modifier.reference.php</string>
+							<string>support.function.magic.php</string>
 						</dict>
 						<key>4</key>
 						<dict>
 							<key>name</key>
-							<string>support.function.magic.php</string>
-						</dict>
-						<key>5</key>
-						<dict>
-							<key>name</key>
 							<string>entity.name.function.php</string>
 						</dict>
-						<key>6</key>
+						<key>5</key>
 						<dict>
 							<key>name</key>
 							<string>meta.function.generics.php</string>
@@ -1690,7 +1804,7 @@
 					<key>name</key>
 					<string>storage.modifier.php</string>
 					<key>match</key>
-					<string>(?i)\b(global|abstract|const|extends|implements|final|p(r(ivate|otected)|ublic)|static)\b</string>
+					<string>(?i)\b(global|abstract|const|extends|implements|final|p(r(ivate|otected)|ublic)|internal|static)\b</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -1729,12 +1843,6 @@
 					<string>keyword.operator.pipe.php</string>
 					<key>match</key>
 					<string>\|&gt;</string>
-				</dict>
-				<dict>
-					<key>name</key>
-					<string>keyword.operator.error-control.php</string>
-					<key>match</key>
-					<string>(@)</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -2083,48 +2191,6 @@
 					<string>=</string>
 				</dict>
 				<dict>
-					<key>name</key>
-					<string>storage.modifier.reference.php</string>
-					<key>match</key>
-					<string>&amp;(?=\s*\$)</string>
-				</dict>
-				<dict>
-					<key>name</key>
-					<string>meta.array.php</string>
-					<key>begin</key>
-					<string>(array)\s*(\()</string>
-					<key>end</key>
-					<string>\)</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#parameter-default-types</string>
-						</dict>
-					</array>
-					<key>beginCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>support.function.construct.php</string>
-						</dict>
-						<key>2</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.array.begin.php</string>
-						</dict>
-					</dict>
-					<key>endCaptures</key>
-					<dict>
-						<key>0</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.definition.array.end.php</string>
-						</dict>
-					</dict>
-				</dict>
-				<dict>
 					<key>include</key>
 					<string>#instantiation</string>
 				</dict>
@@ -2177,7 +2243,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>^\s*\*\s*(@access)\s+((public|private|protected)|(.+))\s*$</string>
+					<string>^\s*\*\s*(@access)\s+((public|private|protected|internal)|(.+))\s*$</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -2242,7 +2308,7 @@
 			<string>string.regexp.double-quoted.php</string>
 			<key>begin</key>
 			<string>(?x)
-&quot;/ (?=(\\.|[^&quot;/])++/[imsxeADSUXu]*&quot;)</string>
+(?&lt;=re)&quot;/ (?=(\\.|[^&quot;/])++/[imsxeADSUXu]*&quot;)</string>
 			<key>end</key>
 			<string>(/)([imsxeADSUXu]*)(&quot;)</string>
 			<key>patterns</key>
@@ -2329,7 +2395,7 @@
 			<string>string.regexp.single-quoted.php</string>
 			<key>begin</key>
 			<string>(?x)
-&apos;/ (?=(\\.|[^&apos;/])++/[imsxeADSUXu]*&apos;)</string>
+(?&lt;=re)&apos;/ (?=(\\.|[^&apos;/])++/[imsxeADSUXu]*&apos;)</string>
 			<key>end</key>
 			<string>(/)([imsxeADSUXu]*)(&apos;)</string>
 			<key>patterns</key>
@@ -3314,15 +3380,9 @@
 			<array>
 				<dict>
 					<key>name</key>
-					<string>support.type.array.php</string>
-					<key>match</key>
-					<string>\barray\b</string>
-				</dict>
-				<dict>
-					<key>name</key>
 					<string>support.type.php</string>
 					<key>match</key>
-					<string>\b(?:bool|int|float|string|array|resource|mixed|arraykey|nonnull|dict|vec|keyset)\b</string>
+					<string>\b(?:bool|int|float|string|resource|mixed|arraykey|nonnull|dict|vec|keyset)\b</string>
 				</dict>
 				<dict>
 					<key>begin</key>

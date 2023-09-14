@@ -111,7 +111,7 @@
 			<key>name</key>
 			<string>comment.line.number-sign.curlrc</string>
 			<key>begin</key>
-			<string>^#</string>
+			<string>(?:^|(?&lt;=[ \t\xA0&quot;]))#</string>
 			<key>end</key>
 			<string>$</string>
 			<key>beginCaptures</key>
@@ -165,23 +165,128 @@
 					<string>meta.option.long.curlrc</string>
 					<key>match</key>
 					<string>(?x)
-(?:\G|^) \s*
+(?:\G|^|(?&lt;=[ \t])) \s*
 (
 	(--)?
-	(?:anyauth|append|basic|cert-status|compressed-ssh|compressed|create-dirs|crlf|digest
-	|disable-eprt|disable-epsv|disable|disallow-username-in-url|fail-early|fail|false-start
-	|ftp-create-dirs|ftp-pasv|ftp-pret|ftp-skip-pasv-ip|ftp-ssl-ccc|ftp-ssl-control|get
-	|globoff|haproxy-protocol|head|help|http1\.[01]|http2(?:-prior-knowledge)?
-	|ignore-content-length|include|insecure|ipv[46]|junk-session-cookies|list-only
-	|location-trusted|location|manual|metalink|negotiate|netrc-optional|netrc|next
-	|no-alpn|no-buffer|no-keepalive|no-npn|no-sessionid|ntlm-wb|ntlm|path-as-is|post30[1-3]
-	|progress-bar|proxy-anyauth|proxy-basic|proxy-digest|proxy-insecure|proxy-negotiate
-	|proxy-ntlm|proxy-ssl-allow-beast|proxy-tlsv1|proxytunnel|quote|raw|remote-header-name
-	|remote-name-all|remote-name|remote-time|request-target|retry-connrefused|sasl-ir
-	|show-error|silent|socks5-(?:basic|gssapi-nec|gssapi)|ssl-allow-beast|ssl-no-revoke
-	|ssl-reqd|sslv[23]|ssl|stderr|styled-output|suppress-connect-headers
-	|tcp-fastopen|tcp-nodelay|tftp-no-options|tlspassword|tlsv1\.[0-3]
-	|tlsv1|tr-encoding|trace-time|use-ascii|verbose|version|xattr)
+	(?&lt;optlist_no_parameter&gt;
+		anyauth
+	|	append
+	|	basic
+	|	cert-status
+	|	compressed-ssh
+	|	compressed
+	|	create-dirs
+	|	crlf
+	|	digest
+	|	disable-eprt
+	|	disable-epsv
+	|	disable
+	|	disallow-username-in-url
+	|	doh-cert-status
+	|	doh-insecure
+	|	fail-early
+	|	fail-with-body
+	|	fail
+	|	false-start
+	|	form-escape
+	|	ftp-create-dirs
+	|	ftp-pasv
+	|	ftp-pret
+	|	ftp-skip-pasv-ip
+	|	ftp-ssl-ccc
+	|	ftp-ssl-control
+	|	get
+	|	globoff
+	|	haproxy-protocol
+	|	head
+	|	http0.9
+	|	http1.0
+	|	http1.1
+	|	http2-prior-knowledge
+	|	http2
+	|	http3-only
+	|	http3
+	|	ignore-content-length
+	|	include
+	|	insecure
+	|	ipv4
+	|	ipv6
+	|	junk-session-cookies
+	|	list-only
+	|	location-trusted
+	|	location
+	|	mail-rcpt-allowfails
+	|	manual
+	|	metalink
+	|	negotiate
+	|	netrc-optional
+	|	netrc
+	|	next
+	|	no-alpn
+	|	no-buffer
+	|	no-clobber
+	|	no-keepalive
+	|	no-npn
+	|	no-progress-meter
+	|	no-sessionid
+	|	ntlm-wb
+	|	ntlm
+	|	parallel-immediate
+	|	parallel
+	|	path-as-is
+	|	post301
+	|	post302
+	|	post303
+	|	progress-bar
+	|	proxy-anyauth
+	|	proxy-basic
+	|	proxy-digest
+	|	proxy-insecure
+	|	proxy-negotiate
+	|	proxy-ntlm
+	|	proxy-ssl-allow-beast
+	|	proxy-ssl-auto-client-cert
+	|	proxy-tlsv1
+	|	proxytunnel
+	|	raw
+	|	remote-header-name
+	|	remote-name-all
+	|	remote-name
+	|	remote-time
+	|	remove-on-error
+	|	retry-all-errors
+	|	retry-connrefused
+	|	sasl-ir
+	|	show-error
+	|	silent
+	|	socks5-basic
+	|	socks5-gssapi-nec
+	|	socks5-gssapi
+	|	ssl-allow-beast
+	|	ssl-auto-client-cert
+	|	ssl-no-revoke
+	|	ssl-reqd
+	|	ssl-revoke-best-effort
+	|	sslv2
+	|	sslv3
+	|	ssl
+	|	styled-output
+	|	suppress-connect-headers
+	|	tcp-fastopen
+	|	tcp-nodelay
+	|	tftp-no-options
+	|	tlsv1.0
+	|	tlsv1.1
+	|	tlsv1.2
+	|	tlsv1.3
+	|	tlsv1
+	|	tr-encoding
+	|	trace-time
+	|	use-ascii
+	|	verbose
+	|	version
+	|	xattr
+	)
 )
 (?=\s|$)</string>
 					<key>captures</key>
@@ -202,9 +307,23 @@
 					<key>name</key>
 					<string>meta.option.long.curlrc</string>
 					<key>begin</key>
-					<string>(?x) (?:\G|^)
+					<string>(?x) (?:\G|^|(?&lt;=[ \t]))
 (?!\s*--\w[-\w]*\s*[=:]) \s*
-((--)?(?:doh-url|mail-auth|mail-from|mail-rcpt|noproxy|referer|url))
+(
+	(--)?
+	(?&lt;optlist_urls&gt;
+		dns-ipv4-addr
+	|	dns-ipv6-addr
+	|	dns-servers
+	|	doh-url
+	|	mail-auth
+	|	mail-from
+	|	mail-rcpt
+	|	noproxy
+	|	referer
+	|	url
+	)
+)
 (?:\s*(=|:)|(?=\s|$))</string>
 					<key>end</key>
 					<string>$|(?:((&quot;)((?:[^&quot;\\]|\\.)*)(?:(&quot;)|(?=$)))|([^\s]+))</string>
@@ -220,7 +339,7 @@
 							<key>name</key>
 							<string>punctuation.definition.dash.long.option.curlrc</string>
 						</dict>
-						<key>3</key>
+						<key>4</key>
 						<dict>
 							<key>patterns</key>
 							<array>
@@ -276,9 +395,15 @@
 					<key>name</key>
 					<string>meta.option.long.curlrc</string>
 					<key>begin</key>
-					<string>(?x) (?:\G|^)
+					<string>(?x) (?:\G|^|(?&lt;=[ \t]))
 (?!\s*--\w[-\w]*\s*[=:]) \s*
-((--)?(?:header|proxy-header))
+(
+	(--)?
+	(?&lt;optlist_headers&gt;
+		header
+	|	proxy-header
+	)
+)
 (?:\s*(=|:)|(?=\s|$))</string>
 					<key>end</key>
 					<string>$|(?:((&quot;)((?:[^&quot;\\]|\\.)*)(?:(&quot;)|(?=$)))|([^\s]+))</string>
@@ -294,7 +419,7 @@
 							<key>name</key>
 							<string>punctuation.definition.dash.long.option.curlrc</string>
 						</dict>
-						<key>3</key>
+						<key>4</key>
 						<dict>
 							<key>patterns</key>
 							<array>
@@ -356,9 +481,17 @@
 					<key>name</key>
 					<string>meta.option.long.curlrc</string>
 					<key>begin</key>
-					<string>(?x) (?:\G|^)
+					<string>(?x) (?:\G|^|(?&lt;=[ \t]))
 (?!\s*--\w[-\w]*\s*[=:]) \s*
-((--)?(?:cookie|form-string|form|telnet-option))
+(
+	(--)?
+	(?&lt;optlist_form_data&gt;
+		cookie
+	|	form-string
+	|	form
+	|	telnet-option
+	)
+)
 (?:\s*(=|:)|(?=\s|$))</string>
 					<key>end</key>
 					<string>$|(?:((&quot;)((?:[^&quot;\\]|\\.)*)(?:(&quot;)|(?=$)))|([^\s]+))</string>
@@ -374,7 +507,7 @@
 							<key>name</key>
 							<string>punctuation.definition.dash.long.option.curlrc</string>
 						</dict>
-						<key>3</key>
+						<key>4</key>
 						<dict>
 							<key>patterns</key>
 							<array>
@@ -428,7 +561,16 @@
 					<key>name</key>
 					<string>meta.option.long.curlrc</string>
 					<key>begin</key>
-					<string>(?:\G|^)(?!\s*--\w[-\w]*\s*[=:])\s*((--)?(?:proto-default|proto-redir|proto))(?:\s*(=|:)|(?=\s|$))</string>
+					<string>(?x) (?:\G|^|(?&lt;=[ \t]))
+(?!\s*--\w[-\w]*\s*[=:]) \s*
+(
+	(--)?
+	(?&lt;optlist_protocols&gt;
+		proto-default
+	|	proto-redir
+	|	proto
+	)
+) (?:\s*(=|:)|(?=\s|$))</string>
 					<key>end</key>
 					<string>$|(?:((&quot;)((?:[^&quot;\\]|\\.)*)(?:(&quot;)|$))|([^\s]+))</string>
 					<key>beginCaptures</key>
@@ -443,7 +585,7 @@
 							<key>name</key>
 							<string>punctuation.definition.dash.long.option.curlrc</string>
 						</dict>
-						<key>3</key>
+						<key>4</key>
 						<dict>
 							<key>patterns</key>
 							<array>
@@ -497,7 +639,14 @@
 					<key>name</key>
 					<string>meta.option.long.curlrc</string>
 					<key>begin</key>
-					<string>(?:\G|^)(?!\s*--\w[-\w]*\s*[=:])\s*((--)?ftp-port)(?:\s*(=|:)|(?=\s|$))</string>
+					<string>(?x) (?:\G|^|(?&lt;=[ \t]))
+(?!\s*--\w[-\w]*\s*[=:]) \s*
+(
+	(--)?
+	(?&lt;optlist_port&gt;
+		ftp-port
+	)
+) (?:\s*(=|:)|(?=\s|$))</string>
 					<key>end</key>
 					<string>$|(?:((&quot;)((?:[^&quot;\\]|\\.)*)(?:(&quot;)|$))|([^\s]+))</string>
 					<key>beginCaptures</key>
@@ -512,7 +661,7 @@
 							<key>name</key>
 							<string>punctuation.definition.dash.long.option.curlrc</string>
 						</dict>
-						<key>3</key>
+						<key>4</key>
 						<dict>
 							<key>patterns</key>
 							<array>
@@ -563,7 +712,14 @@
 					<key>name</key>
 					<string>meta.option.long.curlrc</string>
 					<key>begin</key>
-					<string>(?:\G|^)(?!\s*--\w[-\w]*\s*[=:])\s*((--)?hostpubmd5)(?:\s*(=|:)|(?=\s|$))</string>
+					<string>(?x) (?:\G|^|(?&lt;=[ \t]))
+(?!\s*--\w[-\w]*\s*[=:]) \s*
+(
+	(--)?
+	(?&lt;optlist_md5&gt;
+		hostpubmd5
+	)
+) (?:\s*(=|:)|(?=\s|$))</string>
 					<key>end</key>
 					<string>$|(?:((&quot;)((?:[^&quot;\\]|\\.)*)(?:(&quot;)|$))|([^\s]+))</string>
 					<key>beginCaptures</key>
@@ -578,7 +734,7 @@
 							<key>name</key>
 							<string>punctuation.definition.dash.long.option.curlrc</string>
 						</dict>
-						<key>3</key>
+						<key>4</key>
 						<dict>
 							<key>patterns</key>
 							<array>
@@ -629,7 +785,15 @@
 					<key>name</key>
 					<string>meta.option.long.curlrc</string>
 					<key>begin</key>
-					<string>(?:\G|^)(?!\s*--\w[-\w]*\s*[=:])\s*((--)?(?:local-port|range))(?:\s*(=|:)|(?=\s|$))</string>
+					<string>(?x) (?:\G|^|(?&lt;=[ \t]))
+(?!\s*--\w[-\w]*\s*[=:]) \s*
+(
+	(--)?
+	(?&lt;optlist_range&gt;
+		local-port
+	|	range
+	)
+) (?:\s*(=|:)|(?=\s|$))</string>
 					<key>end</key>
 					<string>$|(?:((&quot;)((?:[^&quot;\\]|\\.)*)(?:(&quot;)|$))|([^\s]+))</string>
 					<key>beginCaptures</key>
@@ -644,7 +808,7 @@
 							<key>name</key>
 							<string>punctuation.definition.dash.long.option.curlrc</string>
 						</dict>
-						<key>3</key>
+						<key>4</key>
 						<dict>
 							<key>patterns</key>
 							<array>
@@ -710,12 +874,26 @@
 					<key>name</key>
 					<string>meta.option.long.curlrc</string>
 					<key>begin</key>
-					<string>(?x) (?:\G|^)
+					<string>(?x) (?:\G|^|(?&lt;=[ \t]))
 (?!\s*--\w[-\w]*\s*[=:](?=\s)) \s*
 (
 	(--)?
-	(?:cert|connect-to|preproxy|proxy-cert|proxy-user|proxy1\.0
-	|proxy|resolve|socks4a?|socks5-hostname|socks5|user)
+	(?&lt;optlist_kv_colon&gt;
+		aws-sigv4
+	|	cert
+	|	connect-to
+	|	preproxy
+	|	proxy-cert
+	|	proxy-user
+	|	proxy1.0
+	|	proxy
+	|	resolve
+	|	socks4a
+	|	socks4
+	|	socks5-hostname
+	|	socks5
+	|	user
+	)
 )
 (?:\s*(=|:)|(?=\s|$))</string>
 					<key>end</key>
@@ -732,7 +910,7 @@
 							<key>name</key>
 							<string>punctuation.definition.dash.long.option.curlrc</string>
 						</dict>
-						<key>3</key>
+						<key>4</key>
 						<dict>
 							<key>patterns</key>
 							<array>
@@ -794,18 +972,90 @@
 					<key>name</key>
 					<string>meta.option.long.curlrc</string>
 					<key>begin</key>
-					<string>(?x) (?:\G|^)
+					<string>(?x) (?:\G|^|(?&lt;=[ \t]))
 (?!\s*--\w[-\w]*\s*[=:](?=\s)) \s*
 (
 	(--)?
-	(?:abstract-unix-socket|cacert|capath|cert-type|ciphers|config|cookie-jar|crlfile|data-ascii
-	|data-binary|data-raw|data-urlencode|data|delegation|dns-interface|dns-ipv[46]-addr|dns-servers
-	|dump-header|egd-file|engine|ftp-(?:account|alternative-to-user|ssl-ccc-mode|method)|interface
-	|key-type|key|krb|libcurl|login-options|netrc-file|oauth2-bearer|output|pass|proxy-(?:cacert
-	|capath|cert-type|crlfile|key-type|key|pass|service-name|tlsauthtype|tlspassword|tlsuser)
-	|pinnedpubkey|proxy-ciphers|proxy-pinnedpubkey|pubkey|random-file|proxy-tls13-ciphers|request
-	|service-name|socks5-gssapi-service|tls13-ciphers|tlsauthtype|tls-max|tlsuser|trace-ascii
-	|trace|unix-socket|upload-file|user-agent|write-out)
+	(?&lt;optlist_string&gt;
+		abstract-unix-socket
+	|	alt-svc
+	|	cacert
+	|	capath
+	|	cert-type
+	|	ciphers
+	|	config
+	|	cookie-jar
+	|	crlfile
+	|	curves
+	|	data-ascii
+	|	data-binary
+	|	data-raw
+	|	data-urlencode
+	|	data
+	|	delegation
+	|	dns-interface
+	|	dump-header
+	|	egd-file
+	|	engine
+	|	etag-compare
+	|	etag-save
+	|	ftp-account
+	|	ftp-alternative-to-user
+	|	ftp-method
+	|	ftp-ssl-ccc-mode
+	|	happy-eyeballs-timeout-ms
+	|	help
+	|	hostpubsha256
+	|	hsts
+	|	interface
+	|	json
+	|	key-type
+	|	key
+	|	krb
+	|	libcurl
+	|	login-options
+	|	netrc-file
+	|	oauth2-bearer
+	|	output-dir
+	|	output
+	|	pass
+	|	pinnedpubkey
+	|	proxy-cacert
+	|	proxy-capath
+	|	proxy-cert-type
+	|	proxy-ciphers
+	|	proxy-crlfile
+	|	proxy-key-type
+	|	proxy-key
+	|	proxy-pass
+	|	proxy-pinnedpubkey
+	|	proxy-service-name
+	|	proxy-tls13-ciphers
+	|	proxy-tlsauthtype
+	|	proxy-tlspassword
+	|	proxy-tlsuser
+	|	pubkey
+	|	quote
+	|	random-file
+	|	request-target
+	|	request
+	|	sasl-authzid
+	|	service-name
+	|	socks5-gssapi-service
+	|	stderr
+	|	tls-max
+	|	tls13-ciphers
+	|	tlsauthtype
+	|	tlspassword
+	|	tlsuser
+	|	trace-ascii
+	|	trace
+	|	unix-socket
+	|	upload-file
+	|	url-query
+	|	user-agent
+	|	write-out
+	)
 )
 (?:\s*(=|:)|(?=\s|$))</string>
 					<key>end</key>
@@ -822,7 +1072,7 @@
 							<key>name</key>
 							<string>punctuation.definition.dash.long.option.curlrc</string>
 						</dict>
-						<key>3</key>
+						<key>4</key>
 						<dict>
 							<key>patterns</key>
 							<array>
@@ -896,14 +1146,31 @@
 					<key>name</key>
 					<string>meta.option.long.curlrc</string>
 					<key>begin</key>
-					<string>(?x) (?:\G|^)
+					<string>(?x) (?:\G|^|(?&lt;=[ \t]))
 (?!\s*--\w[-\w]*\s*[=:])
 \s*
 (
 	(--)?
-	(?:connect-timeout|continue-at|expect100-timeout|happy-eyeballs-timeout-ms|keepalive-time
-	|limit-rate|max-filesize|max-redirs|max-time|retry-delay|retry-max-time|retry|speed-limit
-	|speed-time|tftp-blksize|time-cond)
+	(?&lt;optlist_numeric&gt;
+		connect-timeout
+	|	continue-at
+	|	create-file-mode
+	|	expect100-timeout
+	|	keepalive-time
+	|	limit-rate
+	|	max-filesize
+	|	max-redirs
+	|	max-time
+	|	parallel-max
+	|	rate
+	|	retry-delay
+	|	retry-max-time
+	|	retry
+	|	speed-limit
+	|	speed-time
+	|	tftp-blksize
+	|	time-cond
+	)
 ) (?:\s*(=|:)|(?=\s|$))</string>
 					<key>end</key>
 					<string>$|(?:((&quot;)((?:[^&quot;\\]|\\.)*)(?:(&quot;)|$))|([^\s]+))</string>
@@ -919,7 +1186,7 @@
 							<key>name</key>
 							<string>punctuation.definition.dash.long.option.curlrc</string>
 						</dict>
-						<key>3</key>
+						<key>4</key>
 						<dict>
 							<key>patterns</key>
 							<array>
@@ -1227,70 +1494,87 @@
 					<key>name</key>
 					<string>meta.option.short.curlrc</string>
 					<key>begin</key>
-					<string>^\s*((-)[:#012346BGIJLMNOQRSVafghijklnpqsv]*[ACDEFHKPTUXYbcdemortuwxyz])</string>
+					<string>^\s*((-)[:#012346BGIJLMNOQRSVafghijklnpqsv]*[ACDEFHKPQTUXYbcdehmortuwxyz])</string>
 					<key>end</key>
 					<string>(?x)
 $
 |
 
 # Numbers
-(?&lt;=[CYmyz])\G\s*
+(?&lt;=(?#optlist_numeric)[CYmyz])
+\G (?:(?! )\s)*
 ([-+]?[0-9.]+)
 
 |
 
 # Byte range
-(?&lt;=r)\G\s*
+(?&lt;=(?#optlist_range)r)
+\G (?:(?! )\s)*
 ([-0-9,]+)
 
 |
 
 # “key=value” pairs
-(?&lt;=[Fbt])\G\s*
+(?&lt;=(?#optlist_form_data)[Fbt])
+\G (?:(?! )\s)*
 (?:
 	((&quot;)((?:[^&quot;\\]|\\.)*)(?:(&quot;)|$))
 	|
-	([^\s]+)
+	([\S ]+)
 )
 
 |
 
 # “key:value” pairs
-(?&lt;=[EUux])\G\s*
-([^\\:\s/]*://)?
+(?&lt;=(?#optlist_kv_colon)[EUux])
+\G (?:(?! )\s)*
+((?:[^\\:\s/]| )*://)?
 (
-	(?:[^\\:\s]|\\.)+
-	(?::(?:[^\\:\s]|\\.)+)*
+	(?:[^\\:\s]|\\.| )+
+	(?::(?:[^\\:\s]|\\.| )+)*
 	:?
 )
 
 |
 
 # Headers
-(?&lt;=H)\G\s*
+(?&lt;=(?#optlist_headers)H)
+\G (?:(?! )\s)*
 (?:
-	((&quot;)((?:[^&quot;\\]|\\.)*)(?:(&quot;)|$))
+	((&quot;)((?:[^&quot;\\]|\\.| )*)(?:(&quot;)|$))
 	|
-	([^\s]+)
+	([\S ]+)
 )
 
 |
 
 # URLs
-(?&lt;=e)\G\s*
+(?&lt;=(?#optlist_urls)e)
+\G (?:(?! )\s)*
 (?:
-	((&quot;)((?:[^&quot;\\]|\\.)*)(?:(&quot;)|$))
+	((&quot;)((?:[^&quot;\\]|\\.| )*)(?:(&quot;)|$))
 	|
-	([^\s]+)
+	([\S ]+)
+)
+
+|
+
+# Port address
+(?&lt;=(?#optlist_port)P)
+\G (?:(?! )\s)*
+(?:
+	((&quot;)((?:[^&quot;\\]|\\.| )*)(?:(&quot;)|$))
+	|
+	([\S ]+)
 )
 
 |
 
 # Anything else
 (?:
-	((&quot;)((?:[^&quot;\\]|\\.)*)(?:(&quot;)|$))
+	((&quot;)((?:[^&quot;\\]|\\.| )*)(?:(&quot;)|$))
 	|
-	([^\s]+)
+	([\S ]+)
 )</string>
 					<key>beginCaptures</key>
 					<dict>
@@ -1464,6 +1748,8 @@ $
 						</dict>
 						<key>22</key>
 						<dict>
+							<key>name</key>
+							<string>constant.other.port-address.curlrc</string>
 							<key>patterns</key>
 							<array>
 								<dict>
@@ -1480,6 +1766,36 @@ $
 						<key>24</key>
 						<dict>
 							<key>name</key>
+							<string>constant.other.port-address.curlrc</string>
+						</dict>
+						<key>25</key>
+						<dict>
+							<key>name</key>
+							<string>string.quoted.double.curlrc</string>
+						</dict>
+						<key>26</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.curlrc</string>
+						</dict>
+						<key>27</key>
+						<dict>
+							<key>patterns</key>
+							<array>
+								<dict>
+									<key>include</key>
+									<string>etc#esc</string>
+								</dict>
+							</array>
+						</dict>
+						<key>28</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.curlrc</string>
+						</dict>
+						<key>29</key>
+						<dict>
+							<key>name</key>
 							<string>string.unquoted.curlrc</string>
 						</dict>
 					</dict>
@@ -1488,7 +1804,7 @@ $
 					<key>name</key>
 					<string>meta.option.short.curlrc</string>
 					<key>match</key>
-					<string>^\s*((-)[:#012346BGIJLMNOQRSVafghijklnpqsv]+)</string>
+					<string>^\s*((-)(?#optlist_no_parameter)[#012346:BGIJLMNORSVZafgijklnpqsv]+)</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>

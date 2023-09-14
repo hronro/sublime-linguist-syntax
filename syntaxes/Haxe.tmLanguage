@@ -2240,6 +2240,18 @@
 				</dict>
 				<dict>
 					<key>name</key>
+					<string>keyword.operator.nullcoalescing.hx</string>
+					<key>match</key>
+					<string>\?\?</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.safenavigation.hx</string>
+					<key>match</key>
+					<string>\?\.</string>
+				</dict>
+				<dict>
+					<key>name</key>
 					<string>keyword.other.hx</string>
 					<key>match</key>
 					<string>\bis\b(?!\()</string>

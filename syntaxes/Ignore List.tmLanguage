@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>.gitignore</string>
+	<string>Ignore List</string>
 	<key>scopeName</key>
 	<string>source.gitignore</string>
 	<key>patterns</key>

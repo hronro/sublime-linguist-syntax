@@ -139,6 +139,7 @@
 	<array>
 		<string>desktop</string>
 		<string>desktop.in</string>
+		<string>service</string>
 	</array>
 </dict>
 </plist>

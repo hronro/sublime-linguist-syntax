@@ -398,7 +398,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?i)^\s*(hide|show)\s+(([\w\d_\.]+|&quot;[^&quot;]+&quot;)|&lt;&lt;.+?&gt;&gt;|Stereotypes|class|interface|enum)(\s+(empty fields|empty methods|fields|attributes|methods|members|circle))?\s*$</string>
+					<string>(?i)^\s*(hide|show|remove)\s+(([\w\d_\.\$]+|&quot;[^&quot;]+&quot;)|&lt;&lt;.+?&gt;&gt;|Stereotypes|class|interface|enum|@unlinked)(\s+(empty fields|empty attributes|empty methods|empty description|fields|attributes|methods|members|circle))?\s*$</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -895,7 +895,7 @@
 					<key>name</key>
 					<string>keyword.other.linebegin.source.wsd</string>
 					<key>match</key>
-					<string>(?i)^\s*(usecase|actor|object|participant|boundary|control|entity|database|create|component|interface|package|node|folder|frame|cloud|annotation|enum|abstract\s+class|abstract|class|state|autonumber(\s+stop|\s+resume|\s+inc)?|activate|deactivate|return|destroy|newpage|alt|else|opt|loop|par|break|critical|group|box|rectangle|namespace|partition|agent|artifact|card|circle|collections|file|hexagon|label|person|queue|stack|storage|mainframe|map|repeat|backward|diamond)\b</string>
+					<string>(?i)^\s*(usecase|actor|object|participant|boundary|control|entity|database|create|component|interface|package|node|folder|frame|cloud|annotation|enum|abstract\s+class|abstract|class|state|autonumber(\s+stop|\s+resume|\s+inc)?|activate|deactivate|return|destroy|newpage|alt|else|opt|loop|par|break|critical|group|box|rectangle|namespace|partition|agent|artifact|card|circle|collections|file|hexagon|label|person|queue|stack|storage|mainframe|map|repeat|backward|diamond|goto|binary|clock|concise|robust|compact\s+concise|compact\s+robust|json|protocol|struct)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>

@@ -34,6 +34,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#bracket</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#number</string>
 		</dict>
 		<dict>
@@ -59,6 +63,18 @@
 	</array>
 	<key>repository</key>
 	<dict>
+		<key>bracket</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>meta.bracket.j</string>
+					<key>match</key>
+					<string>(\(|\))</string>
+				</dict>
+			</array>
+		</dict>
 		<key>comment</key>
 		<dict>
 			<key>patterns</key>
@@ -125,6 +141,10 @@
 						<dict>
 							<key>include</key>
 							<string>#explicit_operand</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#bracket</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -236,6 +256,10 @@
 						<dict>
 							<key>include</key>
 							<string>#explicit_arg</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#bracket</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -382,6 +406,10 @@
 						<dict>
 							<key>include</key>
 							<string>#explicit_operand</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#bracket</string>
 						</dict>
 						<dict>
 							<key>include</key>
@@ -537,7 +565,7 @@
 					<key>name</key>
 					<string>keyword.operator.verb.j</string>
 					<key>match</key>
-					<string>\b((p\.\.)|([AcCeEiIjLopruv]\.)|([ipqsux]:))(?![.:])</string>
+					<string>\b((p\.\.)|([AcCeEiIjLoprTuv]\.)|([ipqsux]:))(?![.:])</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -567,13 +595,13 @@
 					<key>name</key>
 					<string>keyword.operator.adverb.j</string>
 					<key>match</key>
-					<string>(([\/\\]\.)|([~\/\\}]))(?![.:])</string>
+					<string>(([\/\\]\.)|(\/\.\.)|([~\/\\}]))(?![.:])</string>
 				</dict>
 				<dict>
 					<key>name</key>
 					<string>keyword.operator.conjunction.j</string>
 					<key>match</key>
-					<string>\b((H\.)|([LS]:))(?![.:])</string>
+					<string>\b(([Ht]\.)|([LS]:))(?![.:])</string>
 				</dict>
 				<dict>
 					<key>name</key>

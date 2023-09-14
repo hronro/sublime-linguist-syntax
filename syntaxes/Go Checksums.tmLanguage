@@ -65,6 +65,7 @@
 	<key>fileTypes</key>
 	<array>
 		<string>go.sum</string>
+		<string>go.work.sum</string>
 	</array>
 </dict>
 </plist>

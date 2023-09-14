@@ -255,6 +255,8 @@
 		<dict>
 			<key>name</key>
 			<string>entity.name.function.jsonnet</string>
+			<key>match</key>
+			<string>\b[a-zA-Z_][a-z0-9A-Z_]*\s*(\([^)]*\))?\s*\+?::?:?</string>
 		</dict>
 		<dict>
 			<key>name</key>

@@ -2096,6 +2096,8 @@
 					<key>patterns</key>
 					<array>
 						<dict>
+							<key>match</key>
+							<string>(?x) ( [\p{Nd}\pL\pM&apos;\-_]+ ) \b (:)? (\w+ \b )? (\S+  )?</string>
 							<key>captures</key>
 							<dict>
 								<key>1</key>
@@ -2147,6 +2149,8 @@
 				<dict>
 					<key>name</key>
 					<string>entity.name.function.regexp.named.raku</string>
+					<key>match</key>
+					<string>[\p{Nd}\pL\pM&apos;\-_]+</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -3515,6 +3519,35 @@
 				<dict>
 					<key>name</key>
 					<string>variable.other.identifier.interpolated.raku</string>
+					<key>match</key>
+					<string>(?x)
+(?&lt;!\\)
+(\$|@|%|&amp;)
+(?!\$)
+(\.|\*|:|!|\^|~|=|\?)?  # Twigils
+([\pL\pM_])             # Must start with Alpha or underscore
+(
+   [\p{Nd}\pL\pM_]  # have alphanum/underscore, or a &apos; or -
+|                           # followed by an Alpha or underscore
+   [\-&apos;] [\pL\pM_]
+)*
+( \[ .* \] )?             # postcircumfix [ ]
+## methods
+(?:
+  (?:
+    ( \. )
+    (
+       [\pL\pM]
+        (?:
+          [\p{Nd}\pL\pM_]  # have alphanum/underscore, or a &apos; or -
+        |                          # followed by an Alpha or underscore
+          [\-&apos;] [\pL\pM_]
+        )*
+
+    )
+  )?
+  ( \( .*?  \) )
+)?</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -3596,6 +3629,10 @@
 						</dict>
 						<key>8</key>
 						<dict>
+							<key>begin</key>
+							<string>\(</string>
+							<key>end</key>
+							<string>\)</string>
 							<key>patterns</key>
 							<array>
 								<dict>
@@ -4531,6 +4568,18 @@
 				<dict>
 					<key>name</key>
 					<string>meta.variable.container.raku</string>
+					<key>match</key>
+					<string>(?x)
+(\$|@|%|&amp;)
+(\.|\*|:|!|\^|~|=|\?)?
+(
+    (?:[\pL\pM_])           # Must start with Alpha or underscore
+    (?:
+       [\p{Nd}\pL\pM_]  # have alphanum/underscore, or a &apos; or -
+    |                           # followed by an Alpha or underscore
+       [\-&apos;] [\pL\pM_]
+    )*
+)</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>

@@ -162,7 +162,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(assert|del|exec|print)\b</string>
+			<string>\b(assert|del|exec|print|match|case|async|await)\b</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -194,13 +194,13 @@
 			<key>name</key>
 			<string>keyword.operator.arithmetic.python.renpy</string>
 			<key>match</key>
-			<string>\+|\-|\*|\*\*|/|//|%|&lt;&lt;|&gt;&gt;|&amp;|\||\^|~</string>
+			<string>\+|\-|\*|\*\*|/|//|%|@|&lt;&lt;|&gt;&gt;|&amp;|\||\^|~</string>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>keyword.operator.assignment.python.renpy</string>
 			<key>match</key>
-			<string>\=</string>
+			<string>\=|\:\=</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -737,19 +737,19 @@
 			<key>name</key>
 			<string>keyword.python.renpy</string>
 			<key>match</key>
-			<string>\b(\$|add|always|and|animation|as|assert|at|attribute|auto|bar|behind|block|break|button|call|camera|choice|circles|class|clear|clockwise|contains|continue|counterclockwise|def|default|define|del|drag|draggroup|elif|else|event|except|exec|expression|finally|fixed|for|frame|from|function|global|grid|group|has|hbox|hide|hotbar|hotspot|if|image|imagebutton|imagemap|import|in|index|init|input|is|jump|key|knot|label|lambda|layeredimage|menu|monologue|mousearea|music|new|nointeract|not|null|nvl|offset|old|on|onlayer|or|parallel|pass|pause|play|print|python|queue|raise|repeat|return|rpy|scene|screen|show|showif|side|sound|stop|strings|style|sustain|tag|take|testcase|text|textbutton|time|timer|transclude|transform|translate|try|use|vbar|vbox|viewport|voice|vpgrid|while|window|with|yield|zorder)\b</string>
+			<string>\b(\$|add|always|and|animation|as|assert|at|attribute|auto|bar|behind|block|break|button|call|camera|choice|circles|class|clear|clockwise|contains|continue|counterclockwise|def|default|define|del|dismiss|drag|draggroup|elif|else|event|except|exec|expression|finally|fixed|for|frame|from|function|global|grid|group|has|hbox|hide|hotbar|hotspot|if|image|imagebutton|imagemap|import|in|index|init|input|is|jump|key|knot|label|lambda|layeredimage|menu|monologue|mousearea|music|nearrect|new|nointeract|not|null|nvl|offset|old|on|onlayer|or|parallel|pass|pause|play|print|python|queue|raise|repeat|return|rpy|scene|screen|show|showif|side|sound|stop|strings|style|sustain|tag|take|testcase|text|textbutton|time|timer|transclude|transform|translate|try|use|vbar|vbox|viewport|voice|vpgrid|while|window|with|yield|zorder)\b</string>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>entity.other.attribute-name.python.renpy</string>
 			<key>match</key>
-			<string>\b((?:action|activate_sound|activated|adjustment|allow|allow_underfull|alpha|alternate|alternate_keysym|arguments|arrowkeys|at|auto|cache|caption|changed|child_size|clicked|cols|copypaste|default|default_focus|drag_handle|drag_joined|drag_name|drag_offscreen|drag_raise|draggable|dragged|drop_allowable|droppable|dropped|edgescroll|exclude|focus|focus_mask|ground|height|hover|hovered|icon_tooltip|id|idle|image_style|insensitive|keysym|layer|length|mask|min_overlap|modal|mouse_drop|mousewheel|pagekeys|pixel_width|predict|prefix|properties|range|repeat|rows|scope|scrollbars|selected|selected_hover|selected_idle|selected_insensitive|sensitive|slow|slow_done|spacing|style|style_group|style_prefix|style_suffix|substitute|suffix|text_style|text_tooltip|tooltip|transpose|unhovered|value|variant|width|xadjustment|xinitial|yadjustment|yinitial|zorder))\b</string>
+			<string>\b((?:action|activate_sound|activated|adjustment|allow|allow_underfull|alpha|alt|alternate|alternate_keysym|arguments|arrowkeys|at|auto|cache|caption|capture|caret_blink|changed|child_size|clicked|cols|copypaste|default|default_focus|drag_handle|drag_joined|drag_name|drag_offscreen|drag_raise|draggable|dragged|dragging|drop_allowable|droppable|dropped|edgescroll|exclude|focus|focus_mask|ground|height|hover|hovered|icon_tooltip|id|idle|image_style|insensitive|keysym|layer|length|mask|min_overlap|modal|mouse_drop|mousewheel|pagekeys|pixel_width|predict|prefer_top|prefix|properties|range|rect|released|repeat|roll_forward|rows|scope|scrollbars|selected|selected_hover|selected_idle|selected_insensitive|sensitive|slow|slow_done|spacing|style|style_group|style_prefix|style_suffix|substitute|suffix|text_style|text_tooltip|tooltip|transpose|unhovered|value|variant|width|xadjustment|xinitial|yadjustment|yinitial|zorder))\b</string>
 		</dict>
 		<dict>
 			<key>name</key>
 			<string>entity.other.attribute-name.python.renpy</string>
 			<key>match</key>
-			<string>\b((?:|activate_|hover_|idle_|insensitive_|selected_|selected_activate_|selected_hover_|selected_idle_|selected_insensitive_)(?:additive|adjust_spacing|align|alignaround|alpha|alt|anchor|angle|antialias|area|around|background|bar_invert|bar_resizing|bar_vertical|base_bar|black_color|blend|blur|bold|bottom_bar|bottom_gutter|bottom_margin|bottom_padding|box_layout|box_reverse|box_wrap|box_wrap_spacing|caret|child|clipping|color|corner1|corner2|crop|crop_relative|debug|delay|drop_shadow|drop_shadow_color|events|first_indent|first_spacing|fit|fit_first|focus_mask|font|foreground|gl_anisostropic|gl_blend_func|gl_color_mask|gl_depth|gl_mipmap|gl_pixel_perfect|gl_texture_wrap|hinting|hyperlink_functions|italic|justify|kerning|key_events|keyboard_focus|language|layout|left_bar|left_gutter|left_margin|left_padding|line_leading|line_spacing|margin|matrixanchor|matrixcolor|matrixtransform|maximum|maxsize|mesh|mesh_pad|min_width|minimum|minwidth|mipmap|modal|mouse|nearest|newline_indent|offset|order_reverse|outline_scaling|outlines|padding|perspective|pos|radius|rest_indent|right_bar|right_gutter|right_margin|right_padding|rotate|rotate_pad|ruby_style|shader|size|size_group|slow_abortable|slow_cps|slow_cps_multiplier|sound|spacing|strikethrough|subpixel|text_align|text_y_fudge|thumb|thumb_offset|thumb_shadow|top_bar|top_gutter|top_margin|top_padding|transform_anchor|underline|unscrollable|vertical|xalign|xanchor|xanchoraround|xaround|xcenter|xfill|xfit|xmargin|xmaximum|xminimum|xoffset|xpadding|xpan|xpos|xsize|xspacing|xtile|xysize|xzoom|yalign|yanchor|yanchoraround|yaround|ycenter|yfill|yfit|ymargin|ymaximum|yminimum|yoffset|ypadding|ypan|ypos|ysize|yspacing|ytile|yzoom|zoom|zpos|zzoom))\b</string>
+			<string>\b((?:|activate_|hover_|idle_|insensitive_|selected_|selected_activate_|selected_hover_|selected_idle_|selected_insensitive_)(?:additive|adjust_spacing|align|alignaround|alpha|alt|anchor|angle|antialias|area|around|background|bar_invert|bar_resizing|bar_vertical|base_bar|black_color|blend|blur|bold|bottom_bar|bottom_gutter|bottom_margin|bottom_padding|box_layout|box_reverse|box_wrap|box_wrap_spacing|caret|child|clipping|color|corner1|corner2|crop|crop_relative|debug|delay|drop_shadow|drop_shadow_color|events|first_indent|first_spacing|fit|fit_first|focus_mask|font|foreground|gl_anisotropic|gl_blend_func|gl_color_mask|gl_depth|gl_drawable_resolution|gl_mipmap|gl_pixel_perfect|gl_texture_scaling|gl_texture_wrap|hinting|hyperlink_functions|italic|justify|kerning|key_events|keyboard_focus|language|layout|left_bar|left_gutter|left_margin|left_padding|line_leading|line_spacing|margin|matrixanchor|matrixcolor|matrixtransform|maximum|maxsize|mesh|mesh_pad|min_width|minimum|minwidth|mipmap|modal|mouse|nearest|newline_indent|offset|order_reverse|outline_scaling|outlines|padding|perspective|pos|radius|rest_indent|right_bar|right_gutter|right_margin|right_padding|rotate|rotate_pad|ruby_style|shader|size|size_group|slow_abortable|slow_cps|slow_cps_multiplier|sound|spacing|strikethrough|subpixel|text_align|text_y_fudge|thumb|thumb_offset|thumb_shadow|top_bar|top_gutter|top_margin|top_padding|transform_anchor|underline|unscrollable|vertical|xalign|xanchor|xanchoraround|xaround|xcenter|xfill|xfit|xmargin|xmaximum|xminimum|xoffset|xpadding|xpan|xpos|xsize|xspacing|xtile|xycenter|xysize|xzoom|yalign|yanchor|yanchoraround|yaround|ycenter|yfill|yfit|ymargin|ymaximum|yminimum|yoffset|ypadding|ypan|ypos|ysize|yspacing|ytile|yzoom|zoom|zpos|zzoom))\b</string>
 		</dict>
 		<dict>
 			<key>name</key>
@@ -1356,7 +1356,7 @@
 					<key>name</key>
 					<string>comment.block.python.renpy</string>
 					<key>begin</key>
-					<string>^\s*(?=[uU]?[rR]?&quot;&quot;&quot;)</string>
+					<string>^\s*(?=[fuUb]?[rR]?&quot;&quot;&quot;)</string>
 					<key>end</key>
 					<string>(?&lt;=&quot;&quot;&quot;)</string>
 					<key>patterns</key>
@@ -1371,7 +1371,7 @@
 					<key>name</key>
 					<string>comment.block.python.renpy</string>
 					<key>begin</key>
-					<string>^\s*(?=[uU]?[rR]?&apos;&apos;&apos;)</string>
+					<string>^\s*(?=[fuUb]?[rR]?&apos;&apos;&apos;)</string>
 					<key>end</key>
 					<string>(?&lt;=&apos;&apos;&apos;)</string>
 					<key>patterns</key>
@@ -1635,7 +1635,7 @@
 			<key>name</key>
 			<string>invalid.illegal.name.python.renpy</string>
 			<key>match</key>
-			<string>\b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|global|if|import|in|is|lambda|nonlocal|not|or|print|raise|try|while|with|yield)\b</string>
+			<string>\b(and|as|assert|async|await|break|class|continue|def|del|elif|else|except|exec|finally|for|global|if|import|in|is|lambda|nonlocal|not|or|print|raise|try|while|with|yield)\b</string>
 		</dict>
 		<key>keyword_arguments</key>
 		<dict>
@@ -1702,17 +1702,7 @@
 			<key>name</key>
 			<string>support.function.magic.python.renpy</string>
 			<key>match</key>
-			<string>(?x)\b(__(?:
-						abs|add|and|cmp|coerce|complex|contains|del|delattr|
-						delete|delitem|delslice|div|divmod|enter|eq|exit|float|
-						floordiv|ge|get|getattr|getattribute|getitem|getslice|gt|
-						hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|
-						int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|
-						long|lshift|lt|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|
-						radd|rand|rdiv|rdivmod|repr|rfloordiv|rlshift|rmod|rmul|ror|
-						rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|
-						setslice|str|sub|truediv|unicode|xor
-					)__)\b</string>
+			<string>(?x)\b(__(?:abs|add|and|cmp|coerce|complex|contains|del|delattr|delete|delitem|delslice|div|divmod|enter|eq|exit|float|floordiv|ge|get|getattr|getattribute|getitem|getslice|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|long|lshift|lt|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|str|sub|truediv|unicode|xor)__)\b</string>
 		</dict>
 		<key>magic_variable_names</key>
 		<dict>
@@ -1739,7 +1729,7 @@
 					<key>name</key>
 					<string>string.quoted.double.block.unicode-raw-regex.python.renpy</string>
 					<key>begin</key>
-					<string>([uU]r)(&quot;&quot;&quot;)</string>
+					<string>([fuUb]r)(&quot;&quot;&quot;)</string>
 					<key>end</key>
 					<string>((?&lt;=&quot;&quot;&quot;)(&quot;)&quot;&quot;|&quot;&quot;&quot;)</string>
 					<key>patterns</key>
@@ -1796,7 +1786,7 @@
 					<key>name</key>
 					<string>string.quoted.double.block.unicode-raw.python.renpy</string>
 					<key>begin</key>
-					<string>([uU]R)(&quot;&quot;&quot;)</string>
+					<string>([fuUb]R)(&quot;&quot;&quot;)</string>
 					<key>end</key>
 					<string>((?&lt;=&quot;&quot;&quot;)(&quot;)&quot;&quot;|&quot;&quot;&quot;)</string>
 					<key>patterns</key>
@@ -1951,7 +1941,7 @@
 					<key>name</key>
 					<string>string.quoted.double.block.unicode.python.renpy</string>
 					<key>begin</key>
-					<string>([uU])(&quot;&quot;&quot;)</string>
+					<string>([fuUb])(&quot;&quot;&quot;)</string>
 					<key>end</key>
 					<string>((?&lt;=&quot;&quot;&quot;)(&quot;)&quot;&quot;|&quot;&quot;&quot;)</string>
 					<key>patterns</key>
@@ -2004,7 +1994,7 @@
 					<key>name</key>
 					<string>string.quoted.double.single-line.unicode-raw-regex.python.renpy</string>
 					<key>match</key>
-					<string>([uU]r)(&quot;)((?:[^&quot;\\]|\\.)*)(&quot;)</string>
+					<string>([fuUb]r)(&quot;)((?:[^&quot;\\]|\\.)*)(&quot;)</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -2054,7 +2044,7 @@
 					<key>name</key>
 					<string>string.quoted.double.single-line.unicode-raw.python.renpy</string>
 					<key>begin</key>
-					<string>([uU]R)(&quot;)</string>
+					<string>([fuUb]R)(&quot;)</string>
 					<key>end</key>
 					<string>((?&lt;=&quot;)(&quot;)|&quot;)</string>
 					<key>patterns</key>
@@ -2212,7 +2202,7 @@
 					<key>name</key>
 					<string>string.quoted.double.single-line.unicode.python.renpy</string>
 					<key>begin</key>
-					<string>([uU])(&quot;)</string>
+					<string>([fuUb])(&quot;)</string>
 					<key>end</key>
 					<string>((?&lt;=&quot;)(&quot;)|&quot;)</string>
 					<key>patterns</key>
@@ -2393,7 +2383,7 @@
 					<key>name</key>
 					<string>string.quoted.single.block.unicode-raw-regex.python.renpy</string>
 					<key>begin</key>
-					<string>([uU]r)(&apos;&apos;&apos;)</string>
+					<string>([fuUb]r)(&apos;&apos;&apos;)</string>
 					<key>end</key>
 					<string>((?&lt;=&apos;&apos;&apos;)(&apos;)&apos;&apos;|&apos;&apos;&apos;)</string>
 					<key>patterns</key>
@@ -2450,7 +2440,7 @@
 					<key>name</key>
 					<string>string.quoted.single.block.unicode-raw.python.renpy</string>
 					<key>begin</key>
-					<string>([uU]R)(&apos;&apos;&apos;)</string>
+					<string>([fuUb]R)(&apos;&apos;&apos;)</string>
 					<key>end</key>
 					<string>((?&lt;=&apos;&apos;&apos;)(&apos;)&apos;&apos;|&apos;&apos;&apos;)</string>
 					<key>patterns</key>
@@ -2605,7 +2595,7 @@
 					<key>name</key>
 					<string>string.quoted.single.block.unicode.python.renpy</string>
 					<key>begin</key>
-					<string>([uU])(&apos;&apos;&apos;)</string>
+					<string>([fuUb])(&apos;&apos;&apos;)</string>
 					<key>end</key>
 					<string>((?&lt;=&apos;&apos;&apos;)(&apos;)&apos;&apos;|&apos;&apos;&apos;)</string>
 					<key>patterns</key>
@@ -2658,7 +2648,7 @@
 					<key>name</key>
 					<string>string.quoted.single.single-line.unicode-raw-regex.python.renpy</string>
 					<key>match</key>
-					<string>([uU]r)(&apos;)((?:[^&apos;\\]|\\.)*)(&apos;)</string>
+					<string>([fuUb]r)(&apos;)((?:[^&apos;\\]|\\.)*)(&apos;)</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -2708,7 +2698,7 @@
 					<key>name</key>
 					<string>string.quoted.single.single-line.unicode-raw.python.renpy</string>
 					<key>begin</key>
-					<string>([uU]R)(&apos;)</string>
+					<string>([fuUb]R)(&apos;)</string>
 					<key>end</key>
 					<string>(&apos;)</string>
 					<key>patterns</key>
@@ -2856,7 +2846,7 @@
 					<key>name</key>
 					<string>string.quoted.single.single-line.unicode.python.renpy</string>
 					<key>begin</key>
-					<string>([uU])(&apos;)</string>
+					<string>([fuUb])(&apos;)</string>
 					<key>end</key>
 					<string>(&apos;)</string>
 					<key>patterns</key>

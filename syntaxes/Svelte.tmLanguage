@@ -412,7 +412,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>(&lt;)(script)\b(?=[^&gt;]*(?:type=(&apos;text/typescript&apos;|&quot;text/typescript&quot;)|lang=(typescript|&apos;typescript&apos;|&quot;typescript&quot;)))(?![^/&gt;]*/&gt;\s*$)</string>
+			<string>(&lt;)(script)\b(?=[^&gt;]*(?:type=(&apos;text/typescript&apos;|&quot;text/typescript&quot;)|lang=(typescript|&apos;typescript&apos;|&quot;typescript&quot;|ts|&apos;ts&apos;|&quot;ts&quot;)))(?![^/&gt;]*/&gt;\s*$)</string>
 			<key>end</key>
 			<string>(&lt;/)(script)(&gt;)</string>
 			<key>patterns</key>

@@ -14,6 +14,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#function-decl</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#as-is</string>
 		</dict>
 		<dict>
@@ -59,10 +63,6 @@
 		<dict>
 			<key>include</key>
 			<string>#function-extend-decl</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#function-decl</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -116,6 +116,14 @@
 			<key>include</key>
 			<string>#punctuations</string>
 		</dict>
+		<dict>
+			<key>include</key>
+			<string>#variable-assign</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#function-decl</string>
+		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
@@ -167,7 +175,7 @@
 			<key>name</key>
 			<string>meta.definition.attribute.v</string>
 			<key>match</key>
-			<string>^\s*((\[)(deprecated|unsafe_fn|console|heap|debug|manualfree|typedef|live|inline|flag|ref_only|windows_stdcall|direct_array_access)(\]))</string>
+			<string>^\s*((\[)(deprecated|unsafe|console|heap|manualfree|typedef|live|inline|flag|ref_only|direct_array_access|callconv)(\]))</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -319,7 +327,7 @@
 							<key>name</key>
 							<string>keyword.control.v</string>
 							<key>match</key>
-							<string>\b(as|in|is|or|break|continue|default|unsafe|match|if|else|for|go|goto|defer|return|shared|select|rlock|lock|atomic|asm)\b(?=\s*\()</string>
+							<string>\b(as|in|is|or|break|continue|default|unsafe|match|if|else|for|go|spawn|goto|defer|return|shared|select|rlock|lock|atomic|asm)\b(?=\s*\()</string>
 						</dict>
 					</array>
 				</dict>
@@ -330,7 +338,7 @@
 							<key>name</key>
 							<string>meta.expr.numeric.cast.v</string>
 							<key>match</key>
-							<string>(i?(?:8|16|nt|64|128)|u?(?:16|32|64|128)|f?(?:32|64))(?=\s*\()</string>
+							<string>(?&lt;!.)(i?(?:8|16|nt|64|128)|u?(?:16|32|64|128)|f?(?:32|64))(?=\s*\()</string>
 							<key>captures</key>
 							<dict>
 								<key>1</key>
@@ -344,7 +352,7 @@
 							<key>name</key>
 							<string>meta.expr.bool.cast.v</string>
 							<key>match</key>
-							<string>(bool|byte|byteptr|charptr|voidptr|string|rune|size_t)(?=\s*\()</string>
+							<string>(bool|byte|byteptr|charptr|voidptr|string|rune|size_t|[ui]size)(?=\s*\()</string>
 							<key>captures</key>
 							<dict>
 								<key>1</key>
@@ -443,30 +451,13 @@
 				</dict>
 			</dict>
 		</dict>
-		<key>escaped-fix</key>
-		<dict>
-			<key>name</key>
-			<string>meta.escaped.keyword.v</string>
-			<key>match</key>
-			<string>((?:@)(?:mut|pub|fn|unsafe|module|import|as|const|map|assert|sizeof|__offsetof|typeof|type|struct|interface|enum|in|is|or|match|if|else|for|go|goto|defer|return|shared|select|rlock|lock|atomic|asm|i?(?:8|16|nt|64|128)|u?(?:16|32|64|128)|f?(?:32|64)|bool|byte|byteptr|charptr|voidptr|string|ustring|rune))</string>
-			<key>captures</key>
-			<dict>
-				<key>0</key>
-				<dict>
-					<key>name</key>
-					<string>keyword.other.escaped.v</string>
-				</dict>
-			</dict>
-		</dict>
 		<key>function-decl</key>
 		<dict>
 			<key>name</key>
 			<string>meta.definition.function.v</string>
-			<key>begin</key>
-			<string>^\s*(pub)?\s*(fn)\s+</string>
-			<key>end</key>
-			<string>(?:(?:C\.)?)(\w+)\s*((?&lt;=[\w\s+])(\&lt;)(\w+)(\&gt;))?</string>
-			<key>beginCaptures</key>
+			<key>match</key>
+			<string>^(\bpub\b\s+)?(\bfn\b)\s+(?:\([^\)]+\)\s+)?(?:(?:C\.)?)(\w+)\s*((?&lt;=[\w\s+])(\&lt;)(\w+)(\&gt;))?</string>
+			<key>captures</key>
 			<dict>
 				<key>1</key>
 				<dict>
@@ -476,28 +467,14 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.function.v</string>
+					<string>keyword.fn.v</string>
 				</dict>
-			</dict>
-			<key>endCaptures</key>
-			<dict>
-				<key>1</key>
+				<key>3</key>
 				<dict>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#illegal-name</string>
-						</dict>
-						<dict>
-							<key>name</key>
-							<string>entity.name.function.v</string>
-							<key>match</key>
-							<string>\w+</string>
-						</dict>
-					</array>
+					<key>name</key>
+					<string>entity.name.function.v</string>
 				</dict>
-				<key>2</key>
+				<key>4</key>
 				<dict>
 					<key>patterns</key>
 					<array>
@@ -566,7 +543,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.function.v</string>
+					<string>keyword.fn.v</string>
 				</dict>
 				<key>3</key>
 				<dict>
@@ -648,7 +625,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.function.v</string>
+					<string>keyword.fn.v</string>
 				</dict>
 				<key>3</key>
 				<dict>
@@ -882,13 +859,13 @@
 					<key>name</key>
 					<string>keyword.control.v</string>
 					<key>match</key>
-					<string>\b(as|it|is|in|or|break|continue|default|unsafe|match|if|else|for|go|goto|defer|return|shared|select|rlock|lock|atomic|asm)\b</string>
+					<string>(?&lt;!@)\b(as|it|is|in|or|break|continue|default|unsafe|match|if|else|for|go|spawn|goto|defer|return|shared|select|rlock|lock|atomic|asm)\b</string>
 				</dict>
 				<dict>
 					<key>name</key>
 					<string>keyword.$1.v</string>
 					<key>match</key>
-					<string>\b(fn|type|typeof|enum|struct|interface|map|assert|sizeof|__offsetof)\b</string>
+					<string>(?&lt;!@)\b(fn|type|typeof|enum|struct|interface|map|assert|sizeof|__offsetof)\b</string>
 				</dict>
 			</array>
 		</dict>
@@ -1358,7 +1335,7 @@
 						<key>3</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.struct.v</string>
+							<string>entity.name.type.v</string>
 						</dict>
 						<key>4</key>
 						<dict>
@@ -1496,6 +1473,30 @@
 					<string>(?&lt;!\.)\b(bool|byte|byteptr|charptr|voidptr|string|ustring|rune)\b</string>
 				</dict>
 			</array>
+		</dict>
+		<key>variable-assign</key>
+		<dict>
+			<key>match</key>
+			<string>[a-zA-Z_]\w*(?:,\s*[a-zA-Z_]\w*)*(?=\s*(?:=|:=))</string>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>variable.other.assignment.v</string>
+							<key>match</key>
+							<string>[a-zA-Z_]\w*</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#punctuation</string>
+						</dict>
+					</array>
+				</dict>
+			</dict>
 		</dict>
 	</dict>
 	<key>fileTypes</key>

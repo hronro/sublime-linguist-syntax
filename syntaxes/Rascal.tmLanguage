@@ -112,6 +112,8 @@
 				<dict>
 					<key>name</key>
 					<string>string.regexp.rascal</string>
+					<key>begin</key>
+					<string>/(?!/|\*)</string>
 					<key>end</key>
 					<string>/([dims]*)</string>
 					<key>patterns</key>

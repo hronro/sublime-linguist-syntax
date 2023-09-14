@@ -3,72 +3,298 @@
 <plist version="1.0">
 <dict>
 	<key>name</key>
-	<string>SRT Subtitle</string>
+	<string>SubRip Text</string>
 	<key>scopeName</key>
 	<string>text.srt</string>
 	<key>patterns</key>
 	<array>
 		<dict>
 			<key>include</key>
-			<string>#subtitle</string>
+			<string>#main</string>
 		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
-		<key>bold</key>
+		<key>action</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.other.sound.action.square-brackets.srt</string>
+					<key>begin</key>
+					<string>\[</string>
+					<key>end</key>
+					<string>\]|(?=^[ \t]*$)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#formatting</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.srt</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.srt</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>string.quoted.other.sound.action.round-brackets.srt</string>
+					<key>begin</key>
+					<string>\(</string>
+					<key>end</key>
+					<string>\)|(?=^[ \t]*$)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#formatting</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.begin.srt</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.string.end.srt</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
+		<key>arrow</key>
 		<dict>
 			<key>name</key>
+			<string>keyword.operator.timespan.srt</string>
+			<key>match</key>
+			<string>--&gt;</string>
+			<key>captures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.separator.srt</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>bold</key>
+		<dict>
+			<key>contentName</key>
 			<string>markup.bold.srt</string>
 			<key>begin</key>
-			<string>(?i)&lt;b&gt;</string>
+			<string>(&lt;)([Bb])(?=$|&gt;|\s)([^&gt;]*)(&gt;)</string>
 			<key>end</key>
-			<string>(?i)&lt;/b&gt;</string>
+			<string>(&lt;/)([Bb])[ \t]*(&gt;)|(?=^[ \t]*$)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#sound</string>
+					<string>#text</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>meta.tag.inline.b.html.srt</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.html.srt</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.inline.b.html.srt</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>text.html.basic#tag-stuff</string>
+						</dict>
+					</array>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end.html.srt</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>meta.tag.inline.b.html.srt</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.html.srt</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.inline.b.html</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end.html.srt</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>dash</key>
+		<dict>
+			<key>name</key>
+			<string>markup.quote.quotation-dash.srt</string>
+			<key>match</key>
+			<string>(?:^|\G)(-)</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.section.quote.srt</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>escapes</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>constant.character.whitespace.escape.hard-space.srt</string>
+					<key>match</key>
+					<string>(\\)h</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.escape.backslash.srt</string>
+						</dict>
+					</dict>
 				</dict>
 				<dict>
-					<key>include</key>
-					<string>#person</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#bold</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#italic</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#underline</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#font</string>
+					<key>name</key>
+					<string>constant.character.whitespace.escape.forced-newline.srt</string>
+					<key>match</key>
+					<string>(\\)N</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.escape.backslash.srt</string>
+						</dict>
+					</dict>
 				</dict>
 			</array>
 		</dict>
 		<key>font</key>
 		<dict>
-			<key>name</key>
-			<string>markup.link.font.srt</string>
+			<key>contentName</key>
+			<string>markup.other.font.srt</string>
 			<key>begin</key>
-			<string>(?i)&lt;font\b.*?&gt;</string>
+			<string>(?i)(&lt;)(font)(?=$|&gt;|\s)([^&gt;]*)(&gt;)</string>
 			<key>end</key>
-			<string>(?i)&lt;/font&gt;</string>
+			<string>(?i)(&lt;/)(font)[ \t]*(&gt;)|(?=^[ \t]*$)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#sound</string>
+					<string>#text</string>
 				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
 				<dict>
-					<key>include</key>
-					<string>#person</string>
+					<key>name</key>
+					<string>meta.tag.inline.font.html.srt</string>
 				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.html.srt</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.inline.font.html.srt</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>text.html.basic#tag-stuff</string>
+						</dict>
+					</array>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end.html.srt</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>meta.tag.inline.font.html.srt</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.html.srt</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.inline.font.html.srt</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end.html.srt</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>formatting</key>
+		<dict>
+			<key>patterns</key>
+			<array>
 				<dict>
 					<key>include</key>
 					<string>#bold</string>
@@ -80,6 +306,10 @@
 				<dict>
 					<key>include</key>
 					<string>#underline</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#strike</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -89,91 +319,17 @@
 		</dict>
 		<key>italic</key>
 		<dict>
-			<key>name</key>
+			<key>contentName</key>
 			<string>markup.italic.srt</string>
 			<key>begin</key>
-			<string>(?i)&lt;i&gt;</string>
+			<string>(&lt;)([Ii])(?=$|&gt;|\s)([^&gt;]*)(&gt;)</string>
 			<key>end</key>
-			<string>(?i)&lt;/i&gt;</string>
+			<string>(&lt;/)([Ii])[ \t]*(&gt;)|(?=^[ \t]*$)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#sound</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#person</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#bold</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#italic</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#underline</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#font</string>
-				</dict>
-			</array>
-		</dict>
-		<key>person</key>
-		<dict>
-			<key>name</key>
-			<string>entity.name.tag.srt</string>
-			<key>match</key>
-			<string>^\w+:</string>
-		</dict>
-		<key>sound</key>
-		<dict>
-			<key>name</key>
-			<string>string.quoted.other.sound.srt</string>
-			<key>match</key>
-			<string>\[.*?\]|\(.*?\)</string>
-		</dict>
-		<key>subtitle</key>
-		<dict>
-			<key>name</key>
-			<string>meta.subtitle.srt</string>
-			<key>begin</key>
-			<string>\b\d+$</string>
-			<key>end</key>
-			<string>^\s*$</string>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#time</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#sound</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#person</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#bold</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#italic</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#underline</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#font</string>
+					<string>#text</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -181,68 +337,514 @@
 				<key>0</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.section.srt</string>
+					<string>meta.tag.inline.i.html.srt</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.html.srt</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.inline.i.html.srt</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>text.html.basic#tag-stuff</string>
+						</dict>
+					</array>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end.html.srt</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>meta.tag.inline.i.html.srt</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.html.srt</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.inline.i.html</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end.html.srt</string>
 				</dict>
 			</dict>
 		</dict>
-		<key>time</key>
+		<key>linePosition</key>
 		<dict>
+			<key>name</key>
+			<string>meta.line-position.${2:/downcase}-axis.srt</string>
 			<key>match</key>
-			<string>^(\d{2}:\d{2}:\d{2},\d{3})\s*(--&gt;)\s*(\d{2}:\d{2}:\d{2},\d{3})$</string>
+			<string>\b(([XY])[0-9]+)(:)(?:([-+]?[0-9]+\.[0-9]+)|([-+]?[0-9]+))\b</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>constant.numeric.time.srt</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.definition.separator.srt</string>
+					<string>variable.parameter.position.srt</string>
 				</dict>
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>constant.numeric.time.srt</string>
+					<string>keyword.operator.assignment.key-value.colon.srt</string>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.float.srt</string>
+				</dict>
+				<key>5</key>
+				<dict>
+					<key>name</key>
+					<string>constant.numeric.integer.srt</string>
 				</dict>
 			</dict>
 		</dict>
-		<key>underline</key>
+		<key>lyrics</key>
 		<dict>
 			<key>name</key>
-			<string>markup.underline.srt</string>
+			<string>markup.quote.lyrics.srt</string>
 			<key>begin</key>
-			<string>(?i)&lt;u&gt;</string>
+			<string>(♪+)[ \t]*</string>
 			<key>end</key>
-			<string>(?i)&lt;/u&gt;</string>
+			<string>[ \t]*(♪+)|(?=^-|^[ \t]*$|\s*&lt;/)</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>include</key>
-					<string>#sound</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#person</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#bold</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#italic</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#underline</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#font</string>
+					<string>#formatting</string>
 				</dict>
 			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.lyrics.begin.srt</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.lyrics.end.srt</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>main</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#subtitle</string>
+				</dict>
+			</array>
+		</dict>
+		<key>speaker</key>
+		<dict>
+			<key>match</key>
+			<string>(?:^|\G)(-[ \t]*)?((?:[^-&lt;&gt;\s:][^:]*(?=:[ \t]*\S)|[^-&lt;&gt;\s:a-z][^:a-z]*)(:))(?=$|\s)</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#dash</string>
+						</dict>
+					</array>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.speaker.srt</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#formatting</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#action</string>
+						</dict>
+					</array>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.separator.speaker.colon.srt</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>strike</key>
+		<dict>
+			<key>contentName</key>
+			<string>markup.strike.srt</string>
+			<key>begin</key>
+			<string>(&lt;)([Ss])(?=$|&gt;|\s)([^&gt;]*)(&gt;)</string>
+			<key>end</key>
+			<string>(&lt;/)([Ss])[ \t]*(&gt;)|(?=^[ \t]*$)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#text</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>meta.tag.inline.s.html.srt</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.html.srt</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.inline.s.html.srt</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>text.html.basic#tag-stuff</string>
+						</dict>
+					</array>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end.html.srt</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>meta.tag.inline.s.html.srt</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.html.srt</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.inline.s.html</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end.html.srt</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>subtitle</key>
+		<dict>
+			<key>name</key>
+			<string>meta.subtitle.srt</string>
+			<key>begin</key>
+			<string>^(?:﻿?)(\d+)$</string>
+			<key>end</key>
+			<string>^[ \t]*$</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>begin</key>
+					<string>\G\s*</string>
+					<key>end</key>
+					<string>(?!\G)$</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>meta.timespan.empty.srt</string>
+							<key>contentName</key>
+							<string>comment.block.ignored.hidden-subtitle.srt</string>
+							<key>begin</key>
+							<string>(?x) ^
+([0-9]{2}:[0-9]{2}:[0-9]{2}[,.][0-9]{3}) \x20(--&gt;)\x20 (\1)
+((?:\s*[XY][0-9]+:[-+]?[0-9]+(?:\.[0-9]+)?)++)?
+[ \t]* $ </string>
+							<key>end</key>
+							<string>(?=^[ \t]*$)</string>
+							<key>beginCaptures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>constant.numeric.time.timecode.start.srt</string>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#timecode</string>
+										</dict>
+									</array>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#arrow</string>
+										</dict>
+									</array>
+								</dict>
+								<key>3</key>
+								<dict>
+									<key>name</key>
+									<string>constant.numeric.time.timecode.end.srt</string>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#timecode</string>
+										</dict>
+									</array>
+								</dict>
+								<key>4</key>
+								<dict>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#linePosition</string>
+										</dict>
+									</array>
+								</dict>
+							</dict>
+						</dict>
+						<dict>
+							<key>name</key>
+							<string>meta.timespan.srt</string>
+							<key>match</key>
+							<string>(?x) ^
+([0-9]{2}:[0-9]{2}:[0-9]{2}[,.][0-9]{3}) \x20(--&gt;)\x20
+([0-9]{2}:[0-9]{2}:[0-9]{2}[,.][0-9]{3})
+((?:\s*[XY][0-9]+:[-+]?[0-9]+(?:\.[0-9]+)?)++)?
+[ \t]* $ </string>
+							<key>captures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>constant.numeric.time.timecode.start.srt</string>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#timecode</string>
+										</dict>
+									</array>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#arrow</string>
+										</dict>
+									</array>
+								</dict>
+								<key>3</key>
+								<dict>
+									<key>name</key>
+									<string>constant.numeric.time.timecode.end.srt</string>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#timecode</string>
+										</dict>
+									</array>
+								</dict>
+								<key>4</key>
+								<dict>
+									<key>patterns</key>
+									<array>
+										<dict>
+											<key>include</key>
+											<string>#linePosition</string>
+										</dict>
+									</array>
+								</dict>
+							</dict>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#text</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#text</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.section.srt</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>text</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#speaker</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#dash</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#action</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#lyrics</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#formatting</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#escapes</string>
+				</dict>
+			</array>
+		</dict>
+		<key>timecode</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.syntax.decimal-separator.srt</string>
+					<key>match</key>
+					<string>\.</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.value.out-of-range.vtt</string>
+					<key>match</key>
+					<string>(?&lt;=:)([6-9][0-9])</string>
+				</dict>
+			</array>
+		</dict>
+		<key>underline</key>
+		<dict>
+			<key>contentName</key>
+			<string>markup.underline.srt</string>
+			<key>begin</key>
+			<string>(&lt;)([Uu])(?=$|&gt;|\s)([^&gt;]*)(&gt;)</string>
+			<key>end</key>
+			<string>(&lt;/)([Uu])[ \t]*(&gt;)|(?=^[ \t]*$)</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#text</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>meta.tag.inline.u.html.srt</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.html.srt</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.inline.u.html.srt</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>text.html.basic#tag-stuff</string>
+						</dict>
+					</array>
+				</dict>
+				<key>4</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end.html.srt</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>0</key>
+				<dict>
+					<key>name</key>
+					<string>meta.tag.inline.u.html.srt</string>
+				</dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.begin.html.srt</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.tag.inline.u.html</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.tag.end.html.srt</string>
+				</dict>
+			</dict>
 		</dict>
 	</dict>
 	<key>fileTypes</key>

@@ -9,6 +9,36 @@
 	<key>patterns</key>
 	<array>
 		<dict>
+			<key>name</key>
+			<string>source.embedded.ditroff</string>
+			<key>begin</key>
+			<string>\A(?=x\s*T\s+(?:[a-z][-a-zA-Z0-9]*)\s*$)</string>
+			<key>end</key>
+			<string>(?=A)B</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.ditroff</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
+			<key>name</key>
+			<string>source.embedded.context</string>
+			<key>begin</key>
+			<string>\A(?=X\s+(?:495|crt|hp|impr|ps)(?:\s+\d+){3}[ \t]*$)</string>
+			<key>end</key>
+			<string>(?=A)B</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>source.context</string>
+				</dict>
+			</array>
+		</dict>
+		<dict>
 			<key>include</key>
 			<string>#main</string>
 		</dict>
@@ -2041,11 +2071,79 @@
 				</dict>
 				<dict>
 					<key>name</key>
+					<string>constant.character.escape.function.point-size.gnu.roff</string>
+					<key>contentName</key>
+					<string>variable.parameter.roff</string>
+					<key>begin</key>
+					<string>((?:((\\)E)|(\\))s([-+])?)((.))</string>
+					<key>end</key>
+					<string>(\6)|(?&lt;!\\)(?=$)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#escapes</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.roff</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>constant.character.escape.current-escape-char.gnu.roff</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.escape.roff</string>
+						</dict>
+						<key>4</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.escape.roff</string>
+						</dict>
+						<key>5</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.arithmetic.roff</string>
+						</dict>
+						<key>6</key>
+						<dict>
+							<key>name</key>
+							<string>string.other.roff</string>
+						</dict>
+						<key>7</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.begin.roff</string>
+						</dict>
+					</dict>
+					<key>endCaptures</key>
+					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>string.other.roff</string>
+						</dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.end.roff</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
 					<string>constant.character.escape.function.check-identifier.gnu.roff</string>
 					<key>contentName</key>
 					<string>string.other.roff</string>
 					<key>begin</key>
-					<string>((?:((\\)E)|(\\))(?!s[-+]?\(?\d)[ABRsZ])((.))</string>
+					<string>((?:((\\)E)|(\\))(?!s[-+]?\(?[-+]?\d)[ABRZ])((.))</string>
 					<key>end</key>
 					<string>(\6)|(?&lt;!\\)(?=$)</string>
 					<key>patterns</key>
@@ -3739,7 +3837,7 @@
 					<key>name</key>
 					<string>constant.character.escape.function.point-size.roff</string>
 					<key>match</key>
-					<string>((?:((\\)E)|(\\))s[-+]?(\()?)(\d+)</string>
+					<string>((?:((\\)E)|(\\))s([-+]?)(\()?)((?&lt;=s\()[-+])?(\d+)</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -3765,9 +3863,19 @@
 						<key>5</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.brace.roff</string>
+							<string>keyword.operator.arithmetic.roff</string>
 						</dict>
 						<key>6</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.brace.roff</string>
+						</dict>
+						<key>7</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.arithmetic.roff</string>
+						</dict>
+						<key>8</key>
 						<dict>
 							<key>name</key>
 							<string>variable.parameter.roff</string>
@@ -5402,6 +5510,59 @@
 				</dict>
 				<dict>
 					<key>name</key>
+					<string>meta.function.cross-reference.man.macro.gnu.roff</string>
+					<key>begin</key>
+					<string>(?:^|\G)([.&apos;])[ \t]*(MR)(?=\s|\\E?[&quot;#])</string>
+					<key>end</key>
+					<string>(?&lt;!\\)(?=$)|(?=\\E?&quot;)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>match</key>
+							<string>(?x)
+\G \s+ ([^\s\\]+)    # Page title
+(?: \s+ ([^\s\\]+))?  # Manual section
+(?: \s+ ([^\s\\]+))?  # Trailing text</string>
+							<key>captures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+									<key>name</key>
+									<string>variable.reference.page-title.roff</string>
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>constant.numeric.manual-section.roff</string>
+								</dict>
+								<key>3</key>
+								<dict>
+									<key>name</key>
+									<string>string.unquoted.trailing-text.roff</string>
+								</dict>
+							</dict>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#param-group</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.macro.gnu.roff</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.function.name.gnu.roff</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
 					<string>meta.function.hyperlink.man.macro.gnu.roff</string>
 					<key>begin</key>
 					<string>(?:^|\G)([.&apos;])[ \t]*(UR)(?=\s|\\E?[&quot;#])\s*</string>
@@ -6664,6 +6825,34 @@
 							<string>punctuation.definition.macro.roff</string>
 						</dict>
 						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>entity.function.name.roff</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.function.${2:/downcase}.me.macro.gnu.roff</string>
+					<key>begin</key>
+					<string>(?:^|\G)([.&apos;])[ \t]*(PF|ld)(?=\s)</string>
+					<key>end</key>
+					<string>(?&lt;!\\)$|(?=\\E?&quot;)</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#params</string>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.macro.roff</string>
+						</dict>
+						<key>2</key>
 						<dict>
 							<key>name</key>
 							<string>entity.function.name.roff</string>
@@ -9294,7 +9483,7 @@
 (aln|als|asciify|backtrace|blm|boxa|box|brp|cflags|chop|close|composite|color
 |cp|devicem|ecs|ecr|evc|fam|fchar|fcolor|fschar|fspecial|ftr|fzoom
 |gcolor|hcode|hla|hlm|hpfa|hpfcode|hpf|hym|hys|itc|kern|length|linetabs|lsm
-|mso|nroff|opena|open|pev|pnr|psbb|ptr|pvs|rchar|rfschar|rj
+|mso|m?soquiet|nroff|opena|open|pev|pnr|psbb|ptr|pvs|rchar|rfschar|rj
 |rnn|schar|shc|shift|sizes|special|spreadwarn|stringdown|stringup|sty
 |substring|tkf|tm1|tmc|trf|trin|trnt|troff|unformat|vpt|warnscale|warn
 |writec|writem|write)
@@ -10065,13 +10254,13 @@
 									<key>name</key>
 									<string>invalid.illegal.readonly.register.roff</string>
 									<key>match</key>
-									<string>\$\$|\.[$aAbcdfFhHijklLnopRTstuvVwxyz]</string>
+									<string>\$\$|\.[$AFHLRTVa-dfh-lnops-z]\b</string>
 								</dict>
 								<dict>
 									<key>name</key>
 									<string>invalid.illegal.readonly.register.gnu.roff</string>
 									<key>match</key>
-									<string>\.[CgmMOPUxyY]</string>
+									<string>\.(?:cp|nm|[CgmMOPUxyY])\b</string>
 								</dict>
 								<dict>
 									<key>name</key>
@@ -10651,7 +10840,7 @@
 			<array>
 				<dict>
 					<key>name</key>
-					<string>meta.request.$3.roff</string>
+					<string>meta.function.request.$3.roff</string>
 					<key>match</key>
 					<string>(?:^|\G)([.&apos;])[ \t]*(?:(do)[ \t]+)?(ul|cu)\s*(0+)(?:(?!\\E?&quot;)\D)*(?=\s|$)(.*)$</string>
 					<key>captures</key>
@@ -10689,8 +10878,6 @@
 					</dict>
 				</dict>
 				<dict>
-					<key>name</key>
-					<string>meta.request.$3.roff</string>
 					<key>begin</key>
 					<string>(?:^|\G)([.&apos;])[ \t]*(?:(do)[ \t]+)?(ul|cu)(?=\s|$|\\)(.*?)$(?!R)\R?</string>
 					<key>end</key>
@@ -10729,6 +10916,11 @@
 					</array>
 					<key>beginCaptures</key>
 					<dict>
+						<key>0</key>
+						<dict>
+							<key>name</key>
+							<string>meta.function.request.$3.roff</string>
+						</dict>
 						<key>1</key>
 						<dict>
 							<key>name</key>

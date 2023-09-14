@@ -130,7 +130,7 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#docvar</string>
+					<string>#eldoc</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -301,6 +301,103 @@
 				</dict>
 			</array>
 		</dict>
+		<key>docesc</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>constant.escape.character.key-sequence.emacs.lisp</string>
+					<key>match</key>
+					<string>\x5C{2}=</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.escape.character.suppress-link.emacs.lisp</string>
+					<key>match</key>
+					<string>\x5C{2}+</string>
+				</dict>
+			</array>
+		</dict>
+		<key>dockey</key>
+		<dict>
+			<key>name</key>
+			<string>variable.other.reference.key-sequence.emacs.lisp</string>
+			<key>match</key>
+			<string>(\x5C{2}\[)((?:[^\s\\]|\\.)+)(\])</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.reference.begin.emacs.lisp</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>constant.other.reference.link.emacs.lisp</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.reference.end.emacs.lisp</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>docmap</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>meta.keymap.summary.emacs.lisp</string>
+					<key>match</key>
+					<string>(\x5C{2}{)((?:[^\s\\]|\\.)+)(})</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.reference.begin.emacs.lisp</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.tag.keymap.emacs.lisp</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.reference.end.emacs.lisp</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.keymap.specifier.emacs.lisp</string>
+					<key>match</key>
+					<string>(\x5C{2}&lt;)((?:[^\s\\]|\\.)+)(&gt;)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.reference.begin.emacs.lisp</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.tag.keymap.emacs.lisp</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.reference.end.emacs.lisp</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+		</dict>
 		<key>docvar</key>
 		<dict>
 			<key>name</key>
@@ -320,6 +417,28 @@
 					<string>punctuation.definition.quote.end.emacs.lisp</string>
 				</dict>
 			</dict>
+		</dict>
+		<key>eldoc</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#docesc</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#docvar</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#dockey</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#docmap</string>
+				</dict>
+			</array>
 		</dict>
 		<key>escapes</key>
 		<dict>
@@ -7614,14 +7733,18 @@
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>include</key>
+					<string>#eldoc</string>
+				</dict>
+				<dict>
 					<key>name</key>
-					<string>constant.character.escape.newline.emacs.lisp</string>
+					<string>constant.escape.character.newline.emacs.lisp</string>
 					<key>match</key>
 					<string>(\\)$\n?</string>
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>constant.character.escape.emacs.lisp</string>
+					<string>constant.escape.character.emacs.lisp</string>
 					<key>match</key>
 					<string>(\\).</string>
 					<key>captures</key>
@@ -7632,10 +7755,6 @@
 							<string>punctuation.escape.backslash.emacs.lisp</string>
 						</dict>
 					</dict>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#docvar</string>
 				</dict>
 			</array>
 		</dict>

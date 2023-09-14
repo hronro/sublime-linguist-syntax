@@ -143,6 +143,96 @@
 				</dict>
 			</array>
 		</dict>
+		<key>compatibility</key>
+		<dict>
+			<key>name</key>
+			<string>keyword.operator.level-1.compatibility.postscript</string>
+			<key>match</key>
+			<string>(?x) (?&lt;![^/\s{}()&lt;&gt;\[\]%]) (?:\b|(?=\.))
+( 11x17tray
+| 11x17
+| a3tray
+| a3
+| a4small
+| a4tray
+| a4
+| accuratescreens
+| appletalktype
+| b5tray
+| b5
+| buildtime
+| byteorder
+| checkpassword
+| checkscreen
+| defaulttimeouts
+| devdismount
+| devforall
+| devformat
+| devmount
+| devstatus
+| diskonline
+| diskstatus
+| doprinterrors
+| dostartpage
+| dosysstart
+| duplexmode
+| emulate
+| firstside
+| hardwareiomode
+| initializedisk
+| jobname
+| jobtimeout
+| ledgertray
+| ledger
+| legaltray
+| legal
+| lettersmall
+| lettertray
+| letter
+| manualfeedtimeout
+| manualfeed
+| margins
+| mirrorprint
+| newsheet
+| note
+| pagecount
+| pagemargin
+| pageparams
+| pagestackorder
+| printername
+| processcolors
+| ramsize
+| realformat
+| resolution
+| sccbatch
+| sccinteractive
+| setaccuratescreens
+| setdefaulttimeouts
+| setdoprinterrors
+| setdostartpage
+| setdosysstart
+| setduplexmode
+| sethardwareiomode
+| setjobtimeout
+| setmargins
+| setmirrorprint
+| setpagemargin
+| setpageparams
+| setpagestackorder
+| setpage
+| setprintername
+| setresolution
+| setsccbatch
+| setsccinteractive
+| setsoftwareiomode
+| settumble
+| setuserdiskpercent
+| softwareiomode
+| tumble
+| userdiskpercent
+| waittimeout
+) \b (?![^/\s{}()&lt;&gt;\[\]%])</string>
+		</dict>
 		<key>dictionary</key>
 		<dict>
 			<key>name</key>
@@ -528,10 +618,19 @@
 		</dict>
 		<key>extensions</key>
 		<dict>
-			<key>name</key>
-			<string>keyword.operator.ghostscript.postscript</string>
-			<key>match</key>
-			<string>(?x) (?&lt;![^/\s{}()&lt;&gt;\[\]%]) (?:\b|(?=\.))
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.distiller.postscript</string>
+					<key>match</key>
+					<string>(?&lt;![^/\s{}()&lt;&gt;\[\]%])\b((?:current|set)distillerparams)\b(?![^/\s{}()&lt;&gt;\[\]%])</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.ghostscript.postscript</string>
+					<key>match</key>
+					<string>(?x) (?&lt;![^/\s{}()&lt;&gt;\[\]%]) (?:\b|(?=\.))
 ( \.activatepathcontrol
 | \.addcontrolpath
 | \.begintransparencygroup
@@ -554,6 +653,18 @@
 | \.genordered
 | \.knownget
 | \.locksafe
+| \.max
+| \.min
+| \.PDFClose
+| \.PDFDrawAnnots
+| \.PDFDrawPage
+| \.PDFFile
+| \.PDFInfo
+| \.PDFInit
+| \.PDFMetadata
+| \.PDFPageInfo
+| \.PDFPageInfoExt
+| \.PDFStream
 | \.popdf14devicefilter
 | \.pushpdf14devicefilter
 | \.setalphaisshape
@@ -575,17 +686,29 @@
 | copydevice
 | copyscanlines
 | currentdevice
+| dopdfpages
 | finddevice
 | findlibfile
 | findprotodevice
 | getdeviceprops
 | getenv
 | makeimagedevice
-| max
-| min
+| pdfclose
+| pdfgetpage
+| pdfopen
+| pdfshowpage
+| pdfshowpage_finish
+| pdfshowpage_init
+| pdfshowpage_setpage
 | putdeviceprops
+| runpdf
+| runpdfbegin
+| runpdfend
+| runpdfpagerange
 | setdevice
 ) \b (?![^/\s{}()&lt;&gt;\[\]%])</string>
+				</dict>
+			</array>
 		</dict>
 		<key>hex</key>
 		<dict>
@@ -672,6 +795,10 @@
 				<dict>
 					<key>include</key>
 					<string>#extensions</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#compatibility</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -1608,6 +1735,24 @@
 					<string>keyword.control.$1.pdf</string>
 					<key>match</key>
 					<string>(?&lt;![^/\s{}()&lt;&gt;\[\]%])\b(trailer|startxref)(?![^/\s{}()&lt;&gt;\[\]%])</string>
+				</dict>
+			</array>
+		</dict>
+		<key>L:source.postscript meta.procedure.postscript - (comment | string | text.embedded)</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\s*(?&lt;=^|\G|[\[{\s])\b(currentfile)\b(?=[\[{\s])</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.postscript</string>
+						</dict>
+					</dict>
 				</dict>
 			</array>
 		</dict>

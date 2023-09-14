@@ -10,11 +10,27 @@
 	<array>
 		<dict>
 			<key>include</key>
+			<string>#nodepath_object</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#nodepath_function</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#base_expression</string>
 		</dict>
 		<dict>
 			<key>include</key>
 			<string>#logic_op</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#in_keyword</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#getter_setter_godot4</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -30,6 +46,18 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#lambda_declaration</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#control_flow</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#annotations</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#keywords</string>
 		</dict>
 		<dict>
@@ -38,15 +66,11 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#const_def</string>
+			<string>#class_definition</string>
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#type_declear</string>
-		</dict>
-		<dict>
-			<key>include</key>
-			<string>#class_def</string>
+			<string>#variable_definition</string>
 		</dict>
 		<dict>
 			<key>include</key>
@@ -70,6 +94,10 @@
 		</dict>
 		<dict>
 			<key>include</key>
+			<string>#pascal_case_class</string>
+		</dict>
+		<dict>
+			<key>include</key>
 			<string>#class_new</string>
 		</dict>
 		<dict>
@@ -82,42 +110,50 @@
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#function-declaration</string>
+			<string>#signal_declaration_bare</string>
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#function-return-type</string>
+			<string>#signal_declaration</string>
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#any-method</string>
+			<string>#function_declaration</string>
 		</dict>
 		<dict>
 			<key>include</key>
-			<string>#any-property</string>
+			<string>#function_keyword</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#any_method</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>#any_property</string>
 		</dict>
 		<dict>
 			<key>include</key>
 			<string>#extends</string>
 		</dict>
-		<dict>
-			<key>include</key>
-			<string>#pascal_case_class</string>
-		</dict>
 	</array>
 	<key>repository</key>
 	<dict>
-		<key>annotated-parameter</key>
+		<key>annotated_parameter</key>
 		<dict>
 			<key>begin</key>
 			<string>(?x)
   \b
-  ([[:alpha:]_]\w*) \s* (:)
+  ([a-zA-Z_]\w*) \s* (:)
 </string>
 			<key>end</key>
 			<string>(,)|(?=\))</string>
 			<key>patterns</key>
 			<array>
+				<dict>
+					<key>include</key>
+					<string>#base_expression</string>
+				</dict>
 				<dict>
 					<key>name</key>
 					<string>keyword.operator.assignment.gdscript</string>
@@ -147,14 +183,32 @@
 				</dict>
 			</dict>
 		</dict>
-		<key>any-method</key>
+		<key>annotations</key>
+		<dict>
+			<key>match</key>
+			<string>(@)(export|export_color_no_alpha|export_dir|export_enum|export_exp_easing|export_file|export_flags|export_flags_2d_navigation|export_flags_2d_physics|export_flags_2d_render|export_flags_3d_navigation|export_flags_3d_physics|export_flags_3d_render|export_global_dir|export_global_file|export_multiline|export_node_path|export_placeholder|export_range|icon|onready|rpc|tool|warning_ignore)\b</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.decorator.gdscript</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.decorator.gdscript</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>any_method</key>
 		<dict>
 			<key>name</key>
 			<string>support.function.any-method.gdscript</string>
 			<key>match</key>
 			<string>\b([A-Za-z_]\w*)\b(?=\s*(?:[(]))</string>
 		</dict>
-		<key>any-property</key>
+		<key>any_property</key>
 		<dict>
 			<key>name</key>
 			<string>variable.other.property.gdscript</string>
@@ -181,11 +235,51 @@
 			<array>
 				<dict>
 					<key>include</key>
+					<string>#builtin_get_node_shorthand</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#nodepath_object</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#nodepath_function</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#strings</string>
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#keywords</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#logic_op</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#lambda_declaration</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#in_keyword</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#control_flow</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#function_call</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#comment</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#self</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -197,7 +291,23 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#line-continuation</string>
+					<string>#builtin_func</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#builtin_classes</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#const_vars</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#pascal_case_class</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#line_continuation</string>
 				</dict>
 			</array>
 		</dict>
@@ -206,23 +316,107 @@
 			<key>name</key>
 			<string>support.class.library.gdscript</string>
 			<key>match</key>
-			<string>(?&lt;![^.]\.|:)\b(Vector2|Vector3|Color|Rect2|Array|Basis|Dictionary|Plane|Quat|RID|Rect3|Transform|Transform2D|AABB|String|Color|NodePath|RID|Object|Dictionary|Array|PoolByteArray|PoolIntArray|PoolRealArray|PoolStringArray|PoolVector2Array|PoolVector3Array|PoolColorArray)\b</string>
+			<string>(?&lt;![^.]\.|:)\b(OS|GDScript|Vector2|Vector2i|Vector3|Vector3i|Color|Rect2|Rect2i|Array|Basis|Dictionary|Plane|Quat|RID|Rect3|Transform|Transform2D|Transform3D|AABB|String|Color|NodePath|Object|PoolByteArray|PoolIntArray|PoolRealArray|PoolStringArray|PoolVector2Array|PoolVector3Array|PoolColorArray|bool|int|float|StringName|Quaternion|PackedByteArray|PackedInt32Array|PackedInt64Array|PackedFloat32Array|PackedFloat64Array|PackedStringArray|PackedVector2Array|PackedVector2iArray|PackedVector3Array|PackedVector3iArray|PackedColorArray|super)\b</string>
 		</dict>
 		<key>builtin_func</key>
 		<dict>
 			<key>name</key>
 			<string>support.function.builtin.gdscript</string>
 			<key>match</key>
-			<string>(?&lt;![^.]\.|:)\b(sin|cos|tan|sinh|cosh|tanh|asin|acos|atan|atan2|sqrt|fmod|fposmod|floor|ceil|round|abs|sign|pow|log|exp|is_nan|is_inf|ease|decimals|stepify|lerp|dectime|randomize|randi|randf|rand_range|seed|rand_seed|deg2rad|rad2deg|linear2db|db2linear|max|min|clamp|nearest_po2|weakref|funcref|convert|typeof|type_exists|char|str|print|printt|prints|printerr|printraw|var2str|str2var|var2bytes|bytes2var|range|load|inst2dict|dict2inst|hash|Color8|print_stack|instance_from_id|preload|yield|assert)\b(?=(\()([^)]*)(\)))</string>
+			<string>(?&lt;![^.]\.|:)\b(abs|absf|absi|acos|asin|assert|atan|atan2|bytes2var|bytes2var_with_objects|ceil|char|clamp|clampf|clampi|Color8|convert|cos|cosh|cubic_interpolate|db2linear|decimals|dectime|deg2rad|dict2inst|ease|error_string|exp|floor|fmod|fposmod|funcref|get_stack|hash|inst2dict|instance_from_id|inverse_lerp|is_equal_approx|is_inf|is_instance_id_valid|is_instance_valid|is_nan|is_zero_approx|len|lerp|lerp_angle|linear2db|load|log|max|maxf|maxi|min|minf|mini|move_toward|nearest_po2|pingpong|posmod|pow|preload|print|printerr|printraw|prints|printt|print_debug|print_stack|print_verbose|push_error|push_warning|rad2deg|randf|randfn|randf_range|randi|randi_range|randomize|rand_from_seed|rand_range|rand_seed|range|range_lerp|range_step_decimals|rid_allocate_id|rid_from_int64|round|seed|sign|signf|signi|sin|sinh|smoothstep|snapped|sqrt|stepify|step_decimals|str|str2var|tan|tanh|typeof|type_exists|var2bytes|var2bytes_with_objects|var2str|weakref|wrapf|wrapi|yield)\b(?=(\()([^)]*)(\)))</string>
 		</dict>
 		<key>builtin_get_node_shorthand</key>
 		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#builtin_get_node_shorthand_quoted</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#builtin_get_node_shorthand_bare</string>
+				</dict>
+			</array>
+		</dict>
+		<key>builtin_get_node_shorthand_bare</key>
+		<dict>
 			<key>name</key>
 			<string>support.function.builtin.shorthand.gdscript</string>
-			<key>match</key>
-			<string>\$((\&quot;(\.\.\/)+|\&quot;\/|\&quot;[0-9]+|\&quot;)([0-9A-Za-z\_]+\/)*[A-Za-z0-9\_]+\&quot;|[A-Za-z\_]+(\/[A-Za-z\_]+)*)</string>
+			<key>begin</key>
+			<string>(\$)</string>
+			<key>end</key>
+			<string>[^\w%]</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape</string>
+					<key>match</key>
+					<string>[a-zA-Z_]\w*/?</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.escape.gdscript</string>
+					<key>match</key>
+					<string>%[a-zA-Z_]\w*/?</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.flow</string>
+				</dict>
+			</dict>
 		</dict>
-		<key>class_def</key>
+		<key>builtin_get_node_shorthand_quoted</key>
+		<dict>
+			<key>name</key>
+			<string>support.function.builtin.shorthand.gdscript</string>
+			<key>begin</key>
+			<string>(\$)([&quot;&apos;])</string>
+			<key>end</key>
+			<string>([&quot;&apos;])</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.flow</string>
+					<key>match</key>
+					<string>%</string>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape</string>
+					<key>match</key>
+					<string>[^%^&quot;^&apos;]*</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.flow</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape</string>
+				</dict>
+			</dict>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>class_definition</key>
 		<dict>
 			<key>match</key>
 			<string>(?&lt;=^class)\s+([a-zA-Z_]\w*)\s*(?=:)</string>
@@ -261,7 +455,7 @@
 		<key>class_is</key>
 		<dict>
 			<key>match</key>
-			<string>\s+(is)\s+([a-zA-Z_][a-zA-Z_0-9]*)</string>
+			<string>\s+(is)\s+([a-zA-Z_]\w*)</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -279,7 +473,7 @@
 		<key>class_name</key>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;=class_name)\s+([a-zA-Z_][a-zA-Z_0-9]*(\.([a-zA-Z_][a-zA-Z_0-9]*))?)</string>
+			<string>(?&lt;=class_name)\s+([a-zA-Z_]\w*(\.([a-zA-Z_]\w*))?)</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -297,7 +491,7 @@
 		<key>class_new</key>
 		<dict>
 			<key>match</key>
-			<string>\b([a-zA-Z_][a-zA-Z_0-9]*).(new)\(</string>
+			<string>\b([a-zA-Z_]\w*).(new)\(</string>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -334,69 +528,86 @@
 			<key>match</key>
 			<string>&lt;=|&gt;=|==|&lt;|&gt;|!=</string>
 		</dict>
-		<key>const_def</key>
-		<dict>
-			<key>match</key>
-			<string>\b(?i:(const))\s+([a-zA-Z_][a-zA-Z_0-9]*)</string>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>storage.type.const.gdscript</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>constant.language.gdscript</string>
-				</dict>
-			</dict>
-		</dict>
 		<key>const_vars</key>
 		<dict>
 			<key>name</key>
 			<string>constant.language.gdscript</string>
 			<key>match</key>
-			<string>\b([A-Z_0-9]+)\b</string>
+			<string>\b([A-Z_][A-Z_0-9]*)\b</string>
+		</dict>
+		<key>control_flow</key>
+		<dict>
+			<key>name</key>
+			<string>keyword.control.gdscript</string>
+			<key>match</key>
+			<string>\b(?i:if|elif|else|for|while|break|continue|pass|return|match|yield|await)\b</string>
 		</dict>
 		<key>extends</key>
 		<dict>
 			<key>name</key>
 			<string>entity.other.inherited-class.gdscript</string>
 			<key>match</key>
-			<string>(?&lt;=extends)\s+[a-zA-Z_][a-zA-Z_0-9]*(\.([a-zA-Z_][a-zA-Z_0-9]*))?</string>
+			<string>(?&lt;=extends)\s+[a-zA-Z_]\w*(\.([a-zA-Z_]\w*))?</string>
 		</dict>
-		<key>function-declaration</key>
+		<key>function_arguments</key>
 		<dict>
-			<key>name</key>
-			<string>meta.function.gdscript</string>
+			<key>contentName</key>
+			<string>meta.function-call.arguments.gdscript</string>
 			<key>begin</key>
-			<string>(?x)
-  \s*
-  (?:\b(static) \s+)? \b(func|signal)\s+
-    (?=
-      [[:alpha:]_][[:word:]]* \s* \(
-    )
-</string>
+			<string>(\()</string>
 			<key>end</key>
-			<string>(:|(?=[#&apos;&quot;\n]))</string>
+			<string>(?=\))(?!\)\s*\()</string>
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>include</key>
-					<string>#function-def-name</string>
+					<key>name</key>
+					<string>punctuation.separator.arguments.gdscript</string>
+					<key>match</key>
+					<string>(,)</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\b([a-zA-Z_]\w*)\s*(=)(?!=)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>variable.parameter.function-call.gdscript</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.operator.assignment.gdscript</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.assignment.gdscript</string>
+					<key>match</key>
+					<string>=(?!=)</string>
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#parameters</string>
+					<string>#base_expression</string>
 				</dict>
 				<dict>
-					<key>include</key>
-					<string>#line-continuation</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#return-annotation</string>
+					<key>match</key>
+					<string>\s*(\))\s*(\()</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.end.gdscript</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.definition.arguments.begin.gdscript</string>
+						</dict>
+					</dict>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -404,12 +615,95 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>storage.type.function.static.gdscript</string>
+					<string>punctuation.definition.arguments.begin.gdscript</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>function_call</key>
+		<dict>
+			<key>name</key>
+			<string>meta.function-call.gdscript</string>
+			<key>begin</key>
+			<string>(?x)
+  \b(?=
+    ([a-zA-Z_]\w*) \s* (\()
+  )
+</string>
+			<key>end</key>
+			<string>(\))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#function_name</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#function_arguments</string>
+				</dict>
+			</array>
+			<key>endCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>punctuation.definition.arguments.end.gdscript</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>function_declaration</key>
+		<dict>
+			<key>name</key>
+			<string>meta.function.gdscript</string>
+			<key>begin</key>
+			<string>(?x) \s*
+ (func) \s+
+ ([a-zA-Z_]\w*) \s*
+ (?=\()</string>
+			<key>end</key>
+			<string>((:)|(?=[#&apos;&quot;\n]))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#parameters</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#line_continuation</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\s*(\-\&gt;)\s*([a-zA-Z_]\w*)\s*\:</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.type.class.gdscript</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#base_expression</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.gdscript</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>storage.type.function.gdscript</string>
+					<string>entity.name.function.gdscript</string>
 				</dict>
 			</dict>
 			<key>endCaptures</key>
@@ -421,39 +715,166 @@
 				</dict>
 			</dict>
 		</dict>
-		<key>function-def-name</key>
+		<key>function_keyword</key>
+		<dict>
+			<key>name</key>
+			<string>keyword.language.gdscript</string>
+			<key>match</key>
+			<string>func</string>
+		</dict>
+		<key>function_name</key>
 		<dict>
 			<key>patterns</key>
 			<array>
 				<dict>
+					<key>include</key>
+					<string>#builtin_func</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#builtin_classes</string>
+				</dict>
+				<dict>
 					<key>name</key>
-					<string>entity.name.function.gdscript</string>
+					<string>support.function.any-method.gdscript</string>
 					<key>match</key>
 					<string>(?x)
-  \b ([[:alpha:]_]\w*) \b
+  \b ([a-zA-Z_]\w*) \b
 </string>
 				</dict>
 			</array>
 		</dict>
-		<key>function-return-type</key>
+		<key>getter_setter_godot4</key>
 		<dict>
-			<key>match</key>
-			<string>\)\s*\-\&gt;\s*([a-zA-Z_][a-zA-Z_0-9]*)\s*\:</string>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\b(get):</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.gdscript</string>
+						</dict>
+					</dict>
+				</dict>
 				<dict>
 					<key>name</key>
-					<string>entity.name.type.class.gdscript</string>
+					<string>meta.function.gdscript</string>
+					<key>begin</key>
+					<string>(?x) \s+
+ (set) \s*
+ (?=\()</string>
+					<key>end</key>
+					<string>(:|(?=[#&apos;&quot;\n]))</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>include</key>
+							<string>#parameters</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#line_continuation</string>
+						</dict>
+						<dict>
+							<key>match</key>
+							<string>\s*(\-\&gt;)\s*([a-zA-Z_]\w*)\s*\:</string>
+							<key>captures</key>
+							<dict>
+								<key>1</key>
+								<dict>
+
+								</dict>
+								<key>2</key>
+								<dict>
+									<key>name</key>
+									<string>entity.name.type.class.gdscript</string>
+								</dict>
+							</dict>
+						</dict>
+					</array>
+					<key>beginCaptures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.gdscript</string>
+						</dict>
+					</dict>
 				</dict>
-			</dict>
+			</array>
+		</dict>
+		<key>in_keyword</key>
+		<dict>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>\b(for)\s+[a-zA-Z_]\w*\s+(in)\b</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.gdscript</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.gdscript</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>keyword.operator.wordlike.gdscript</string>
+					<key>match</key>
+					<string>\bin\b</string>
+				</dict>
+			</array>
 		</dict>
 		<key>keywords</key>
 		<dict>
 			<key>name</key>
 			<string>keyword.language.gdscript</string>
 			<key>match</key>
-			<string>\b(?i:if|elif|else|for|while|break|continue|pass|return|match|func|class|class_name|extends|is|in|onready|tool|static|export|setget|const|var|as|void|enum|preload|assert|yield|signal|breakpoint|rpc|sync|remote|master|puppet|slave|remotesync|mastersync|puppetsync|in)\b</string>
+			<string>\b(?i:class|class_name|extends|is|onready|tool|static|export|as|void|enum|preload|assert|breakpoint|rpc|sync|remote|master|puppet|slave|remotesync|mastersync|puppetsync|trait|namespace)\b</string>
+		</dict>
+		<key>lambda_declaration</key>
+		<dict>
+			<key>name</key>
+			<string>meta.function.gdscript</string>
+			<key>begin</key>
+			<string>(func)(?=\()</string>
+			<key>end</key>
+			<string>(:|(?=[#&apos;&quot;\n]))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#parameters</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#line_continuation</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.gdscript</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.gdscript</string>
+				</dict>
+			</dict>
 		</dict>
 		<key>letter</key>
 		<dict>
@@ -462,7 +883,7 @@
 			<key>match</key>
 			<string>\b(?i:true|false|null)\b</string>
 		</dict>
-		<key>line-continuation</key>
+		<key>line_continuation</key>
 		<dict>
 			<key>patterns</key>
 			<array>
@@ -516,11 +937,11 @@
 		<key>logic_op</key>
 		<dict>
 			<key>name</key>
-			<string>keyword.operator.logical.gdscript</string>
+			<string>keyword.operator.wordlike.gdscript</string>
 			<key>match</key>
 			<string>\b(and|or|not)\b</string>
 		</dict>
-		<key>loose-default</key>
+		<key>loose_default</key>
 		<dict>
 			<key>begin</key>
 			<string>(=)</string>
@@ -547,6 +968,80 @@
 				<dict>
 					<key>name</key>
 					<string>punctuation.separator.parameters.gdscript</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>nodepath_function</key>
+		<dict>
+			<key>name</key>
+			<string>meta.literal.nodepath.gdscript</string>
+			<key>begin</key>
+			<string>(get_node_or_null|has_node|has_node_and_resource|find_node|get_node)\s*(?:\()</string>
+			<key>end</key>
+			<string>(?:\))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape</string>
+					<key>begin</key>
+					<string>[&quot;&apos;]</string>
+					<key>end</key>
+					<string>[&quot;&apos;]</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.flow</string>
+							<key>match</key>
+							<string>%</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.gdscript</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>nodepath_object</key>
+		<dict>
+			<key>name</key>
+			<string>meta.literal.nodepath.gdscript</string>
+			<key>begin</key>
+			<string>(NodePath)\s*(?:\()</string>
+			<key>end</key>
+			<string>(?:\))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>name</key>
+					<string>constant.character.escape</string>
+					<key>begin</key>
+					<string>[&quot;&apos;]</string>
+					<key>end</key>
+					<string>[&quot;&apos;]</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>keyword.control.flow</string>
+							<key>match</key>
+							<string>%</string>
+						</dict>
+					</array>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>support.class.library.gdscript</string>
 				</dict>
 			</dict>
 		</dict>
@@ -586,36 +1081,6 @@
 				</dict>
 			</array>
 		</dict>
-		<key>parameter-special</key>
-		<dict>
-			<key>match</key>
-			<string>(?x)
-  \b ((self)|(cls)) \b \s*(?:(,)|(?=\)))
-</string>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter.function.language.gdscript</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter.function.language.special.self.gdscript</string>
-				</dict>
-				<key>3</key>
-				<dict>
-					<key>name</key>
-					<string>variable.parameter.function.language.special.cls.gdscript</string>
-				</dict>
-				<key>4</key>
-				<dict>
-					<key>name</key>
-					<string>punctuation.separator.parameters.gdscript</string>
-				</dict>
-			</dict>
-		</dict>
 		<key>parameters</key>
 		<dict>
 			<key>name</key>
@@ -627,19 +1092,13 @@
 			<key>patterns</key>
 			<array>
 				<dict>
-					<key>name</key>
-					<string>keyword.operator.unpacking.parameter.gdscript</string>
-					<key>match</key>
-					<string>(\*\*|\*)</string>
-				</dict>
-				<dict>
 					<key>include</key>
-					<string>#parameter-special</string>
+					<string>#annotated_parameter</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(?x)
-  ([[:alpha:]_]\w*)
+  ([a-zA-Z_]\w*)
     \s* (?: (,) | (?=[)#\n=]))
 </string>
 					<key>captures</key>
@@ -662,11 +1121,7 @@
 				</dict>
 				<dict>
 					<key>include</key>
-					<string>#loose-default</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#annotated-parameter</string>
+					<string>#loose_default</string>
 				</dict>
 			</array>
 			<key>beginCaptures</key>
@@ -688,16 +1143,10 @@
 		</dict>
 		<key>pascal_case_class</key>
 		<dict>
+			<key>name</key>
+			<string>support.class.library.gdscript</string>
 			<key>match</key>
-			<string>\b([A-Z][a-zA-Z_0-9]*)\b</string>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>entity.name.type.class.gdscript</string>
-				</dict>
-			</dict>
+			<string>\b([A-Z][a-z_0-9]*([A-Z]?[a-z_0-9]+)*[A-Z]?)\b</string>
 		</dict>
 		<key>self</key>
 		<dict>
@@ -706,10 +1155,111 @@
 			<key>match</key>
 			<string>\bself\b</string>
 		</dict>
+		<key>signal_declaration</key>
+		<dict>
+			<key>name</key>
+			<string>meta.signal.gdscript</string>
+			<key>begin</key>
+			<string>(?x) \s*
+ (signal) \s+
+ ([a-zA-Z_]\w*) \s*
+ (?=\()</string>
+			<key>end</key>
+			<string>((?=[#&apos;&quot;\n]))</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>include</key>
+					<string>#parameters</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#line_continuation</string>
+				</dict>
+				<dict>
+					<key>match</key>
+					<string>\s*(\-\&gt;)\s*([a-zA-Z_]\w*)\s*\:</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.type.class.gdscript</string>
+						</dict>
+					</dict>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.gdscript</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.gdscript</string>
+				</dict>
+			</dict>
+		</dict>
+		<key>signal_declaration_bare</key>
+		<dict>
+			<key>match</key>
+			<string>(?x) \s*
+ (signal) \s+
+ ([a-zA-Z_]\w*)(?=[\n\s])</string>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>storage.type.function.gdscript</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function.gdscript</string>
+				</dict>
+			</dict>
+		</dict>
 		<key>strings</key>
 		<dict>
 			<key>patterns</key>
 			<array>
+				<dict>
+					<key>begin</key>
+					<string>(?:(?&lt;=get_node|has_node|find_node|get_node_or_null|NodePath)\s*\(\s*)</string>
+					<key>end</key>
+					<string>(?:\s*\))</string>
+					<key>patterns</key>
+					<array>
+						<dict>
+							<key>name</key>
+							<string>constant.character.escape</string>
+							<key>begin</key>
+							<string>[&quot;&apos;]</string>
+							<key>end</key>
+							<string>[&quot;&apos;]</string>
+						</dict>
+						<dict>
+							<key>include</key>
+							<string>#base_expression</string>
+						</dict>
+					</array>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>invalid.illegal.escape.gdscript</string>
+					<key>begin</key>
+					<string>&apos;&apos;&apos;</string>
+					<key>end</key>
+					<string>&apos;&apos;&apos;</string>
+				</dict>
 				<dict>
 					<key>name</key>
 					<string>string.quoted.double.gdscript</string>
@@ -763,24 +1313,65 @@
 				</dict>
 			</array>
 		</dict>
-		<key>type_declear</key>
+		<key>variable_definition</key>
 		<dict>
-			<key>match</key>
-			<string>\:\s*([a-zA-Z_][a-zA-Z_0-9]*)</string>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
+			<key>begin</key>
+			<string>\b(?:(var)|(const))\s+</string>
+			<key>end</key>
+			<string>$|;</string>
+			<key>patterns</key>
+			<array>
+				<dict>
+					<key>match</key>
+					<string>(:)\s*([a-zA-Z_]\w*)?</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>punctuation.separator.annotation.gdscript</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.type.class.gdscript</string>
+						</dict>
+					</dict>
+				</dict>
 				<dict>
 					<key>name</key>
-					<string>entity.name.type.class.gdscript</string>
+					<string>keyword.operator.assignment.gdscript</string>
+					<key>match</key>
+					<string>=(?!=)</string>
 				</dict>
-			</dict>
-		</dict>
-		<key>var_def</key>
-		<dict>
-			<key>match</key>
-			<string>\b(?i:(var))\s+([a-zA-Z_][a-zA-Z_0-9]*)</string>
-			<key>captures</key>
+				<dict>
+					<key>match</key>
+					<string>(setget)\s+([a-zA-Z_]\w*)(?:[,]\s*([a-zA-Z_]\w*))?</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>storage.type.const.gdscript</string>
+						</dict>
+						<key>2</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.gdscript</string>
+						</dict>
+						<key>3</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.gdscript</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#base_expression</string>
+				</dict>
+			</array>
+			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
 				<dict>
@@ -790,7 +1381,7 @@
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>variable.language.gdscript</string>
+					<string>storage.type.const.gdscript</string>
 				</dict>
 			</dict>
 		</dict>

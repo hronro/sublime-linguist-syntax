@@ -297,19 +297,16 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>meta.interface.aidl</string>
-					<key>begin</key>
-					<string>(?:(oneway)\s+)?(interface)\s+([_a-zA-Z][_a-zA-Z0-9]*)\s*(\{)</string>
-					<key>end</key>
+					<string>punctuation.section.braces.end.aidl</string>
+					<key>match</key>
 					<string>(\})</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#interface_members</string>
-						</dict>
-					</array>
-					<key>beginCaptures</key>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.interface.aidl</string>
+					<key>match</key>
+					<string>(?:(oneway)\s+)?(interface)\s+([_a-zA-Z][_a-zA-Z0-9]*)\s*(\{)</string>
+					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
@@ -332,30 +329,13 @@
 							<string>punctuation.section.braces.begin.aidl</string>
 						</dict>
 					</dict>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.section.braces.end.aidl</string>
-						</dict>
-					</dict>
 				</dict>
 				<dict>
 					<key>name</key>
 					<string>meta.parcelable.aidl</string>
-					<key>begin</key>
+					<key>match</key>
 					<string>(parcelable)\s+((?:[_a-zA-Z][_a-zA-Z0-9]*)(?:\.([_a-zA-Z][_a-zA-Z0-9]*))*)\s*(?:(&lt;)((:?[_a-zA-Z][_a-zA-Z0-9]*)(:?,\s+[_a-zA-Z][_a-zA-Z0-9]*)*)(&gt;)\s*)?(\{)</string>
-					<key>end</key>
-					<string>(\})</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#parcelable_members</string>
-						</dict>
-					</array>
-					<key>beginCaptures</key>
+					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
@@ -386,14 +366,6 @@
 						<dict>
 							<key>name</key>
 							<string>punctuation.section.braces.begin.aidl</string>
-						</dict>
-					</dict>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.section.braces.end.aidl</string>
 						</dict>
 					</dict>
 				</dict>
@@ -440,7 +412,7 @@
 					<key>name</key>
 					<string>meta.parcelable.aidl</string>
 					<key>match</key>
-					<string>(parcelable)\s+((?:[_a-zA-Z][_a-zA-Z0-9]*)(?:\.([_a-zA-Z][_a-zA-Z0-9]*))*)\s*(cpp_header)\s*(&quot;)([^\&quot;]*)(&quot;)(;)</string>
+					<string>(parcelable)\s+((?:[_a-zA-Z][_a-zA-Z0-9]*)(?:\.([_a-zA-Z][_a-zA-Z0-9]*))*)\s*(;)?</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
@@ -456,29 +428,44 @@
 						<key>3</key>
 						<dict>
 							<key>name</key>
+							<string>punctuation.terminator.aidl</string>
+						</dict>
+					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>meta.parcelable.aidl</string>
+					<key>match</key>
+					<string>(cpp_header|ndk_header|rust_type)\s*(&quot;)([^\&quot;]*)(&quot;)</string>
+					<key>captures</key>
+					<dict>
+						<key>1</key>
+						<dict>
+							<key>name</key>
 							<string>keyword.aidl</string>
 						</dict>
-						<key>4</key>
+						<key>2</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.begin.aidl</string>
 						</dict>
-						<key>5</key>
+						<key>3</key>
 						<dict>
 							<key>name</key>
 							<string>string.quoted.double.aidl</string>
 						</dict>
-						<key>6</key>
+						<key>4</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.string.end.aidl</string>
 						</dict>
-						<key>7</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.terminator.aidl</string>
-						</dict>
 					</dict>
+				</dict>
+				<dict>
+					<key>name</key>
+					<string>punctuation.terminator.aidl</string>
+					<key>match</key>
+					<string>;</string>
 				</dict>
 				<dict>
 					<key>name</key>
@@ -524,18 +511,9 @@
 				<dict>
 					<key>name</key>
 					<string>meta.union.aidl</string>
-					<key>begin</key>
+					<key>match</key>
 					<string>(union)\s+((?:[_a-zA-Z][_a-zA-Z0-9]*)(?:\.([_a-zA-Z][_a-zA-Z0-9]*))*)\s*(?:(&lt;)((:?[_a-zA-Z][_a-zA-Z0-9]*)(:?,\s+[_a-zA-Z][_a-zA-Z0-9]*)*)(&gt;)\s*)?(\{)</string>
-					<key>end</key>
-					<string>(\})</string>
-					<key>patterns</key>
-					<array>
-						<dict>
-							<key>include</key>
-							<string>#parcelable_members</string>
-						</dict>
-					</array>
-					<key>beginCaptures</key>
+					<key>captures</key>
 					<dict>
 						<key>1</key>
 						<dict>
@@ -568,14 +546,22 @@
 							<string>punctuation.section.braces.begin.aidl</string>
 						</dict>
 					</dict>
-					<key>endCaptures</key>
-					<dict>
-						<key>1</key>
-						<dict>
-							<key>name</key>
-							<string>punctuation.section.braces.end.aidl</string>
-						</dict>
-					</dict>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#comments</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#constant_decl</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#method_decl</string>
+				</dict>
+				<dict>
+					<key>include</key>
+					<string>#variable_decl</string>
 				</dict>
 			</array>
 		</dict>
@@ -642,24 +628,6 @@
 				</dict>
 			</array>
 		</dict>
-		<key>interface_members</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#comments</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#constant_decl</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#method_decl</string>
-				</dict>
-			</array>
-		</dict>
 		<key>main</key>
 		<dict>
 			<key>patterns</key>
@@ -708,12 +676,6 @@
 				</dict>
 				<dict>
 					<key>name</key>
-					<string>entity.name.function.aidl</string>
-					<key>match</key>
-					<string>[_a-zA-Z][_a-zA-Z0-9]*</string>
-				</dict>
-				<dict>
-					<key>name</key>
 					<string>keyword.operator.assignment.aidl</string>
 					<key>match</key>
 					<string>=</string>
@@ -725,10 +687,10 @@
 					<string>;</string>
 				</dict>
 				<dict>
-					<key>name</key>
+					<key>contentName</key>
 					<string>meta.function.parameters.aidl</string>
 					<key>begin</key>
-					<string>(\()</string>
+					<string>([_a-zA-Z][_a-zA-Z0-9]*)\s*(\()</string>
 					<key>end</key>
 					<string>(\))</string>
 					<key>patterns</key>
@@ -759,6 +721,11 @@
 					<key>beginCaptures</key>
 					<dict>
 						<key>1</key>
+						<dict>
+							<key>name</key>
+							<string>entity.name.function.aidl</string>
+						</dict>
+						<key>2</key>
 						<dict>
 							<key>name</key>
 							<string>punctuation.definition.parameters.begin.aidl</string>
@@ -895,24 +862,6 @@
 							<string>punctuation.terminator.aidl</string>
 						</dict>
 					</dict>
-				</dict>
-			</array>
-		</dict>
-		<key>parcelable_members</key>
-		<dict>
-			<key>patterns</key>
-			<array>
-				<dict>
-					<key>include</key>
-					<string>#comments</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#constant_decl</string>
-				</dict>
-				<dict>
-					<key>include</key>
-					<string>#variable_decl</string>
 				</dict>
 			</array>
 		</dict>
