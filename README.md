@@ -6,7 +6,7 @@ A collection of high quality and well-maintained syntax definations that used by
 
 - Install [Deno](https://deno.land).
 - Clone this repo.
-- Run `deno run ./srcripts/generate.ts <path-to-store-syntaxes>`. Normally `<path-to-store-syntaxes>` should be `./syntaxes`, but you can change it to whatever you want if you wish.
+- Run `deno run ./scripts/generate.ts <path-to-store-syntaxes>`. Normally `<path-to-store-syntaxes>` should be `./syntaxes`, but you can change it to whatever you want if you wish.
 - Done.
 
 When running `generate.ts`, thanks to the Deno's permission API, the script can not access any network and disks without your permission. So there will be an interactive prompt to ask permissions for:
